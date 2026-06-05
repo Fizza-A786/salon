@@ -32,31 +32,30 @@ function InputRow({ label, value, prefix = "", suffix = "" }) {
 }
 
 export default function RevenueCalculator() {
-  // Constants exactly synchronized with the single source of truth reference
   const monthlyCalls = 1500;
   const missedInquiryPct = 30;
   const conversionRate = 22;
   const avgJobValue = 1200;
 
-  // Revenue recovery logic matching the metrics output
   const { lastMonthlyRevenue, lostAnnually, estimatedRecovered } = useMemo(() => {
     return {
-      lastMonthlyRevenue: 118800, // Explicitly fixed to match Figma target image precisely
+      lastMonthlyRevenue: 118800,
       lostAnnually: 1425600,
-      estimatedRecovered: 2494800 // Projected recovery value based on system input
+      estimatedRecovered: 2494800
     };
   }, []);
 
   return (
-    <section className="w-full flex flex-col items-center justify-center py-12 px-4 bg-white font-robotoPin selection:bg-[#C2FFE5]">
-      {/* Google Font Preload Injection */}
+    // Outer section breaks constraints layout safely
+    <section className="w-full relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen flex flex-col items-center justify-center py-12 bg-white font-robotoPin selection:bg-[#C2FFE5] overflow-x-hidden">
+      
       <link
         href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
         rel="stylesheet"
       />
 
       {/* Header Container */}
-      <div className="w-full max-w-[791px] flex flex-col items-center justify-center text-center gap-4 mb-[42px]">
+      <div className="w-full max-w-[791px] flex flex-col items-center justify-center text-center gap-4 mb-[42px] px-4">
         <h2 className="w-full font-roboto font-medium text-[32px] md:text-[42px] leading-tight text-black tracking-normal">
           How Much Revenue Are You Losing?
         </h2>
@@ -65,20 +64,22 @@ export default function RevenueCalculator() {
         </p>
       </div>
 
-      {/* Main Interactive Stage with both local asset tracking and a premium styling fallback link */}
+      {/* IMAGE CONTAINER LAYER: 
+         - Explicitly removed any "rounded-*" classes so corners are strictly sharp (straight)
+         - Applied rounded-none just to overwrite any inherited CSS rules.
+      */}
       <div 
-        className="relative w-full max-w-[1440px] min-h-[567px] bg-cover bg-center rounded-2xl flex items-center justify-center py-10 px-4 md:px-[100px]"
+        className="w-full min-h-[567px] bg-cover bg-center bg-no-repeat rounded-none border-none flex items-center justify-center py-12 px-4 sm:px-6 md:px-8 lg:px-[100px]"
         style={{ 
-          backgroundImage: `url(${Section4})` 
+          backgroundImage: `url(${Section4})`,
+          backgroundSize: '100% 100%'
         }}
       >
-        {/* Content Wrapper / Auto Layout Grid equivalent */}
+        {/* Inside Main Interactive content Grid */}
         <div className="w-full max-w-[965px] flex flex-col md:flex-row items-center md:items-stretch justify-center gap-[57px]">
           
-          {/* LEFT CARD: Live Summary View Metrics */}
+          {/* LEFT CARD */}
           <div className="relative w-full max-w-[486px] min-h-[444px] bg-[#D4D4D4]/69 border-2 border-[#C2FFE5] rounded-[16px] shadow-[0px_4px_10px_3px_rgba(194,255,229,0.6)] backdrop-blur-[2px] p-8 flex flex-col justify-between">
-            
-            {/* Top Stat Grid */}
             <div className="grid grid-cols-2 gap-x-6 gap-y-8 pt-4">
               <div className="flex flex-col items-center text-center gap-3">
                 <span className="font-roboto font-bold text-[32px] leading-none text-black">
@@ -88,7 +89,6 @@ export default function RevenueCalculator() {
                   Monthly Service Calls
                 </span>
               </div>
-
               <div className="flex flex-col items-center text-center gap-3">
                 <span className="font-roboto font-bold text-[32px] leading-none text-[#070707] drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
                   {missedInquiryPct}%
@@ -97,7 +97,6 @@ export default function RevenueCalculator() {
                   Missed Inquiries
                 </span>
               </div>
-
               <div className="flex flex-col items-center text-center gap-3">
                 <span className="font-roboto font-bold text-[32px] leading-none text-[#070707] drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
                   {conversionRate}%
@@ -106,7 +105,6 @@ export default function RevenueCalculator() {
                   Conversion Rate
                 </span>
               </div>
-
               <div className="flex flex-col items-center text-center gap-3">
                 <span className="font-roboto font-bold text-[32px] leading-none text-[#070707] drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
                   ${avgJobValue.toLocaleString()}
@@ -117,10 +115,8 @@ export default function RevenueCalculator() {
               </div>
             </div>
 
-            {/* Figma Native Line Divider */}
             <div className="w-full h-0 border-t border-black/25 my-6" />
 
-            {/* Financial Calculations Section */}
             <div className="w-full flex flex-col gap-5 px-3 mb-2">
               <div className="w-full flex items-center justify-between font-roboto text-[20px] leading-none text-black drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
                 <span>Last Monthly Revenue :</span>
@@ -133,36 +129,28 @@ export default function RevenueCalculator() {
             </div>
           </div>
 
-          {/* RIGHT CARD: Operational Parameter Modifiers */}
+          {/* RIGHT CARD */}
           <div className="relative w-full max-w-[422px] min-h-[439px] bg-[#ECEBEE]/54 border border-white rounded-[16px] shadow-[0px_4px_10px_rgba(0,0,0,0.25)] backdrop-blur-[30.5px] p-[19px] flex flex-col gap-8 justify-between">
-            
-            {/* Input Row Containers Layout */}
             <div className="w-full flex flex-col gap-4">
               <InputRow label="Monthly Calls" value={monthlyCalls} />
               <InputRow label="Missed Inquiry %" value={missedInquiryPct} suffix="%" />
               <InputRow label="Average Job value" value={avgJobValue} prefix="$" />
             </div>
 
-            {/* Bottom Total Recovery Viewport */}
             <div className="relative w-full min-h-[177px] bg-[#C2FFE5]/72 rounded-[16px] shadow-[0px_4px_10px_#C2FFE5] backdrop-blur-[30.5px] py-4 px-5 flex flex-col items-center justify-between gap-[17px]">
               <p className="w-full font-roboto font-bold text-[17px] leading-[120%] text-center text-black tracking-normal">
                 ESTIMATED ANNUAL REVENUE RECOVERED
               </p>
-
-              {/* Recovery Financial Data Node */}
               <div className="flex items-center justify-center relative">
                 <span className="font-roboto font-bold text-[42px] leading-[120%] text-black tracking-tight pl-2">
                   ${estimatedRecovered.toLocaleString()}
                 </span>
-                {/* Blinking Insertion Line Point Indicator */}
                 <div className="w-2 h-[58px] bg-[#3C995B] ml-2 animate-pulse rounded-sm" />
               </div>
-
               <p className="w-full font-roboto font-normal text-[16px] leading-[120%] text-center text-black">
                 Projection based on provided inputs. Results vary by landscaping business.
               </p>
             </div>
-
           </div>
 
         </div>

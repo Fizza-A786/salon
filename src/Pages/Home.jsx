@@ -7,6 +7,8 @@ import CustomerCareSection from '../components/Home/CustomerCareSection';
 import WaveformDemoSection from '../components/Home/WaveformDemoSection';
 import RevenueLeakageDashboard from '../components/Home/RevenueLeakageDashboard';
 import RevenueCalculator from '../components/Home/RevenueCalculator';
+import LandscapingCommunication from '../components/Home/CommunicationComparison';
+import LandscapingAiWorkforce from '../components/Home/LandscapingAiWorkforce';
 
 export default function Hero() {
   return (
@@ -60,6 +62,9 @@ export default function Hero() {
               <WaveformDemoSection/>
               <RevenueLeakageDashboard/>
               <RevenueCalculator/>
+              <LandscapingCommunication/>
+              <LandscapingAiWorkforce/>
+           
     </main>
   );
 }
