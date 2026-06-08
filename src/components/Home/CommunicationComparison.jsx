@@ -32,8 +32,8 @@ export default function LandscapingCommunication() {
                   <span className="inline-block mt-[6px] w-[5px] h-[5px] min-w-[5px] bg-white rounded-full"></span>
                   <span>Limited 8-5 availability</span>
                 </li>
-                <li className="flex items-start gap-2">
-                  <span className="inline-block mt-[6px] w-[5px] h-[5px] min-w-[5px] bg-white rounded-full"></span>
+                <li className="flex whitespace-nowrap items-start gap-2">
+                  <span className="inline-block mt-[6px] w-[5px] h-[5px]  min-w-[5px] bg-white rounded-full"></span>
                   <span>Missed service calls during peak hours</span>
                 </li>
                 <li className="flex items-start gap-2">
@@ -119,7 +119,7 @@ export default function LandscapingCommunication() {
                   <span className="inline-block mt-[6px] w-[5px] h-[5px] min-w-[5px] bg-white rounded-full"></span>
                   <span>Centralized customer intelligence</span>
                 </li>
-                <li className="flex items-start gap-2">
+                <li className="flex whitespace-nowrap items-start gap-2">
                   <span className="inline-block mt-[6px] w-[5px] h-[5px] min-w-[5px] bg-white rounded-full"></span>
                   <span>Real-time lead & follow-up automation</span>
                 </li>

@@ -3,7 +3,7 @@ import VoiceAgentPanel from "./VoiceAgentPanel";
 
 export default function HeroContent() {
   return (
-    <div className="w-full px-6 sm:px-12 lg:px-10 flex flex-col justify-center max-w-2xl mx-auto lg:mx-0 z-10 relative py-12 lg:py-20">
+    <div className="w-full px-6 sm:px-12 lg:px-10 flex flex-col justify-center max-w-2xl mx-auto lg:mx-0 z-10 relative py-12 lg:py-16">
       
       {/* Mobile Glass Glow Background Circle */}
       <div className="absolute top-[20%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-white/80 rounded-full blur-[70px] -z-10 lg:hidden pointer-events-none" />

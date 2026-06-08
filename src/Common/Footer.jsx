@@ -1,223 +1,273 @@
-import React from 'react'
-import { Send } from 'lucide-react'
-import { FaFacebook, FaXTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa6'
-import { useI18n } from '@/lib/i18n-client'
+import React from "react";
 
-export default function Footer() {
-  const { t } = useI18n()
-
-  const solutionsLinks = [
-    { label: t('nav.webAgency', 'Web Agency'), href: '/solutions/web-agency' },
-    { label: t('nav.digitalAgency', 'Digital Agency'), href: '/solutions/digital-agency' },
-    { label: t('nav.startups', 'Startups'), href: '/solutions/startups' },
-    { label: t('nav.saas', 'SaaS'), href: '/solutions/saas' },
-    { label: t('nav.sales', 'Sales Automation'), href: '/solutions/sales' },
-  ]
-
-  const platformLinks = [
-    { label: t('nav.aiWorkforce', 'AI Workforce'), href: '/platform/ai-workforce' },
-    { label: t('nav.marketplace', 'Marketplace'), href: '/marketplace' },
-    { label: t('nav.automations', 'Automations'), href: '/platform/automations' },
-    { label: t('nav.projectManagement', 'Project Management'), href: '/platform/project-management' },
-    { label: t('nav.payments', 'Payments'), href: '/platform/payments' },
-  ]
-
-  const areasLinks = [
-    { label: t('nav.primaryCare', 'Primary Care'), href: '/industries/primary-care/workflow' },
-    { label: t('nav.dentalPractices', 'Dental Practices'), href: '/industries/dental/workflow' },
-    { label: t('nav.salons', 'Salons'), href: '/industries/salons/workflow' },
-    { label: t('nav.homeServices', 'Home Services'), href: '/industries/home-services/workflow' },
-    { label: t('nav.restaurants', 'Restaurants'), href: '/industries/restaurants/workflow' },
-  ]
-
-  const resourceLinks = [
-    { label: t('footer.blog', 'Blog'), href: '/blog' },
-    { label: t('footer.documentation', 'Documentation'), href: '/docs' },
-    { label: t('footer.helpCenter', 'Help Center'), href: '/help' },
-    { label: t('footer.status', 'System Status'), href: '/status' },
-  ]
-
-  const companyLinks = [
-    { label: t('footer.aboutUs', 'About Us'), href: '/about' },
-    { label: t('footer.careers', 'Careers'), href: '/careers' },
-    { label: t('footer.contact', 'Contact'), href: '/contact' },
-    { label: t('footer.partners', 'Partners'), href: '/partners' },
-  ]
-
-  const legalLinks = [
-    { label: t('footer.privacy', 'Privacy Policy'), href: '/privacy' },
-    { label: t('footer.terms', 'Terms of Service'), href: '/terms' },
-    { label: t('footer.security', 'Security'), href: '/security' },
-  ]
-
+export const Footer = ({
+  property1 = "variant",
+  style,
+  footerStyle,
+  vector = "/img/vector-13.svg",
+  groupStyle,
+  group = "/img/group-2147225313.png",
+  hasComponent = true,
+}) => {
   return (
-    <footer className="bg-[#052d24] text-white border-t border-white/10 pt-16 pb-8 px-6 md:px-12 w-full overflow-hidden">
-      <div className="max-w-[1600px] mx-auto">
-        {/* Main Columns Container - wraps on screens < 1400px */}
-        <div className="flex flex-row flex-wrap gap-x-8 gap-y-12 items-start justify-between w-full">
+    <div
+      className="relative w-full overflow-hidden"
+      style={{
+        padding: "60px 0px 40px", // Reduced from 120px to fix the top margin issue completely
+        backgroundColor: "#053228",
+        minHeight: "700px",
+        ...style,
+      }}
+    >
+      {/* Background Radial Glow Effect */}
+      <div
+        className="absolute pointer-events-none z-0"
+        style={{
+          width: "1920px",
+          height: "96px",
+          left: "calc(50% - 1920px/2)",
+          top: "calc(50% - 96px/2 + 6px)",
+          background: "#063A2F",
+          filter: "blur(44.6px)",
+        }}
+      />
+
+      {/* Main Container - Reduced side padding (px-4) to maximize horizontal view space */}
+      <div
+        className="relative grid grid-cols-1 md:grid-cols-4 lg:grid-cols-12 gap-x-5 gap-y-8 px-4 mx-auto w-full max-w-[1440px] z-10"
+        style={footerStyle}
+      >
+        
+        {/* COLUMN 1: Logo & Newsletter Form Group */}
+        <div className="lg:col-span-2 flex flex-col items-start gap-5 min-w-[190px]">
+          {/* Brand Logo */}
+          <img
+            className="w-[178px] h-[31.73px] object-contain"
+            alt="DaitchPro Logo"
+            src="/img/logo-1-1.png"
+          />
           
-          {/* Column 1: Newsletter (newsletter keeps fixed width but shrinks below 768px) */}
-          <div className="w-[320px] shrink md:shrink-0 flex flex-col gap-6">
-            <div className="flex items-center gap-2">
-              <span className="text-xl font-bold tracking-wide" style={{ fontFamily: "'Roboto', sans-serif" }}>
-                Daitch<span className="text-[#82C1A6]">Pro</span>
-              </span>
+          {/* Newsletter Setup */}
+          <div className="flex flex-col items-start gap-3 w-full">
+            <div className="text-white font-roboto text-[19px] font-semibold leading-[26px]">
+              Subscribe To Our Newsletter
             </div>
             
-            <p className="text-white/70 text-sm leading-relaxed" style={{ fontFamily: "'Roboto', sans-serif" }}>
-              {t('footer.description', 'Empowering local businesses with state-of-the-art AI receptionist, ordering, and booking workflows.')}
-            </p>
-
-            {/* Newsletter Input */}
-            <div className="flex flex-col gap-3">
-              <h4 className="text-sm font-semibold text-[#82C1A6] uppercase tracking-wider" style={{ fontFamily: "'Roboto', sans-serif" }}>
-                {t('footer.subscribeTitle', 'Stay Updated')}
-              </h4>
-              <div className="relative w-full max-w-sm">
+            <div className="flex flex-col items-start gap-2 w-full">
+              <label className="text-white/70 font-roboto text-[13px] font-medium variant-none">
+                Your Email
+              </label>
+              
+              {/* Email Field Container */}
+              <div className="box-border flex flex-row items-center px-3 w-full h-[46px] border border-white/20 rounded-[9px] bg-[#042921]">
                 <input
                   type="email"
-                  placeholder={t('footer.emailPlaceholder', 'Enter your email')}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl py-3 pl-4 pr-12 text-sm text-white placeholder-white/40 focus:outline-none focus:border-[#82C1A6] transition-colors"
+                  placeholder="Your Email"
+                  className="w-full bg-transparent border-none text-white font-roboto text-[14px] font-medium outline-none placeholder-white/30"
                 />
-                <button 
-                  className="absolute right-1.5 top-1.5 p-2 bg-[#82C1A6] hover:bg-[#6FA990] text-[#052d24] rounded-lg transition-colors flex items-center justify-center"
-                  aria-label="Subscribe"
-                >
-                  <Send className="w-4 h-4" />
-                </button>
               </div>
-            </div>
 
-            {/* Social media icons - uniform p-3 padding for consistent icon centering */}
-            <div className="flex items-center gap-3">
-              {[
-                { Icon: FaFacebook, href: '#', label: 'Facebook' },
-                { Icon: FaXTwitter, href: '#', label: 'Twitter' },
-                { Icon: FaInstagram, href: '#', label: 'Instagram' },
-                { Icon: FaLinkedin, href: '#', label: 'LinkedIn' },
-              ].map(({ Icon, href, label }) => (
-                <a
-                  key={label}
-                  href={href}
-                  className="p-3 bg-white/5 hover:bg-[#82C1A6] text-white hover:text-[#052d24] rounded-xl transition-all duration-200 flex items-center justify-center"
-                  aria-label={label}
-                >
-                  <Icon className="w-5 h-5 shrink-0" />
-                </a>
-              ))}
+              {/* Submit Button */}
+              <button className="flex flex-row justify-center items-center w-full h-[46px] bg-[#3E8667] hover:bg-[#336e54] transition-colors border-none rounded-[12px] cursor-pointer">
+                <span className="text-white font-roboto text-[16px] font-normal leading-[21px]">
+                  Subscribe
+                </span>
+              </button>
             </div>
           </div>
 
-          {/* Column 2: Solutions */}
-          <div className="min-w-[120px] flex-1 flex flex-col gap-4">
-            <h3 className="text-sm font-bold text-[#82C1A6] uppercase tracking-wider" style={{ fontFamily: "'Roboto', sans-serif" }}>
-              {t('nav.solution', 'Solutions')}
-            </h3>
-            <ul className="flex flex-col gap-2.5">
-              {solutionsLinks.map((link) => (
-                <li key={link.label}>
-                  <a href={link.href} className="text-white/70 hover:text-[#82C1A6] transition-colors text-sm" style={{ fontFamily: "'Roboto', sans-serif" }}>
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
+          {/* Social Icons List Row */}
+          <div className="flex flex-row gap-2 w-full mt-1">
+            {[0, 1, 2, 3].map((index) => (
+              <a
+                href="#"
+                key={index}
+                className="flex items-center justify-center w-[36px] h-[36px] bg-white/[0.06] hover:bg-white/[0.12] transition-colors rounded-full text-white text-xs no-underline"
+              >
+                <span className="font-['Font_Awesome_5_Brands']">
+                  {index === 0 && ""}
+                  {index === 1 && ""}
+                  {index === 2 && ""}
+                  {index === 3 && ""}
+                </span>
+              </a>
+            ))}
           </div>
-
-          {/* Column 3: Platform */}
-          <div className="min-w-[120px] flex-1 flex flex-col gap-4">
-            <h3 className="text-sm font-bold text-[#82C1A6] uppercase tracking-wider" style={{ fontFamily: "'Roboto', sans-serif" }}>
-              {t('nav.platform', 'Platform')}
-            </h3>
-            <ul className="flex flex-col gap-2.5">
-              {platformLinks.map((link) => (
-                <li key={link.label}>
-                  <a href={link.href} className="text-white/70 hover:text-[#82C1A6] transition-colors text-sm" style={{ fontFamily: "'Roboto', sans-serif" }}>
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Column 4: Areas We Handle */}
-          <div className="min-w-[120px] flex-1 flex flex-col gap-4">
-            <h3 className="text-sm font-bold text-[#82C1A6] uppercase tracking-wider" style={{ fontFamily: "'Roboto', sans-serif" }}>
-              {t('nav.areasWeHandle', 'Areas')}
-            </h3>
-            <ul className="flex flex-col gap-2.5">
-              {areasLinks.map((link) => (
-                <li key={link.label}>
-                  <a href={link.href} className="text-white/70 hover:text-[#82C1A6] transition-colors text-sm" style={{ fontFamily: "'Roboto', sans-serif" }}>
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Column 5: Resources */}
-          <div className="min-w-[120px] flex-1 flex flex-col gap-4">
-            <h3 className="text-sm font-bold text-[#82C1A6] uppercase tracking-wider" style={{ fontFamily: "'Roboto', sans-serif" }}>
-              {t('footer.resources', 'Resources')}
-            </h3>
-            <ul className="flex flex-col gap-2.5">
-              {resourceLinks.map((link) => (
-                <li key={link.label}>
-                  <a href={link.href} className="text-white/70 hover:text-[#82C1A6] transition-colors text-sm" style={{ fontFamily: "'Roboto', sans-serif" }}>
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Column 6: Company */}
-          <div className="min-w-[120px] flex-1 flex flex-col gap-4">
-            <h3 className="text-sm font-bold text-[#82C1A6] uppercase tracking-wider" style={{ fontFamily: "'Roboto', sans-serif" }}>
-              {t('footer.company', 'Company')}
-            </h3>
-            <ul className="flex flex-col gap-2.5">
-              {companyLinks.map((link) => (
-                <li key={link.label}>
-                  <a href={link.href} className="text-white/70 hover:text-[#82C1A6] transition-colors text-sm" style={{ fontFamily: "'Roboto', sans-serif" }}>
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Column 7: Legal */}
-          <div className="min-w-[120px] flex-1 flex flex-col gap-4">
-            <h3 className="text-sm font-bold text-[#82C1A6] uppercase tracking-wider" style={{ fontFamily: "'Roboto', sans-serif" }}>
-              {t('footer.legal', 'Legal')}
-            </h3>
-            <ul className="flex flex-col gap-2.5">
-              {legalLinks.map((link) => (
-                <li key={link.label}>
-                  <a href={link.href} className="text-white/70 hover:text-[#82C1A6] transition-colors text-sm" style={{ fontFamily: "'Roboto', sans-serif" }}>
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
         </div>
 
-        {/* Footer Bottom copyright row */}
-        <div className="mt-16 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-white/50 text-xs">
-          <p style={{ fontFamily: "'Roboto', sans-serif" }}>
-            &copy; {new Date().getFullYear()} DaitchPro. {t('footer.allRightsReserved', 'All rights reserved.')}
-          </p>
-          <div className="flex gap-4">
-            <a href="/terms" className="hover:text-white transition-colors">{t('footer.termsShort', 'Terms')}</a>
-            <a href="/privacy" className="hover:text-white transition-colors">{t('footer.privacyShort', 'Privacy')}</a>
+        {/* COLUMN 2: Solutions Container */}
+        <div className="lg:col-span-2 flex flex-col items-start gap-3 pl-1">
+          <div className="text-[#82C1A6] font-roboto font-bold text-[17px] leading-[24px] uppercase tracking-wider">
+            SOLUTIONS
+          </div>
+          <div className="flex flex-col items-start gap-1.5">
+            {[
+              "Web Agency",
+              "Digital Agency",
+              "Social Media Agency",
+              "Marketing",
+              "Creative Agencies",
+              "Software vendor",
+              "Sales"
+            ].map((name) => (
+              <a href="#" key={name} className="font-roboto font-normal text-[13.5px] leading-[22px] text-white/80 hover:text-white no-underline transition-colors whitespace-nowrap">
+                {name}
+              </a>
+            ))}
+          </div>
+        </div>
+
+        {/* COLUMN 3: Platform Container */}
+        <div className="lg:col-span-2 flex flex-col items-start gap-3">
+          <div className="text-[#82C1A6] font-roboto font-bold text-[17px] leading-[24px] uppercase tracking-wider">
+            PLATFORM
+          </div>
+          <div className="flex flex-col items-start gap-1.5">
+            {[
+              "AI Workforce",
+              "MarketPlace",
+              "Automations",
+              "Project Management",
+              "Payments",
+              "DaitchPro Affiliate"
+            ].map((name) => (
+              <a href="#" key={name} className="font-roboto font-normal text-[13.5px] leading-[22px] text-white/80 hover:text-white no-underline transition-colors whitespace-nowrap">
+                {name}
+              </a>
+            ))}
+          </div>
+        </div>
+
+        {/* COLUMN 4: Areas We Handle Container */}
+        <div className="lg:col-span-2 flex flex-col items-start gap-3">
+          <div className="text-[#82C1A6] font-roboto font-bold text-[17px] leading-[24px] uppercase tracking-wider">
+            AREAS WE HANDLE
+          </div>
+          <div className="flex flex-col items-start gap-1.5 w-full">
+            {[
+              "Primary Care",
+              "Dental Practices",
+              "Salons",
+              "Home Services",
+              "Restaurants",
+              "Automotive Dealerships",
+              "Real Estate",
+              "Veterinary Clinics",
+              "Professional Services",
+              "Retail & E-commerce",
+              "Financial Services",
+              "Education & Tutoring",
+              "Mental Health",
+              "Gyms, Fitness Studios",
+              "Senior Care",
+              "Landscaping",
+              "Events & Venue",
+              "Logistics",
+              "Nonprofit Fundraising",
+              "SaaS, Agencies"
+            ].map((name) => (
+              <a href="#" key={name} className="font-roboto font-normal text-[13.5px] leading-[22px] text-white/80 hover:text-white no-underline transition-colors truncate w-full">
+                {name}
+              </a>
+            ))}
+          </div>
+        </div>
+
+        {/* COLUMN 5: Company Container */}
+        <div className="lg:col-span-2 flex flex-col items-start gap-3">
+          <div className="text-[#82C1A6] font-roboto font-bold text-[17px] leading-[24px] uppercase tracking-wider">
+            COMPANY
+          </div>
+          <div className="flex flex-col items-start gap-1.5">
+            {[
+              "About Us",
+              "Contact Us",
+              "FAQs",
+              "Pricing",
+              "Terms of Service",
+              "Privacy Policy",
+              "Affiliate policy",
+              "Affiliate program terms",
+              "DaitchPro Affiliate"
+            ].map((name) => (
+              <a href="#" key={name} className="font-roboto font-normal text-[13.5px] leading-[22px] text-white/80 hover:text-white no-underline transition-colors whitespace-nowrap">
+                {name}
+              </a>
+            ))}
+          </div>
+        </div>
+
+        {/* COLUMN 6: Benefits & Stacking Product Menus */}
+        <div className="lg:col-span-1 flex flex-col items-start gap-5 min-w-[150px]">
+          {/* Sub-block: Benefits */}
+          <div className="flex flex-col items-start gap-2 w-full">
+            <div className="text-[#82C1A6] font-roboto font-bold text-[17px] leading-[24px] uppercase tracking-wider">
+              BENEFITS
+            </div>
+            <div className="flex flex-col items-start gap-1.5 text-white/80 text-[13.5px]">
+              <span className="whitespace-nowrap">Review Management</span>
+              <span className="whitespace-nowrap">Phone & Calling</span>
+            </div>
+          </div>
+
+          {/* Sub-block: AI Products */}
+          <div className="flex flex-col items-start gap-2 w-full">
+            <div className="text-[#82C1A6] font-roboto font-bold text-[17px] leading-[24px] uppercase tracking-wider">
+              AI PRODUCTS
+            </div>
+            <div className="flex flex-col items-start gap-1.5 text-white/80 text-[13.5px]">
+              <span className="whitespace-nowrap">AI WebChat</span>
+              <span className="whitespace-nowrap">CRM</span>
+            </div>
+          </div>
+
+          {/* Sub-block: AI Agent Product */}
+          <div className="flex flex-col items-start gap-2 w-full">
+            <div className="text-[#82C1A6] font-roboto font-bold text-[17px] leading-[24px] uppercase tracking-wider whitespace-nowrap">
+              AI AGENT PRODUCT
+            </div>
+            <div className="flex flex-col items-start gap-1.5 text-white/80 text-[13.5px]">
+              <span className="whitespace-nowrap">AI Agent Demo</span>
+              <span className="whitespace-nowrap">AI Agent Product</span>
+              <span className="whitespace-nowrap">AI Agent Product Pricing</span>
+            </div>
+          </div>
+        </div>
+
+        {/* COLUMN 7: Email & Phone Action Details */}
+        <div className="lg:col-span-1 flex flex-col items-start gap-5 pl-2 min-w-[140px]">
+          {/* Email Block */}
+          <div className="flex flex-col items-start gap-2">
+            <div className="text-[#82C1A6] font-roboto font-bold text-[17px] leading-[24px] uppercase tracking-wider">
+              EMAIL
+            </div>
+            <a href="mailto:Info@DaitchPro.com" className="font-roboto font-normal text-[13.5px] leading-[22px] text-white/80 hover:text-[#82C1A6] transition-colors no-underline whitespace-nowrap">
+              Info@DaitchPro.com
+            </a>
+          </div>
+
+          {/* Phone Block */}
+          <div className="flex flex-col items-start gap-2">
+            <div className="text-[#82C1A6] font-roboto font-bold text-[17px] leading-[24px] uppercase tracking-wider whitespace-nowrap">
+              PHONE NUMBER
+            </div>
+            <a href="tel:+1309230950" className="font-roboto font-normal text-[13.5px] leading-[22px] text-white/80 hover:text-[#82C1A6] transition-colors no-underline whitespace-nowrap">
+              +1 (309) 230-950
+            </a>
           </div>
         </div>
 
       </div>
-    </footer>
-  )
-}
+
+      {/* Blueprint Backdrop Lines Graphic */}
+      <div className="absolute bottom-0 left-0 w-full h-[120px] opacity-[0.04] pointer-events-none z-0">
+        <img
+          className="w-full h-full object-cover"
+          style={groupStyle}
+          alt="Grid Graphic Background Layout"
+          src={property1 === "variant" ? "/img/group-2147225313-1.png" : group}
+        />
+      </div>
+    </div>
+  );
+};

@@ -3,7 +3,7 @@ import { MdSend } from 'react-icons/md';
 export default function AIChatPanel({ isMobile }) {
   return (
     <div 
-      className={`flex flex-col w-full bg-white/70 backdrop-blur-xl border border-white/60 rounded-3xl overflow-hidden shadow-[0_16px_40px_rgba(0,0,0,0.15)] pointer-events-auto ${isMobile ? 'mx-auto w-[283px] max-w-[283px] h-[253px]' : 'absolute top-[5%] xl:top-[20%] right-0 xl:right-32 w-[283px] h-[253px]'}`}
+      className={`flex flex-col h-[260px] w-full bg-white/70 backdrop-blur-xl border border-white/60 rounded-3xl overflow-hidden shadow-[0_16px_40px_rgba(0,0,0,0.15)] pointer-events-auto ${isMobile ? 'mx-auto w-[283px] max-w-[283px] h-[253px]' : 'absolute top-[5%] xl:top-[33%] right-0 xl:right-32 w-[283px] h-[253px]'}`}
     >
       {/* Title Section */}
       <div className="px-4 pt-4 pb-3">
@@ -13,17 +13,17 @@ export default function AIChatPanel({ isMobile }) {
       </div>
       
       {/* Message Container */}
-      <div className="px-4 flex flex-col gap-3 flex-1 overflow-y-auto scrollbar-none [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden [scrollbar-width:none]">
+      <div className="px-4 flex flex-col gap-3 flex-1 overflow-hidden">
         {/* AI Message Box */}
         <div className="flex items-center justify-center p-2.5 gap-2.5 rounded-[10px] bg-[rgba(194,255,229,0.4)] border border-white h-[71px]">
-          <p className="text-[14px] text-[#000000] font-normal leading-[120%] line-clamp-3">
+          <p className="text-[13px] text-[#000000] font-normal leading-[120%] line-clamp-3">
             Hello! I'm Daniel, your AI Landscaping Revenue Intelligence Assistant. How can I help you today?
           </p>
         </div>
         
         {/* Input Suggestion Box */}
         <div className="flex items-center px-2.5 py-2.5 gap-2.5 rounded-[10px] bg-[rgba(255,255,255,0.69)] border border-white h-[54px]">
-          <p className="text-[14px] text-[#000000] font-normal leading-[120%] line-clamp-2">
+          <p className="text-[13px] text-[#000000] font-normal leading-[120%] line-clamp-2">
             Ask about lawn care, projects, or pricing...
           </p>
         </div>

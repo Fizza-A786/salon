@@ -54,17 +54,18 @@ export default function RevenueLeakageSection() {
           <h2 className="text-stone-900 text-3xl md:text-[42px] font-bold tracking-tight leading-[1.15]">
             Why Most Landscaping Businesses <br className="hidden md:inline" /> Are Quietly Losing Revenue
           </h2>
-          <p className="text-stone-500 text-sm md:text-base font-normal tracking-wide max-w-[750px] mx-auto">
-            Hidden inefficiencies in scheduling, follow-ups, and job management are costing thousands every month.
-          </p>
+<p className="text-stone-500 text-sm md:text-base font-normal tracking-wide mx-auto whitespace-nowrap">
+  Hidden inefficiencies in scheduling, follow-ups, and job management are costing thousands every month.
+</p>
         </div>
 
         {/* Dashboard Canvas Container (Utilizing your exact bg3.jpg) */}
         <div 
-          className="w-full lg:min-h-[620px] bg-cover bg-center bg-no-repeat px-6 py-6 md:px-4 md:py-20 flex flex-col gap-12 justify-between"
+          className="w-full lg:min-h-[620px] bg-cover bg-center bg-no-repeat px-6 py-6 md:px-4 md:py-20 flex flex-col justify-between"
           style={{ backgroundImage: `url(${bg3})` }}
         >
-          <div className="w-full max-w-[1324px] mx-auto flex flex-col gap-30">
+          {/* Main inner stack with increased gap between top grid and bottom row */}
+          <div className="w-full max-w-[1324px] mx-auto flex flex-col gap-20 lg:gap-24">
             
             {/* Top Row Layout Matrix */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
@@ -77,15 +78,15 @@ export default function RevenueLeakageSection() {
                 <MetricCard value="28%" label="No Follow-Up on Estimates" isGreenAlert={true} />
               </div>
 
-              {/* Center Side: Critical Revenue Leakage Badge */}
-              <div className="lg:col-span-4 flex flex-col items-center justify-center relative min-h-[240px] lg:my-1">
+              {/* Center Side: Critical Revenue Leakage Badge (Shifted slightly left via column span allocation) */}
+              <div className="lg:col-span-4 flex flex-col items-center justify-center relative min-h-[240px] lg:my-1 lg:-ml-6">
                 {/* Floating Pill Tag */}
                 <span className="absolute top-0 bg-gradient-to-r from-[#836E4A] to-[#91825F] text-[#F4EFEA] text-[11px] font-bold tracking-wider px-5 py-2 rounded-full uppercase z-20 -translate-y-1/2 shadow-sm">
                   Analytics Dashboard
                 </span>
                 
                 {/* Main Badge Box */}
-                <div className="w-[330px] h-[250px] bg-gradient-to-br from-[#A3A379] via-[#7E6B4A] to-[#626946] rounded-2xl  flex flex-col items-center justify-center text-center shadow-[0_13px_17px_0_rgba(136,106,68,0.50)] border border-white z-10">
+                <div className="w-[330px] h-[250px] bg-gradient-to-br from-[#A3A379] via-[#7E6B4A] to-[#626946] rounded-2xl flex flex-col items-center justify-center text-center shadow-[0_13px_17px_0_rgba(136,106,68,0.50)] border border-white z-10">
                   <h3 className="text-[#FDFDFB] text-3xl md:text-[50px] font-black tracking-tight leading-[1.08] uppercase">
                     Critical <br />
                     Revenue <br />
@@ -94,12 +95,12 @@ export default function RevenueLeakageSection() {
                 </div>
               </div>
 
-              {/* Right Side: Spacer Column (Lets the asset image's cash illustration show beautifully underneath) */}
+              {/* Right Side: Re-balanced spacer columns to perfectly fit money graphic */}
               <div className="lg:col-span-3 hidden lg:block" />
 
             </div>
 
-            {/* Bottom Row Layout Matrix */}
+            {/* Bottom Row Layout Matrix (Pushed down perfectly via the parent flex layout container) */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
               
               {/* Detail Card 1 */}
@@ -137,7 +138,7 @@ export default function RevenueLeakageSection() {
                 </div>
                 <div>
                   <h5 className="text-[12px] font-bold text-stone-900 leading-tight">
-                    High-Value Projects Lost + $60,000
+                    High-Value Projects Lost: +$60,000
                   </h5>
                   <p className="text-[12px] text-stone-400 font-medium mt-0.5">annual missed opportunities</p>
                 </div>

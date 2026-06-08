@@ -1,156 +1,193 @@
-'use client';
+import React from "react";
 
-import React from 'react';
+// ── LOCAL IMAGE IMPORTS (UNCHANGED) ─────────────────────────────────────────
+import layoutBg from "../../assets/Obj.png"; 
+import qrCodeUrl from "../../assets/qr.png"; 
+import obj1 from "../../assets/assistant.png";
+
+
+const nodes = [
+  { id: 1, title: "Customer & Service Requests", desc: "AI handles calls, messages, and job inquires" },
+  { id: 2, title: "Scheduling & Routing",         desc: "Smart crew scheduling and route optimization" },
+  { id: 3, title: "Billing & Payments",           desc: "Invoices, payments, and job tracking" },
+  { id: 4, title: "Marketing & Retention",        desc: "Follow-ups, promotions, repeat clients" },
+];
+
+const bullets = [
+  "Handles customer inquiries and service requests automatically",
+  "24/7 voice and chat booking",
+  "Smart scheduling and route optimization",
+  "Automated invoicing and payments",
+  "Marketing and repeat client growth",
+];
 
 export default function LandscapingAiWorkforce() {
   return (
-    <div className="w-full bg-white flex flex-col items-center justify-start py-12 md:py-16 px-4 sm:px-6 md:px-12 font-sans antialiased select-none overflow-x-hidden">
+    <div className="w-full max-w-[1280px] bg-white flex flex-col items-center p-4 md:p-8 gap-[36px] font-['Roboto',sans-serif] antialiased mx-auto overflow-hidden select-none">
       
-      {/* --- HEADER TITLE --- */}
-      <h1 className="w-full text-center text-[32px] sm:text-[38px] md:text-[42px] font-medium tracking-tight text-black mb-12 max-w-[700px] mx-auto leading-[110%] font-['Roboto',_sans-serif]">
-        Run your landscaping business with a complete AI workforce.
+      {/* Title */}
+      <h1 className="w-full max-w-[700px] text-[36px] md:text-[42px] font-bold tracking-tight text-[#000000] text-center leading-[115%] mt-2">
+        Run your landscaping business<br />
+        with a complete AI workforce.
       </h1>
 
-      {/* --- DESKTOP AUTO LAYOUT FRAME CONTAINER --- */}
-      <div className="w-full max-w-[1320px] mx-auto grid grid-cols-1 lg:grid-cols-[881px_1fr] gap-[31px] items-start">
+      {/* Main Container Row */}
+      <div className="w-full flex flex-col lg:flex-row justify-center items-center lg:items-start gap-[32px] mt-2">
         
-        {/* ========================================================
-            LEFT COLUMN AREA: HERO OVERLAY BLOCK (881px fixed spec)
-           ======================================================== */}
-        <div className="relative rounded-[30px] overflow-hidden aspect-[881/528] w-full bg-[#f8f9fa] border border-black/5">
-          {/* Base Background Image Source Asset */}
-          <div 
-            className="absolute inset-0 bg-cover"
-            style={{ 
-              backgroundImage: `url('/Section-06.png')`, 
-              backgroundPosition: 'center center'
-            }}
-          />
+        {/* ── LEFT AREA: DIAGRAM IMAGE BOX (740px x 480px) ── */}
+        <div className="relative w-full max-w-[740px] h-[480px] bg-white rounded-[24px] overflow-hidden flex-shrink-0 shadow-md">
           
-          {/* Complete Flow Diagram Stack Layer */}
-          <div className="absolute inset-0 flex items-center justify-end p-6 z-10">
-            <div className="relative w-full max-w-[520px] h-full flex items-center justify-between">
-              
-              {/* --- CONNECTIVE SVG ROUTING LINES SYSTEM --- */}
-              <div className="absolute inset-0 pointer-events-none z-20 text-[#C2FFE5]">
-                <svg className="w-full h-full" viewBox="0 0 520 480" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  {/* Top Stem Branch Bracket to Customer & Service Requests Box */}
-                  <path d="M 152 220 C 200 220 190 60 250 60 L 257 60" stroke="currentColor" strokeWidth="2" fill="none" />
-                  
-                  {/* Stem Branch to Scheduling & Routing Box */}
-                  <path d="M 152 220 C 200 220 190 168 250 168 L 257 168" stroke="currentColor" strokeWidth="2" fill="none" />
-                  
-                  {/* Stem Branch to Billing & Payments Box */}
-                  <path d="M 152 220 C 200 220 190 280 250 280 L 257 280" stroke="currentColor" strokeWidth="2" fill="none" />
+          <img 
+            src={layoutBg} 
+            alt="Landscaping Representative Stage" 
+            className="absolute inset-0 w-full h-full object-cover pointer-events-none z-10"
+          />
 
-                  {/* Lower Sweep Branch Hook into Marketing & Retention Box */}
-                  <path d="M 76 250 L 76 370 C 76 392 140 392 200 392 L 250 392 C 255 392 257 394 257 398 L 257 402" stroke="currentColor" strokeWidth="2" fill="none" />
-                </svg>
-              </div>
+          {/* ── PERFECT SMOOTH CURVEY LINES (RE-CALCULATED) ── */}
+          {/* C point controls the sexy bezier curves to make it match Figma smoothly */}
+          <svg 
+            className="absolute inset-0 w-full h-full pointer-events-none z-20"
+            viewBox="0 0 740 480" 
+            fill="none" 
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            {/* Base anchor point from right side of CRM Badge: X=405, Y=240 */}
+            
+            {/* Curve 1 to Customer & Service Requests */}
+            <path 
+              d="M 405,240 C 450,240 440,58 482,58" 
+              stroke="#C2FFE5" 
+              strokeWidth="2.5" 
+              strokeLinecap="round"
+            />
+            
+            {/* Curve 2 to Scheduling & Routing */}
+            <path 
+              d="M 405,240 C 450,240 445,178 482,178" 
+              stroke="#C2FFE5" 
+              strokeWidth="2.5" 
+              strokeLinecap="round"
+            />
+            
+            {/* Curve 3 to Billing & Payments */}
+            <path 
+              d="M 405,240 C 450,240 445,302 482,302" 
+              stroke="#C2FFE5" 
+              strokeWidth="2.5" 
+              strokeLinecap="round"
+            />
+            
+            {/* Curve 4 to Marketing & Retention (PERFECTLY CONNECTED NOW) */}
+            <path 
+              d="M 405,240 C 450,240 440,422 482,422" 
+              stroke="#C2FFE5" 
+              strokeWidth="2.5" 
+              strokeLinecap="round"
+            />
+          </svg>
 
-              {/* Master Control Action Node (Landscaping CRM Activated) */}
-              <div className="relative flex flex-col justify-center h-full z-30 pl-2">
-                <div className="bg-[#DCF3ED] border-2 border-white shadow-[0px_4px_4px_3px_rgba(194,255,229,0.4)] text-black font-semibold text-[18px] w-[158px] h-[78px] rounded-[15px] flex items-center justify-center text-center p-3 leading-[120%] font-['Roboto',_sans-serif]">
-                  Landscaping CRM Activated
+          {/* ── CENTRAL HUB BADGE ── */}
+          <div className="absolute left-[260px] top-[200px] w-[145px] h-[80px] bg-[#DCF3ED] border-2 border-white rounded-[14px] shadow-[0px_4px_12px_rgba(194,255,229,0.5)] z-30 flex items-center justify-center p-3">
+            <div className="font-semibold text-[15px] text-black text-center leading-[120%]">
+              Landscaping <br />CRM Activated
+            </div>
+          </div>
+
+          {/* ── FLOATING PANEL CARDS ── */}
+          <div className="absolute right-[24px] top-[14px] bottom-[14px] w-[234px] flex flex-col justify-between z-30">
+            
+            {/* Card 1 */}
+            <div className="w-full h-[90px] bg-[#DCF3ED]/95 backdrop-blur-sm border border-white rounded-[14px] p-2.5 shadow-sm flex flex-col justify-center">
+              <div className="flex flex-row items-start gap-2">
+                <div className="w-[15px] h-[15px] bg-[#B5F3DE] border border-[#FDFDFD] rounded-[5px] flex-shrink-0 mt-0.5" />
+                <div className="flex flex-col min-w-0">
+                  <div className="text-black font-semibold text-[13px] leading-tight truncate">{nodes[0].title}</div>
+                  <div className="text-[#484848] text-[11px] leading-[130%] font-normal mt-0.5 line-clamp-2">{nodes[0].desc}</div>
                 </div>
               </div>
-
-              {/* Destination Feature Node Block Stack */}
-              <div className="flex flex-col justify-between h-full w-[263px] z-30 py-4">
-                {[
-                  { title: "Customer & Service Requests", desc: "AI handles calls, messages, and job inquires", lightBg: true },
-                  { title: "Scheduling & Routing", desc: "Smart crew scheduling and route optimization" },
-                  { title: "Billing & Payments", desc: "Invoices, payments, and job tracking" },
-                  { title: "Marketing & Retention", desc: "Follow-ups, promotions, repeat clients" }
-                ].map((node, idx) => (
-                  <div 
-                    key={idx} 
-                    className="box-sizing-border-box w-[263px] h-[98px] bg-[#DCF3ED] border border-white rounded-[15px] p-[13px_11px] relative flex gap-[9px] items-start shadow-sm"
-                  >
-                    {/* Visual Check/Indicator Anchor Element */}
-                    <div className="w-[20px] h-[20px] bg-[#B5F3DE] border border-[#FDFDFD] rounded-[6px] shrink-0 mt-0.5" />
-                    
-                    {/* Content Matrix Block */}
-                    <div className="flex flex-col gap-2 font-['Roboto',_sans-serif]">
-                      <h4 className="text-black font-medium text-[17px] leading-[100%] m-0">
-                        {node.title}
-                      </h4>
-                      <p className="text-[#484848] text-[15px] font-normal leading-[100%] m-0">
-                        {node.desc}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
             </div>
+
+            {/* Card 2 */}
+            <div className="w-full h-[90px] bg-[#DCF3ED]/95 backdrop-blur-sm border border-white rounded-[14px] p-2.5 shadow-sm flex flex-col justify-center">
+              <div className="flex flex-row items-start gap-2">
+                <div className="w-[15px] h-[15px] bg-[#B5F3DE] border border-[#FDFDFD] rounded-[5px] flex-shrink-0 mt-0.5" />
+                <div className="flex flex-col min-w-0">
+                  <div className="text-black font-semibold text-[13px] leading-tight truncate">{nodes[1].title}</div>
+                  <div className="text-[#484848] text-[11px] leading-[130%] font-normal mt-0.5 line-clamp-2">{nodes[1].desc}</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Card 3 */}
+            <div className="w-full h-[90px] bg-[#DCF3ED]/95 backdrop-blur-sm border border-white rounded-[14px] p-2.5 shadow-sm flex flex-col justify-center">
+              <div className="flex flex-row items-start gap-2">
+                <div className="w-[15px] h-[15px] bg-[#B5F3DE] border border-[#FDFDFD] rounded-[5px] flex-shrink-0 mt-0.5" />
+                <div className="flex flex-col min-w-0">
+                  <div className="text-black font-semibold text-[13px] leading-tight truncate">{nodes[2].title}</div>
+                  <div className="text-[#484848] text-[11px] leading-[130%] font-normal mt-0.5 line-clamp-2">{nodes[2].desc}</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Card 4 */}
+            <div className="w-full h-[90px] bg-[#DCF3ED]/95 backdrop-blur-sm border border-white rounded-[14px] p-2.5 shadow-sm flex flex-col justify-center">
+              <div className="flex flex-row items-start gap-2">
+                <div className="w-[15px] h-[15px] bg-[#B5F3DE] border border-[#FDFDFD] rounded-[5px] flex-shrink-0 mt-0.5" />
+                <div className="flex flex-col min-w-0">
+                  <div className="text-black font-semibold text-[13px] leading-tight truncate">{nodes[3].title}</div>
+                  <div className="text-[#484848] text-[11px] leading-[130%] font-normal mt-0.5 line-clamp-2">{nodes[3].desc}</div>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
 
-        {/* ========================================================
-            RIGHT COLUMN AREA: VALUE AGGREGATES & AGENT PANEL
-           ======================================================== */}
-        <div className="flex flex-col justify-start h-full pt-2">
+        {/* ── RIGHT AREA: DESCRIPTION & UPDATED ACTIONS ── */}
+        <div className="w-full max-w-[440px] flex flex-col justify-between min-h-[480px] flex-shrink-0 px-2">
           
-          {/* Bullet Spec Description List */}
-          <ul className="space-y-0 mb-10 text-black font-['Roboto',_sans-serif] text-[20px] font-normal leading-[190%] list-none pl-0">
-            {[
-              "Handles customer inquiries and service requests automatically",
-              "24/7 voice and chat booking",
-              "Smart scheduling and route optimization",
-              "Automated invoicing and payments",
-              "Marketing and repeat client growth"
-            ].map((bullet, i) => (
-              <li key={i} className="flex items-start mb-1">
-                <span className="mr-3 text-black font-bold select-none">•</span>
-                <span className="flex-1">{bullet}</span>
-              </li>
-            ))}
-          </ul>
+          <div className="w-full text-[16px] md:text-[17px] font-normal text-black text-left leading-[175%]">
+            <ul className="space-y-3.5 list-none p-0 m-0">
+              {bullets.map((bullet, idx) => (
+                <li key={idx} className="flex items-start gap-2">
+                  <span className="text-black font-bold select-none text-[15px] mt-0.5">•</span>
+                  <span>{bullet}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-          {/* Identity Matrix Row Frame */}
-          <div className="flex items-end justify-between w-full mt-auto gap-4">
+          {/* Action Row */}
+          <div className="w-full flex flex-row items-end justify-between mt-6 lg:mt-auto gap-4">
             
-            {/* --- COMPONENT BOX FRAME 2147229398 --- */}
-            <div className="w-[218px] h-[266px] bg-[#C2FFE5]/[0.41] border-2 border-[#3C995B]/[0.27] shadow-[0px_2px_15px_5px_rgba(194,255,229,0.47)] rounded-[15px] p-2.5 flex flex-col relative justify-between font-['Roboto',_sans-serif] shrink-0">
-              
-              {/* Internal Crop Graphic Base (Frame 2147229399) */}
-              <div className="w-[198px] h-[92px] bg-white rounded-[10px] overflow-hidden relative">
-                <div 
-                  className="w-[202px] h-[95px] absolute left-1/2 -translate-x-1/2 -top-[1px] bg-cover bg-center"
-                  style={{ backgroundImage: `url('/Section-06.png')` }}
+            {/* Male AI Assistant Card */}
+            <div className="w-[210px] h-[250px] bg-[#EAFBF5] border border-[#3C995B]/20 rounded-[18px] shadow-sm relative flex-shrink-0 p-3 flex flex-col justify-between">
+              <div className="w-full h-[105px] bg-white rounded-[12px] overflow-hidden relative">
+                <img 
+                  src={obj1} 
+                  alt="AI Assistant Silhouette Avatar View" 
+                  className="absolute w-full h-full object-cover "
                 />
               </div>
-
-              {/* Description Content Stack Framework */}
-              <div className="flex flex-col gap-[12px] px-[2px] mt-2">
-                <p className="text-[16px] font-normal text-[#484848] m-0 leading-[100%]">
-                  Male AI Assistant
-                </p>
-                <h2 className="text-[20px] font-semibold text-black m-0 leading-[120%]">
-                  AI Landscaping Expert Agent
-                </h2>
+              <div className="w-full flex flex-col gap-0.5 mt-1">
+                <div className="text-[12px] font-normal text-gray-500 leading-none">Male AI Assistant</div>
+                <div className="text-[15px] font-bold text-black leading-tight mt-1">AI Landscaping Expert Agent</div>
               </div>
-
-              {/* Call-to-Action Interactive Element Button */}
-              <button className="w-[198px] h-[49px] bg-[#3C995B] opacity-90 border border-white shadow-[0px_0px_30px_rgba(0,0,0,0.15)] backdrop-blur-[39.45px] rounded-[12px] flex items-center justify-center p-0 transition-all hover:opacity-100 cursor-pointer mt-2">
-                <span className="text-[16px] font-medium text-white leading-[19px]">
-                  Learn More
-                </span>
+              <button className="w-full h-[38px] bg-[#3C995B] hover:bg-[#2e7746] transition-colors rounded-[10px] flex items-center justify-center shadow-sm mt-2">
+                <span className="text-[13px] font-medium text-white tracking-wide">Learn More</span>
               </button>
             </div>
 
-            {/* --- QR SYSTEM TARGET BASE CONTAINER --- */}
-            <div className="w-[120px] h-[120px] border border-gray-200 rounded-[18px] bg-white p-2.5 shadow-sm flex items-center justify-center shrink-0 mb-1">
-              <div 
-                className="w-full h-full bg-contain bg-no-repeat bg-center"
-                style={{ backgroundImage: `url('/Section-06.png')` }}
-                title="Access Link QR"
+            {/* QR Scanner Container */}
+            <div className="w-[140px] h-[155px] bg-[#F8FDFB] rounded-[18px] overflow-hidden flex flex-col items-center justify-center shadow-sm border border-emerald-50/50">
+              <img 
+                src={qrCodeUrl} 
+                alt="Quick Navigation target module" 
+                className="w-full h-auto object-contain"
               />
             </div>
 
           </div>
-
         </div>
 
       </div>
