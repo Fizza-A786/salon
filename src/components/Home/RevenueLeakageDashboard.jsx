@@ -46,11 +46,11 @@ const DetailCard = ({ children }) => (
 // --- Main Section Component ---
 export default function RevenueLeakageSection() {
   return (
-    <section className="w-full bg-white py-10 flex flex-col items-center font-['Roboto',sans-serif] antialiased">
+    <section className="w-full bg-white  flex flex-col items-center font-['Roboto',sans-serif] antialiased">
       <div className="w-full flex flex-col gap-12">
         
         {/* Top Header Section */}
-        <div className="w-full text-center max-w-4xl mx-auto flex flex-col gap-4 px-4">
+        <div className="w-full text-center  md:pt-[75px] md:pb-[18px]  max-w-4xl mx-auto flex flex-col gap-4 px-4">
           <h2 className="text-stone-900 text-3xl md:text-[42px] font-bold tracking-tight leading-[1.15]">
             Why Most Landscaping Businesses <br className="hidden md:inline" /> Are Quietly Losing Revenue
           </h2>

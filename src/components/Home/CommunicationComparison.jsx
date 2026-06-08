@@ -4,9 +4,9 @@ import Object1 from '../../assets/Object1.png';
 
 export default function LandscapingCommunication() {
   return (
-    <div className="w-full min-h-screen bg-white py-16 px-4 flex flex-col items-center justify-center font-['Roboto',sans-serif]">
+    <div className="w-full min-h-screen bg-white  px-4 flex flex-col items-center justify-center font-['Roboto',sans-serif]">
       {/* Frame 2147229384 - Title Container */}
-      <div className="flex flex-col justify-center items-center gap-4 w-full max-w-[1106px] mb-[42px] text-center">
+      <div className="flex flex-col justify-center  md:pt-[70px] md:pb-[20px]  items-center gap-4 w-full max-w-[1106px] mb-[42px] text-center">
         <h2 className="w-full text-[32px] md:text-[42px] font-medium leading-[100%] tracking-tight text-black">
           Why Traditional Landscaping Communication Is Broken
         </h2>

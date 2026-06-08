@@ -47,7 +47,7 @@ export default function RevenueCalculator() {
 
   return (
     // Outer section breaks constraints layout safely
-    <section className="w-full relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen flex flex-col items-center justify-center py-12 bg-white font-robotoPin selection:bg-[#C2FFE5] overflow-x-hidden">
+    <section className="w-full relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen flex flex-col items-center justify-center  bg-white font-robotoPin selection:bg-[#C2FFE5] overflow-x-hidden">
       
       <link
         href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
@@ -55,7 +55,7 @@ export default function RevenueCalculator() {
       />
 
       {/* Header Container */}
-      <div className="w-full max-w-[791px] flex flex-col items-center justify-center text-center gap-4 mb-[42px] px-4">
+      <div className="w-full max-w-[791px]  md:pt-[60px] md:pb-[48px]  flex flex-col items-center justify-center text-center gap-4  px-4">
         <h2 className="w-full font-roboto font-medium text-[32px] md:text-[42px] leading-tight text-black tracking-normal">
           How Much Revenue Are You Losing?
         </h2>

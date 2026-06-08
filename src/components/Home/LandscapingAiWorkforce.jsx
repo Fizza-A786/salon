@@ -23,10 +23,10 @@ const bullets = [
 
 export default function LandscapingAiWorkforce() {
   return (
-    <div className="w-full max-w-[1280px] bg-white flex flex-col items-center p-4 md:p-8 gap-[36px] font-['Roboto',sans-serif] antialiased mx-auto overflow-hidden select-none">
-      
+    <div className="w-full max-w-[1280px] bg-white flex md:pb-[90px] flex-col items-center gap-[36px] font-['Roboto',sans-serif] antialiased mx-auto overflow-hidden select-none">
+
       {/* Title */}
-      <h1 className="w-full max-w-[700px] text-[36px] md:text-[42px] font-bold tracking-tight text-[#000000] text-center leading-[115%] mt-2">
+      <h1 className="w-full max-w-[700px] text-[36px]  md:pt-[68px] md:pb-[20px]   md:text-[42px] font-bold tracking-tight text-[#000000] text-center leading-[115%] ">
         Run your landscaping business<br />
         with a complete AI workforce.
       </h1>
