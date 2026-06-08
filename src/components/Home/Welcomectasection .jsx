@@ -43,6 +43,7 @@ export default function WelcomeCTASection() {
 
   return (
     <motion.section
+    
       ref={ref}
       initial={{ opacity: 0, y: 24 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -58,7 +59,7 @@ export default function WelcomeCTASection() {
           <div className="absolute inset-0 bg-black/[0.02] pointer-events-none" />
 
           {/* Main Card Modal Component — Fixed missing closing bracket on shadow */}
-          <div className="relative z-10 w-full max-w-[290px] xs:max-w-[340px] sm:max-w-[480px] md:max-w-[580px] border-2 border-[#3C995B] bg-[#F5FCF8]/55 backdrop-blur-md rounded-[24px] p-5 sm:p-8 md:p-10 shadow-[0_10px_35px_rgba(0,0,0,0.06)] flex flex-col items-center text-center">
+          <div className="relative z-10 w-full max-w-[290px] xs:max-w-[340px] sm:max-w-[480px] md:max-w-[580px] border-[1px] border-[#FFF] bg-[#F5FCF8]/55 backdrop-blur-md rounded-[24px] p-5 sm:p-8 md:p-10 shadow-[0_10px_35px_rgba(0,0,0,0.06)] flex flex-col items-center text-center">
             {/* Animated Heading */}
             <h2 className="text-black font-semibold tracking-tight leading-[1.3] m-0 select-none w-full">
               <span className="block" style={{ fontSize: 'clamp(14px, 3.4vw, 24px)' }}>

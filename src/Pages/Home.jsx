@@ -13,7 +13,7 @@ import WelcomeCTASection from './../components/Home/Welcomectasection ';
 
 export default function Hero() {
   return (
-    <main className="w-full flex flex-col bg-gradient-to-r py-12 from-[#9ADBB8]/40 to-white/40 backdrop-blur-lg">
+    <main className="w-full flex flex-col bg-gradient-to-r from-[#9ADBB8]/40 to-white/40 backdrop-blur-lg">
       <section className="relative w-full min-h-screen flex flex-col lg:flex-row items-stretch">
         
       <div className="w-full lg:w-[44%] relative z-10 flex items-center shrink-0">

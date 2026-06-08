@@ -4,40 +4,60 @@ import bg3 from '../../assets/bg3.png';
 
 // --- Precise Alert Icons matching Figma ---
 const AlertTriangleIcon = () => (
-  <svg className="w-3.5 h-3.5 text-[#A37F61]" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M12 2L1 21h22L12 2zm1 14h-2v-2h2v2zm0-4h-2V10h2v2z" />
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="select-none pointer-events-none shrink-0">
+    <path d="M12 2L1 21h22L12 2zm0 15c-.55 0-1-.45-1-1v-4c0-.55.45-1 1-1s1 .45 1 1v4c0 .55-.45 1-1 1zm1 4h-2v-2h2v2z" fill="#886A44"/>
   </svg>
 );
 
 const CheckCircleIcon = () => (
-  <svg className="w-3.5 h-3.5 text-[#3C995B]" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="select-none pointer-events-none shrink-0">
+    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" fill="#3C995B"/>
   </svg>
 );
 
-// --- Reusable Sub-Components ---
+// --- 1. Small Metric Cards (Left Column) - Increased Size ---
 const MetricCard = ({ value, label, isGreenAlert = false }) => (
-  <div className="bg-[#FAF9F5]/95 backdrop-blur-sm p-[22px] rounded-2xl border border-stone-200/40 shadow-[0_4px_24px_-6px_rgba(120,110,90,0.04)] flex flex-col justify-between relative min-h-[120px] w-full">
-    <div className="absolute top-5 right-5">
+  <div 
+    className="relative flex flex-col justify-between backdrop-blur-[19px] rounded-2xl select-none text-left shrink-0 mx-auto sm:mx-0"
+    style={{
+      width: '176px', 
+      height: '135px',
+      background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, rgba(241, 238, 238, 0.3) 100%)',
+      boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.12)',
+      border: '1px solid rgba(255, 255, 255, 0.45)',
+      padding: '18px'
+    }}
+  >
+    <div className="absolute top-[14px] right-[14px]">
       {isGreenAlert ? <CheckCircleIcon /> : <AlertTriangleIcon />}
     </div>
-    <div className="mt-auto">
-      <span className={`text-[36px] font-bold tracking-tight leading-none ${isGreenAlert ? 'text-[#3C995B]' : 'text-[#826440]'}`}>
+    <div className="mt-auto flex flex-col gap-1.5">
+      <span className={`text-[32px] font-bold tracking-tight leading-none ${isGreenAlert ? 'text-[#3C995B]' : 'text-[#886A44]'}`}>
         {value}
       </span>
-      <p className="text-[12px] font-medium text-stone-500 mt-2 leading-snug">
+      <p className="text-[12px] font-medium text-[#484848] leading-[15px]">
         {label}
       </p>
     </div>
   </div>
 );
 
-const DetailCard = ({ children }) => (
-  <div className="bg-[#FAF9F5]/95 backdrop-blur-sm p-6 rounded-2xl border border-stone-200/40 shadow-[0_4px_24px_-6px_rgba(120,110,90,0.04)] flex flex-col gap-4 relative min-h-[140px] w-full">
-    <div className="absolute top-6 right-6">
-      <AlertTriangleIcon />
+// --- 2. Big Detail Cards (Bottom Row) - Dynamic Responsive Width ---
+const DetailCard = ({ children, isGreenAlert = false }) => (
+  <div 
+    className="relative flex flex-col justify-start backdrop-blur-[19px] text-left rounded-2xl w-full"
+    style={{
+      height: '188.73px',
+      background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, rgba(241, 238, 238, 0.3) 100%)',
+      boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.15)',
+      border: '1px solid rgba(255, 255, 255, 0.4)'
+    }}
+  >
+    <div className="absolute top-[18px] right-[18px] z-20">
+      {isGreenAlert ? <CheckCircleIcon /> : <AlertTriangleIcon />}
     </div>
-    <div className="flex flex-col gap-3.5 pr-2">
+    {/* Frame 2147229387 Alignment */}
+    <div className="absolute left-[26px] top-[23px] right-[26px] h-[128px] flex flex-col gap-[14px]">
       {children}
     </div>
   </div>
@@ -46,48 +66,61 @@ const DetailCard = ({ children }) => (
 // --- Main Section Component ---
 export default function RevenueLeakageSection() {
   return (
-    <section className="w-full bg-white  flex flex-col items-center font-['Roboto',sans-serif] antialiased">
-      <div className="w-full flex flex-col gap-12">
+    <section className="w-full bg-white flex flex-col items-center font-['Roboto',sans-serif] antialiased pb-16 overflow-hidden">
+      <div className="w-full flex flex-col">
         
         {/* Top Header Section */}
-        <div className="w-full text-center  md:pt-[75px] md:pb-[18px]  max-w-4xl mx-auto flex flex-col gap-4 px-4">
-          <h2 className="text-stone-900 text-3xl md:text-[42px] font-bold tracking-tight leading-[1.15]">
-            Why Most Landscaping Businesses <br className="hidden md:inline" /> Are Quietly Losing Revenue
+        <div className="w-full text-center pt-[80px] pb-[45px] max-w-4xl mx-auto flex flex-col gap-3 px-4">
+          <h2 className="text-[#000000] text-3xl md:text-[38px] font-bold tracking-tight leading-[1.2]">
+            Why Most Landscaping Businesses<br />Are Quietly Losing Revenue
           </h2>
-<p className="text-stone-500 text-sm md:text-base font-normal tracking-wide mx-auto whitespace-nowrap">
+<p className="text-[#484848] text-sm md:text-[17px] font-normal tracking-wide max-w-2xl mx-auto whitespace-nowrap">
   Hidden inefficiencies in scheduling, follow-ups, and job management are costing thousands every month.
 </p>
         </div>
 
-        {/* Dashboard Canvas Container (Utilizing your exact bg3.jpg) */}
+        {/* Dashboard Canvas Container Area */}
         <div 
-          className="w-full lg:min-h-[620px] bg-cover bg-center bg-no-repeat px-6 py-6 md:px-4 md:py-20 flex flex-col justify-between"
+          className="w-full bg-cover bg-center bg-no-repeat px-6 py-8 md:px-12 flex flex-col justify-start min-h-[550px]"
           style={{ backgroundImage: `url(${bg3})` }}
         >
-          {/* Main inner stack with increased gap between top grid and bottom row */}
-          <div className="w-full max-w-[1324px] mx-auto flex flex-col gap-20 lg:gap-24">
+          {/* Main Layout Container */}
+          <div className="w-full max-w-[1140px] mx-auto flex flex-col gap-9 mt-4">
             
-            {/* Top Row Layout Matrix */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+            {/* Top Row Grid Layout */}
+            <div className="grid grid-cols-1 lg:grid-cols-13 gap-8 items-center">
               
-              {/* Left Side: 4 Quad Metrics */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 lg:col-span-5">
+              {/* Left Column Area: 2x2 Small Metric Cards with Increased Size */}
+              <div className="grid grid-cols-2 gap-3 lg:col-span-5 shrink-0 mx-auto lg:mx-0">
                 <MetricCard value="92" label="Missed Service Calls (Last 7 Days)" />
                 <MetricCard value="$22,400" label="Estimated Lost Job Revenue" />
                 <MetricCard value="35%" label="Unanswered Customer Inquiries" />
                 <MetricCard value="28%" label="No Follow-Up on Estimates" isGreenAlert={true} />
               </div>
 
-              {/* Center Side: Critical Revenue Leakage Badge (Shifted slightly left via column span allocation) */}
-              <div className="lg:col-span-4 flex flex-col items-center justify-center relative min-h-[240px] lg:my-1 lg:-ml-6">
-                {/* Floating Pill Tag */}
-                <span className="absolute top-0 bg-gradient-to-r from-[#836E4A] to-[#91825F] text-[#F4EFEA] text-[11px] font-bold tracking-wider px-5 py-2 rounded-full uppercase z-20 -translate-y-1/2 shadow-sm">
+              {/* Center Column Area: Critical Leakage Display Box */}
+              <div className="relative flex flex-col items-center justify-center lg:col-span-4">
+                {/* Floating Analytics Pill Tag */}
+                <div 
+                  className="absolute -top-3.5 text-[#FAF9F5] text-[11px] font-bold tracking-normal px-[18px] py-1.5 rounded-full uppercase z-20 shadow-sm"
+                  style={{ backgroundColor: '#7E6B4A' }}
+                >
                   Analytics Dashboard
-                </span>
+                </div>
                 
-                {/* Main Badge Box */}
-                <div className="w-[330px] h-[250px] bg-gradient-to-br from-[#A3A379] via-[#7E6B4A] to-[#626946] rounded-2xl flex flex-col items-center justify-center text-center shadow-[0_13px_17px_0_rgba(136,106,68,0.50)] border border-white z-10">
-                  <h3 className="text-[#FDFDFB] text-3xl md:text-[50px] font-black tracking-tight leading-[1.08] uppercase">
+                {/* Central Gradient Card */}
+                <div 
+                  className="rounded-[32px] flex flex-col items-center justify-center text-center shadow-[0_12px_24px_rgba(0,0,0,0.15)] border-[2px] border-white/60 z-10"
+                  style={{
+                    width: '308px',
+                    height: '270px',
+background: 'linear-gradient(132.36deg, #A3A379 9.01%, #7E6B4A 29.4%, #626946 75.56%)',
+                    boxShadow: '0px 13px 17px rgba(136, 106, 68, 0.5)'
+                  }}
+                >
+                  <h3 className="text-white text-[40px] font-black tracking-tight leading-[1.05]  uppercase select-none"
+                  style={{ textShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)' }}
+                  >
                     Critical <br />
                     Revenue <br />
                     Leakage
@@ -95,64 +128,64 @@ export default function RevenueLeakageSection() {
                 </div>
               </div>
 
-              {/* Right Side: Re-balanced spacer columns to perfectly fit money graphic */}
+              {/* Right Spacer Area: Leaves space for the cash illustration background */}
               <div className="lg:col-span-3 hidden lg:block" />
 
             </div>
 
-            {/* Bottom Row Layout Matrix (Pushed down perfectly via the parent flex layout container) */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {/* Bottom Row Layout Grid: Wraps dynamically to prevent layout push */}
+            <div className="grid grid-cols-1  sm:grid-cols-2 lg:grid-cols-4 gap-[15px] mt-4 w-full">
               
               {/* Detail Card 1 */}
-              <DetailCard>
-                <div>
-                  <h4 className="text-[14px] font-bold text-stone-900 leading-tight">Missed Calls = Lost Jobs</h4>
-                  <p className="text-[12px] text-stone-500 font-medium mt-1">
-                    Avg <span className="font-bold text-stone-800">$1,500</span> per missed service opportunity
+              <DetailCard className="shadow-2xl">
+                <div className="flex flex-col justify-start gap-2">
+                  <h4 className="text-[18px] font-bold text-black leading-none tracking-tight">Missed Calls = Lost Jobs</h4>
+                  <p className="text-[15px] text-[#484848] font-normal leading-[18px]">
+                    Avg <span className="font-bold text-black">$1,500</span> per missed opportunity
                   </p>
                 </div>
-                <div>
-                  <h5 className="text-[12px] font-bold text-stone-900">Customer Inquiry Delays</h5>
-                  <p className="text-[12px] text-stone-400 font-medium mt-0.5">Leads go cold within hours</p>
+                <div className="flex flex-col justify-start gap-2">
+                  <h5 className="text-[18px] font-bold text-black leading-none tracking-tight">Customer Inquiry Delays</h5>
+                  <p className="text-[15px] text-[#484848] font-normal leading-[18px]">Leads go cold within hours</p>
                 </div>
               </DetailCard>
 
               {/* Detail Card 2 */}
               <DetailCard>
-                <div>
-                  <h4 className="text-[14px] font-bold text-stone-900 leading-tight">Crew Scheduling Overload</h4>
-                  <p className="text-[12px] text-stone-500 font-medium mt-1">4+ hours wasted on manual coordination</p>
+                <div className="flex flex-col justify-start gap-2">
+                  <h4 className="text-[18px] font-bold text-black leading-none tracking-tight">Crew Scheduling Overload</h4>
+                  <p className="text-[15px] text-[#484848] font-normal leading-[18px]">4+ hours wasted on manual coordination</p>
                 </div>
-                <div>
-                  <h5 className="text-[12px] font-bold text-stone-900">Job No-Shows / Delays</h5>
-                  <p className="text-[12px] text-stone-400 font-medium mt-0.5">
-                    <span className="font-bold text-stone-800">18%</span> loss of daily capacity
+                <div className="flex flex-col justify-start gap-2">
+                  <h5 className="text-[18px] font-bold text-black leading-none tracking-tight">Job No-Shows / Delays</h5>
+                  <p className="text-[15px] text-[#484848] font-bold leading-[18px]">
+                    18% loss of daily capacity
                   </p>
                 </div>
               </DetailCard>
 
               {/* Detail Card 3 */}
               <DetailCard>
-                <div>
-                  <h4 className="text-[14px] font-bold text-stone-900 leading-tight">Poor Follow-Up on Estimates</h4>
+                <div className="flex flex-col justify-start gap-2">
+                  <h4 className="text-[18px] font-bold text-black leading-none tracking-tight">Poor Follow-Up on Estimates</h4>
                 </div>
-                <div>
-                  <h5 className="text-[12px] font-bold text-stone-900 leading-tight">
-                    High-Value Projects Lost: +$60,000
+                <div className="flex flex-col justify-start gap-1">
+                  <h5 className="text-[18px] font-bold text-black leading-snug tracking-tight">
+                    High-Value Projects Lost + $60,000
                   </h5>
-                  <p className="text-[12px] text-stone-400 font-medium mt-0.5">annual missed opportunities</p>
+                  <p className="text-[15px] text-[#484848] font-normal leading-[18px]">annual missed opportunities</p>
                 </div>
               </DetailCard>
 
               {/* Detail Card 4 */}
               <DetailCard>
-                <div>
-                  <h4 className="text-[14px] font-bold text-stone-900 leading-tight">Pricing & Service Confusion</h4>
-                  <p className="text-[12px] text-stone-500 font-medium mt-1">Service Confusion</p>
+                <div className="flex flex-col justify-start items gap-2">
+                  <h4 className="text-[17px] font-bold text-black leading-none tracking-tight">Pricing & Service  Confusion</h4>
+                  <p className="text-[15px] text-[#484848] font-normal leading-[18px]">Service Confusion</p>
                 </div>
-                <div>
-                  <h5 className="text-[12px] font-bold text-stone-900">Marketing Leakage Low ROI</h5>
-                  <p className="text-[12px] text-stone-400 font-medium mt-0.5">From untracked leads</p>
+                <div className="flex flex-col justify-start gap-2">
+                  <h5 className="text-[17px] font-bold text-black leading-none tracking-tight">Marketing Leakage Low ROI</h5>
+                  <p className="text-[15px] text-[#484848] font-normal leading-[18px]">From untracked leads</p>
                 </div>
               </DetailCard>
 

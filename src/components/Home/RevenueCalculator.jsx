@@ -1,6 +1,54 @@
 "use client";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import Section4 from '../../assets/Section4.png';
+
+// --- Improved Typewriter Animation Component (Runs every 1 minute) ---
+function AnimatedPriceCounter({ finalValue }) {
+  const [displayText, setDisplayText] = useState("");
+  const typingIntervalRef = useRef(null);
+  const loopIntervalRef = useRef(null);
+
+  useEffect(() => {
+    const fullString = `$${parseInt(finalValue, 10).toLocaleString()}`;
+
+    const startTypingAnimation = () => {
+      let currentIndex = 0;
+      
+      // Purani typing animation ko clear karna
+      if (typingIntervalRef.current) {
+        clearInterval(typingIntervalRef.current);
+      }
+      
+      setDisplayText(""); // Reset to empty before typing
+
+      // Har character ko 75ms ke gap se type karega
+      typingIntervalRef.current = setInterval(() => {
+        if (currentIndex < fullString.length) {
+          setDisplayText(fullString.substring(0, currentIndex + 1));
+          currentIndex++;
+        } else {
+          clearInterval(typingIntervalRef.current);
+        }
+      }, 10);
+    };
+
+    // 1. Pehli baar page load/refresh par foran chalega
+    startTypingAnimation();
+
+    // 2. Har 1 minute (60000 milliseconds) baad isko automatic dobara chalayega
+    loopIntervalRef.current = setInterval(() => {
+      startTypingAnimation();
+    }, 60000); 
+
+    // Component unmount hone par memory leaks se bachne ke liye cleanup
+    return () => {
+      if (typingIntervalRef.current) clearInterval(typingIntervalRef.current);
+      if (loopIntervalRef.current) clearInterval(loopIntervalRef.current);
+    };
+  }, [finalValue]);
+
+  return <>{displayText}</>;
+}
 
 // Individual Input Component matching specific Figma properties
 function InputRow({ label, value, prefix = "", suffix = "" }) {
@@ -47,7 +95,7 @@ export default function RevenueCalculator() {
 
   return (
     // Outer section breaks constraints layout safely
-    <section className="w-full relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen flex flex-col items-center justify-center  bg-white font-robotoPin selection:bg-[#C2FFE5] overflow-x-hidden">
+    <section className="w-full relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen flex flex-col items-center justify-center bg-white font-robotoPin selection:bg-[#C2FFE5] overflow-x-hidden">
       
       <link
         href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
@@ -55,7 +103,7 @@ export default function RevenueCalculator() {
       />
 
       {/* Header Container */}
-      <div className="w-full max-w-[791px]  md:pt-[60px] md:pb-[48px]  flex flex-col items-center justify-center text-center gap-4  px-4">
+      <div className="w-full max-w-[791px] md:pt-[30px] md:pb-[48px] flex flex-col items-center justify-center text-center gap-3 px-4">
         <h2 className="w-full font-roboto font-medium text-[32px] md:text-[42px] leading-tight text-black tracking-normal">
           How Much Revenue Are You Losing?
         </h2>
@@ -64,10 +112,7 @@ export default function RevenueCalculator() {
         </p>
       </div>
 
-      {/* IMAGE CONTAINER LAYER: 
-         - Explicitly removed any "rounded-*" classes so corners are strictly sharp (straight)
-         - Applied rounded-none just to overwrite any inherited CSS rules.
-      */}
+      {/* IMAGE CONTAINER LAYER */}
       <div 
         className="w-full min-h-[567px] bg-cover bg-center bg-no-repeat rounded-none border-none flex items-center justify-center py-12 px-4 sm:px-6 md:px-8 lg:px-[100px]"
         style={{ 
@@ -137,16 +182,22 @@ export default function RevenueCalculator() {
               <InputRow label="Average Job value" value={avgJobValue} prefix="$" />
             </div>
 
+            {/* Green Box matching Figma image component */}
             <div className="relative w-full min-h-[177px] bg-[#C2FFE5]/72 rounded-[16px] shadow-[0px_4px_10px_#C2FFE5] backdrop-blur-[30.5px] py-4 px-5 flex flex-col items-center justify-between gap-[17px]">
               <p className="w-full font-roboto font-bold text-[17px] leading-[120%] text-center text-black tracking-normal">
                 ESTIMATED ANNUAL REVENUE RECOVERED
               </p>
-              <div className="flex items-center justify-center relative">
+              
+              {/* Typewriter Counter Container Area */}
+              <div className="flex items-center justify-center relative select-none">
                 <span className="font-roboto font-bold text-[42px] leading-[120%] text-black tracking-tight pl-2">
-                  ${estimatedRecovered.toLocaleString()}
+                  <AnimatedPriceCounter finalValue={estimatedRecovered} />
                 </span>
-                <div className="w-2 h-[58px] bg-[#3C995B] ml-2 animate-pulse rounded-sm" />
+                
+                {/* Visual cursor line animation mimicking image properties */}
+                <div className="w-1.5 h-[42px] bg-[#3C995B] ml-2 animate-pulse rounded-sm" />
               </div>
+              
               <p className="w-full font-roboto font-normal text-[16px] leading-[120%] text-center text-black">
                 Projection based on provided inputs. Results vary by landscaping business.
               </p>

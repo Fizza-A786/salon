@@ -133,7 +133,7 @@ export default function LandscapingCommunication() {
 
           {/* Efficiency Track Bar Bottom */}
           <div className="relative w-full h-[51px] bg-white/20 border border-white/20 rounded-[12px] p-[3px] backdrop-blur-[8.5px] shadow-[0px_4px_14px_4px_rgba(0,0,0,0.1)] flex items-center z-10 mt-auto">
-            <div className="w-[98%] h-full bg-[#C2FFE5] rounded-[11px] backdrop-blur-[8.5px] transition-all duration-500"></div>
+            <div className="w-[98%] ms-[3px] h-full bg-[#C2FFE5] rounded-[11px] backdrop-blur-[8.5px] transition-all duration-500"></div>
             <div className="absolute inset-0 flex justify-center items-center pointer-events-none">
               <span className="text-sm md:text-base font-normal text-black text-center">
                 Workflow efficiency: <strong className="font-bold">97% Effective</strong>

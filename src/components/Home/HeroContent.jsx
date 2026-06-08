@@ -9,7 +9,7 @@ export default function HeroContent() {
       <div className="absolute top-[20%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-white/80 rounded-full blur-[70px] -z-10 lg:hidden pointer-events-none" />
 
       {/* Figma Typography Header */}
-      <h1 className="text-[32px] sm:text-[40px] mb-6 md:text-[40px] lg:text-[48px] font-bold text-[#000000] text-left leading-[1.12] tracking-tight font-sans mt-10">
+      <h1 className="text-[32px] sm:text-[40px] mb-6 md:text-[40px] lg:text-[48px] font-bold text-[#000000] text-left leading-[1.12] tracking-tight font-sans mt-19">
         DaitchPro – AI<br />
         Landscaping Revenue<br />
         Intelligence Agent
