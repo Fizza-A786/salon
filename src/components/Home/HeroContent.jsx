@@ -10,9 +10,10 @@ export default function HeroContent() {
 
       {/* Figma Typography Header */}
       <h1 className="text-[32px] sm:text-[40px] mb-6 md:text-[40px] lg:text-[48px] font-bold text-[#000000] text-left leading-[1.12] tracking-tight font-sans mt-19">
-        DaitchPro – AI<br />
-        Landscaping Revenue<br />
-        Intelligence Agent
+        DaitchPro – Al<br/>
+Dental Revenue<br/>
+Intelligence Agent<br />
+
       </h1>
 
       {/* Mobile View Responsive Grid Layer */}
@@ -27,10 +28,13 @@ export default function HeroContent() {
 
       {/* Figma Bullet Lists */}
       <ul className="space-y-3.5 mb-10 pl-5 text-[#000000] text-[15px] sm:text-[16px] lg:text-[17px] font-medium leading-relaxed">
-        <li className="list-disc pl-1">Lawn care & seasonal service call automation</li>
-        <li className="list-disc pl-1">Job follow-up & maintenance scheduling systems</li>
-        <li className="list-disc pl-1">Revenue leakage → missed job recovery analytics</li>
-        <li className="list-disc pl-1">Landscape project & client lifecycle enhancement</li>
+        <li className="list-disc pl-1">Hygiene recall calling automation
+</li>
+        <li className="list-disc pl-1">Treatment follow-up tracking systems
+</li>
+        <li className="list-disc pl-1">Revenue leakage → recovery analytics
+</li>
+        <li className="list-disc pl-1">Dental naturally dental enhancement</li>
       </ul>
 
       {/* Action Buttons Frame Interface */}
@@ -47,13 +51,7 @@ export default function HeroContent() {
       </div>
 
       {/* Sub-caption Text Frame */}
-      <p className="text-[#484848] text-[14px] sm:text-[15px] font-normal leading-normal">
-        Start automating your{" "}
-        <strong className="font-semibold text-black">landscaping</strong>{" "}
-        <strong className="font-semibold text-black">communication</strong>{" "}
-        in minutes
-      </p>
-
+      
     </div>
   );
 }

@@ -9,7 +9,7 @@ export default function WelcomeCTASection() {
   const isInView = useInView(ref, { once: true, margin: '-60px', amount: 0.15 })
 
   // Typewriter Animation Logic
-  const words = ["Landscaping", "Growth", "Orders"]
+  const words = ["Patients", "Growth", "Orders"]
   const [currentWordIndex, setCurrentWordIndex] = useState(0)
   const [currentText, setCurrentText] = useState('')
   const [isDeleting, setIsDeleting] = useState(false)
@@ -59,17 +59,17 @@ export default function WelcomeCTASection() {
           <div className="absolute inset-0 bg-black/[0.02] pointer-events-none" />
 
           {/* Main Card Modal Component — Fixed missing closing bracket on shadow */}
-          <div className="relative z-10 w-full max-w-[290px] xs:max-w-[340px] sm:max-w-[480px] md:max-w-[580px] border-[1px] border-[#FFF] bg-[#F5FCF8]/55 backdrop-blur-md rounded-[24px] p-5 sm:p-8 md:p-10 shadow-[0_10px_35px_rgba(0,0,0,0.06)] flex flex-col items-center text-center">
+          <div className="relative z-10 w-full max-w-[290px] xs:max-w-[340px] sm:max-w-[480px] md:max-w-[580px] border-[1px] border-[#FFF] bg-[#F5FCF8]/20 backdrop-blur-md rounded-[24px] p-5 sm:p-8 md:p-10 shadow-[0_10px_35px_rgba(0,0,0,0.06)] flex flex-col items-center text-center">
             {/* Animated Heading */}
             <h2 className="text-black font-semibold tracking-tight leading-[1.3] m-0 select-none w-full">
               <span className="block" style={{ fontSize: 'clamp(14px, 3.4vw, 24px)' }}>
-                Let AI Run Your Operations -
+               ‘Let AI Run Your Front Desk-
               </span>
               <span className="inline-flex items-center justify-center mt-1 sm:mt-1.5" style={{ fontSize: 'clamp(14px, 3.4vw, 24px)' }}>
-                So You Can Focus on&nbsp;
+                So You Ca Focus on&nbsp;
                 <span className="relative inline-flex items-center text-left min-w-[20px]">
                   {/* CHANGED: Text color set to theme green (#3C995B) */}
-                  <span className="text-[#0d473a] font-bold">
+                  <span className="text-[black] font-bold">
                     {currentText}
                   </span>
                   {/* Blinking Cursor */}

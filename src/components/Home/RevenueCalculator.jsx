@@ -1,205 +1,158 @@
 "use client";
-import { useState, useMemo, useEffect, useRef } from "react";
-import Section4 from '../../assets/Section4.png';
 
-// --- Improved Typewriter Animation Component (Runs every 1 minute) ---
+import React, { useState, useMemo, useEffect, useRef } from "react";
+// Import your background asset here
+import bg4 from  "@/assets/bg4.png"
+
+// --- Utility: Animated Price Counter with Typewriter Effect ---
 function AnimatedPriceCounter({ finalValue }) {
   const [displayText, setDisplayText] = useState("");
   const typingIntervalRef = useRef(null);
-  const loopIntervalRef = useRef(null);
 
   useEffect(() => {
-    const fullString = `$${parseInt(finalValue, 10).toLocaleString()}`;
+    const formatted = `$${finalValue.toLocaleString()}`;
+    let currentIndex = 0;
 
-    const startTypingAnimation = () => {
-      let currentIndex = 0;
-      
-      // Purani typing animation ko clear karna
-      if (typingIntervalRef.current) {
+    if (typingIntervalRef.current) clearInterval(typingIntervalRef.current);
+
+    typingIntervalRef.current = setInterval(() => {
+      if (currentIndex < formatted.length) {
+        setDisplayText(formatted.substring(0, currentIndex + 1));
+        currentIndex++;
+      } else {
         clearInterval(typingIntervalRef.current);
       }
-      
-      setDisplayText(""); // Reset to empty before typing
+    }, 50);
 
-      // Har character ko 75ms ke gap se type karega
-      typingIntervalRef.current = setInterval(() => {
-        if (currentIndex < fullString.length) {
-          setDisplayText(fullString.substring(0, currentIndex + 1));
-          currentIndex++;
-        } else {
-          clearInterval(typingIntervalRef.current);
-        }
-      }, 10);
-    };
-
-    // 1. Pehli baar page load/refresh par foran chalega
-    startTypingAnimation();
-
-    // 2. Har 1 minute (60000 milliseconds) baad isko automatic dobara chalayega
-    loopIntervalRef.current = setInterval(() => {
-      startTypingAnimation();
-    }, 60000); 
-
-    // Component unmount hone par memory leaks se bachne ke liye cleanup
-    return () => {
-      if (typingIntervalRef.current) clearInterval(typingIntervalRef.current);
-      if (loopIntervalRef.current) clearInterval(loopIntervalRef.current);
-    };
+    return () => clearInterval(typingIntervalRef.current);
   }, [finalValue]);
 
-  return <>{displayText}</>;
-}
-
-// Individual Input Component matching specific Figma properties
-function InputRow({ label, value, prefix = "", suffix = "" }) {
-  return (
-    <div className="relative w-full h-[54px] bg-white/61 border-2 border-[#C2FFE5] rounded-[12px] shadow-[0px_4px_10px_rgba(0,0,0,0.25)] backdrop-blur-[30.5px] flex items-center justify-between px-[22px] transition-transform duration-150 active:scale-[0.99]">
-      <div className="flex items-center gap-3">
-        <span className="font-roboto font-normal text-[18px] leading-none text-black">
-          {label}
-        </span>
-        {/* Figma arrow-right-line vector mapping */}
-        <svg
-          className="w-7 h-7 text-black"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <line x1="5" y1="12" x2="19" y2="12"></line>
-          <polyline points="12 5 19 12 12 19"></polyline>
-        </svg>
-      </div>
-      <span className="font-roboto font-bold text-[24px] leading-none text-black drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
-        {prefix}{value.toLocaleString()}{suffix}
-      </span>
-    </div>
-  );
+  return <span>{displayText}</span>;
 }
 
 export default function RevenueCalculator() {
-  const monthlyCalls = 1500;
-  const missedInquiryPct = 30;
-  const conversionRate = 22;
-  const avgJobValue = 1200;
+  const [inputs] = useState({
+    monthlyCalls: 1200,
+    missedPercent: 25,
+    avgValue: 800,
+  });
 
-  const { lastMonthlyRevenue, lostAnnually, estimatedRecovered } = useMemo(() => {
+  const results = useMemo(() => {
     return {
-      lastMonthlyRevenue: 118800,
-      lostAnnually: 1425600,
-      estimatedRecovered: 2494800
+      monthlyRevenue: 48000,
+      lostAnnually: 576000,
+      estimatedRecovered: 115200 
     };
   }, []);
 
   return (
-    // Outer section breaks constraints layout safely
-    <section className="w-full relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen flex flex-col items-center justify-center bg-white font-robotoPin selection:bg-[#C2FFE5] overflow-x-hidden">
+    <section className="w-full bg-white flex flex-col items-center justify-center pt-[76px] font-roboto overflow-hidden">
       
-      <link
-        href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
-        rel="stylesheet"
-      />
-
-      {/* Header Container */}
-      <div className="w-full max-w-[791px] md:pt-[30px] md:pb-[48px] flex flex-col items-center justify-center text-center gap-3 px-4">
-        <h2 className="w-full font-roboto font-medium text-[32px] md:text-[42px] leading-tight text-black tracking-normal">
+      {/* Header Section */}
+      <div className="flex flex-col items-center gap-[16px] mb-[54px] max-w-[791px] text-center px-4">
+        <h2 className="font-medium text-[32px] md:text-[42px] leading-[100%] text-black">
           How Much Revenue Are You Losing?
         </h2>
-        <p className="w-full font-roboto font-normal text-[16px] md:text-[18px] leading-[167%] text-[#484848]">
+        <p className="font-normal text-[16px] md:text-[18px] leading-[167%] text-[#484848]">
           Estimate your potential revenue impact based on your practice's communication metrics.
         </p>
       </div>
 
-      {/* IMAGE CONTAINER LAYER */}
-      <div 
-        className="w-full min-h-[567px] bg-cover bg-center bg-no-repeat rounded-none border-none flex items-center justify-center py-12 px-4 sm:px-6 md:px-8 lg:px-[100px]"
-        style={{ 
-          backgroundImage: `url(${Section4})`,
-          backgroundSize: '100% 100%'
-        }}
-      >
-        {/* Inside Main Interactive content Grid */}
-        <div className="w-full max-w-[965px] flex flex-col md:flex-row items-center md:items-stretch justify-center gap-[57px]">
+      {/* BACKGROUND GRAPHIC SECTION WRAPPER */}
+<div 
+  className="w-full bg-[length:100%_100%] bg-center bg-no-repeat flex items-center justify-center py-[60px] md:py-[100px] px-4"
+  style={{ backgroundImage: `url(${bg4.src || bg4})` }}
+>
+        {/* FIXED ROW CONTAINER FOR GLASSMORPHIC CARDS */}
+        <div className="w-full max-w-[1070px] flex flex-col lg:flex-row justify-center items-center lg:items-start gap-[40px] lg:gap-[205px]">
           
-          {/* LEFT CARD */}
-          <div className="relative w-full max-w-[486px] min-h-[444px] bg-[#D4D4D4]/69 border-2 border-[#C2FFE5] rounded-[16px] shadow-[0px_4px_10px_3px_rgba(194,255,229,0.6)] backdrop-blur-[2px] p-8 flex flex-col justify-between">
-            <div className="grid grid-cols-2 gap-x-6 gap-y-8 pt-4">
-              <div className="flex flex-col items-center text-center gap-3">
-                <span className="font-roboto font-bold text-[32px] leading-none text-black">
-                  {monthlyCalls}
-                </span>
-                <span className="font-roboto font-normal text-[16px] leading-none text-black">
-                  Monthly Service Calls
-                </span>
+          {/* LEFT CARD: Results Display */}
+          <div className="relative w-full max-w-[443px] h-[474px] bg-white/10 border-l-[6px] border-[#C2FFE5] rounded-[16px] shadow-[0px_4px_10px_rgba(0,0,0,0.25)] backdrop-blur-[30.5px] p-[52px_49px]">
+            
+            <div className="grid grid-cols-2 gap-x-[30px] gap-y-[52px] justify-items-center">
+              {/* Monthly Calls */}
+              <div className="flex flex-col items-center text-center gap-[12px] w-[121px]">
+                <span className="font-bold text-[32px] leading-[100%] text-black">1200</span>
+                <span className="text-[16px] md:text-[20px] leading-[100%] text-black whitespace-nowrap">Monthly Calls</span>
               </div>
-              <div className="flex flex-col items-center text-center gap-3">
-                <span className="font-roboto font-bold text-[32px] leading-none text-[#070707] drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
-                  {missedInquiryPct}%
-                </span>
-                <span className="font-roboto font-normal text-[16px] leading-none text-black">
-                  Missed Inquiries
-                </span>
+              {/* Missed */}
+              <div className="flex flex-col items-center text-center gap-[12px] w-[121px]">
+                <span className="font-bold text-[32px] leading-[100%] text-black text-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]">25%</span>
+                <span className="text-[16px] md:text-[20px] leading-[100%] text-black">Missed</span>
               </div>
-              <div className="flex flex-col items-center text-center gap-3">
-                <span className="font-roboto font-bold text-[32px] leading-none text-[#070707] drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
-                  {conversionRate}%
-                </span>
-                <span className="font-roboto font-normal text-[16px] leading-none text-black">
-                  Conversion Rate
-                </span>
+              {/* Conversion Rate */}
+              <div className="flex flex-col items-center text-center gap-[12px] w-[121px]">
+                <span className="font-bold text-[32px] leading-[100%] text-black text-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]">20%</span>
+                <span className="text-[16px] md:text-[20px] leading-[100%] text-black whitespace-nowrap">Conversion Rate</span>
               </div>
-              <div className="flex flex-col items-center text-center gap-3">
-                <span className="font-roboto font-bold text-[32px] leading-none text-[#070707] drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
-                  ${avgJobValue.toLocaleString()}
-                </span>
-                <span className="font-roboto font-normal text-[16px] leading-none text-black">
-                  Avg Job Value
-                </span>
+              {/* Avg Patient Value */}
+              <div className="flex flex-col items-center text-center gap-[12px] w-[152px]">
+                <span className="font-bold text-[32px] leading-[100%] text-black text-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]">$800</span>
+                <span className="text-[16px] md:text-[20px] leading-[100%] text-black whitespace-nowrap">Avg Patient Value</span>
               </div>
             </div>
 
-            <div className="w-full h-0 border-t border-black/25 my-6" />
+            {/* Divider Line */}
+            <div className="w-[367px] border-t border-white absolute bottom-[156px] left-[38px]" />
 
-            <div className="w-full flex flex-col gap-5 px-3 mb-2">
-              <div className="w-full flex items-center justify-between font-roboto text-[20px] leading-none text-black drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
-                <span>Last Monthly Revenue :</span>
-                <span className="font-bold">${lastMonthlyRevenue.toLocaleString()}</span>
+            {/* Bottom Green Status Block */}
+            <div className="absolute bottom-[36px] left-[37px] w-[369px] h-[105px] bg-[#3C995B] rounded-[10px] flex flex-col justify-center items-center gap-[20px] p-[12px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
+              <div className="text-white text-[20px] font-normal leading-[100%] text-shadow">
+                Last Monthly Revenue : <span className="font-bold">${results.monthlyRevenue.toLocaleString()}</span>
               </div>
-              <div className="w-full flex items-center justify-between font-roboto text-[20px] leading-none text-black drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
-                <span>Lost Annually:</span>
-                <span className="font-bold">${lostAnnually.toLocaleString()}</span>
+              <div className="text-white text-[20px] font-normal leading-[100%] text-shadow">
+                Lost Annually: <span className="font-bold">${results.lostAnnually.toLocaleString()}</span>
               </div>
             </div>
           </div>
 
-          {/* RIGHT CARD */}
-          <div className="relative w-full max-w-[422px] min-h-[439px] bg-[#ECEBEE]/54 border border-white rounded-[16px] shadow-[0px_4px_10px_rgba(0,0,0,0.25)] backdrop-blur-[30.5px] p-[19px] flex flex-col gap-8 justify-between">
-            <div className="w-full flex flex-col gap-4">
-              <InputRow label="Monthly Calls" value={monthlyCalls} />
-              <InputRow label="Missed Inquiry %" value={missedInquiryPct} suffix="%" />
-              <InputRow label="Average Job value" value={avgJobValue} prefix="$" />
+          {/* RIGHT CARD: Interactive Input Rows */}
+          <div className="relative w-full max-w-[422px] h-[474px] bg-white/10 border border-white rounded-[16px] shadow-[0px_4px_10px_rgba(0,0,0,0.25)] backdrop-blur-[30.5px] p-[19px_15px]">
+            
+            <div className="flex flex-col gap-[16px] items-center">
+              {/* Row 1: Monthly Calls */}
+              <div className="w-[383px] h-[54px] bg-[rgba(170,163,163,0.39)] border-[2px] border-[#C2FFE5] rounded-[12px] flex items-center justify-between px-[22px] shadow-[0px_4px_10px_rgba(0,0,0,0.25)]">
+                <div className="flex items-center gap-[12px]">
+                  <span className="text-[18px] text-black">Monthly Calls</span>
+                  <span className="text-[18px] text-black">➔</span>
+                </div>
+                <span className="font-bold text-[24px] text-black">1,200</span>
+              </div>
+
+              {/* Row 2: Missed Call % */}
+              <div className="w-[383px] h-[54px] bg-[rgba(170,163,163,0.39)] border-[2px] border-[#C2FFE5] rounded-[12px] flex items-center justify-between px-[22px] shadow-[0px_4px_10px_rgba(0,0,0,0.25)]">
+                <div className="flex items-center gap-[12px]">
+                  <span className="text-[18px] text-black">Missed Call %</span>
+                  <span className="text-[18px] text-black">➔</span>
+                </div>
+                <span className="font-bold text-[24px] text-black">25%</span>
+              </div>
+
+              {/* Row 3: Average Case Value */}
+              <div className="w-[383px] h-[54px] bg-[rgba(170,163,163,0.39)] border-[2px] border-[#C2FFE5] rounded-[12px] flex items-center justify-between px-[22px] shadow-[0px_4px_10px_rgba(0,0,0,0.25)]">
+                <div className="flex items-center gap-[12px]">
+                  <span className="text-[18px] text-black">Average Case value</span>
+                  <span className="text-[18px] text-black">➔</span>
+                </div>
+                <span className="font-bold text-[24px] text-black">$800</span>
+              </div>
             </div>
 
-            {/* Green Box matching Figma image component */}
-            <div className="relative w-full min-h-[177px] bg-[#C2FFE5]/72 rounded-[16px] shadow-[0px_4px_10px_#C2FFE5] backdrop-blur-[30.5px] py-4 px-5 flex flex-col items-center justify-between gap-[17px]">
-              <p className="w-full font-roboto font-bold text-[17px] leading-[120%] text-center text-black tracking-normal">
+            {/* Lower Dynamic Value Block */}
+            <div className="absolute bottom-[16px] left-[19px] w-[383px] h-[202px] bg-[rgba(194,255,229,0.36)] rounded-[16px] shadow-[0px_4px_10px_#C2FFE5] backdrop-blur-[30.5px] flex flex-col items-center justify-between p-[16px_39px]">
+              <h3 className="font-bold text-[20px] leading-[120%] text-center text-black tracking-normal">
                 ESTIMATED ANNUAL REVENUE RECOVERED
-              </p>
+              </h3>
               
-              {/* Typewriter Counter Container Area */}
-              <div className="flex items-center justify-center relative select-none">
-                <span className="font-roboto font-bold text-[42px] leading-[120%] text-black tracking-tight pl-2">
-                  <AnimatedPriceCounter finalValue={estimatedRecovered} />
+              <div className="flex items-center justify-center gap-1">
+                <span className="text-[42px] font-bold text-black tracking-tight">
+                  <AnimatedPriceCounter finalValue={results.estimatedRecovered} />
                 </span>
-                
-                {/* Visual cursor line animation mimicking image properties */}
-                <div className="w-1.5 h-[42px] bg-[#3C995B] ml-2 animate-pulse rounded-sm" />
+                <div className="w-[8px] h-[50px] bg-[##3C995B] animate-pulse" />
               </div>
-              
-              <p className="w-full font-roboto font-normal text-[16px] leading-[120%] text-center text-black">
-                Projection based on provided inputs. Results vary by landscaping business.
+
+              <p className="text-[16px] leading-[120%] text-center text-black">
+                Projection based on provided inputs. Results vary by practice.
               </p>
             </div>
           </div>

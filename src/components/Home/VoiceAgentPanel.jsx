@@ -4,7 +4,7 @@ import { MdKeyboardVoice } from "react-icons/md";
 export default function VoiceAgentPanel({ isMobile }) {
   return (
     <div
-      className={`relative overflow-hidden w-full max-w-[235px] rounded-[20px] border border-white/60 bg-white/20 backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,0.12)] ${
+      className={`relative overflow-hidden w-full max-w-[235px] rounded-[20px] border border-white/20 bg-white/20 backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,0.12)] ${
         isMobile
           ? "mx-auto"
           : "absolute top-[70%] left-[40%] -translate-x-1/2 -translate-y-1/2 z-20"
@@ -13,7 +13,7 @@ export default function VoiceAgentPanel({ isMobile }) {
       {/* Background Blur Image */}
       <div className="absolute inset-0">
 
-        <div className="absolute inset-0 bg-white/35 backdrop-blur-[6px]" />
+        <div className="absolute inset-0 bg-white/10 backdrop-blur-[6px]" />
       </div>
 
       {/* Content */}

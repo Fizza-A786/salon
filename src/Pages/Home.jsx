@@ -5,11 +5,11 @@ import VoiceAgentPanel from '../components/Home/VoiceAgentPanel';
 import bg1 from '../assets/Bg1.png';
 import CustomerCareSection from '../components/Home/CustomerCareSection';
 import WaveformDemoSection from '../components/Home/WaveformDemoSection';
-import RevenueLeakageDashboard from '../components/Home/RevenueLeakageDashboard';
+import RevenueLeakageSection from '../components/Home/Revenueleakagesection';
+import Reavenuheading from '../components/Home/Reavenuheading';
 import RevenueCalculator from '../components/Home/RevenueCalculator';
-import LandscapingCommunication from '../components/Home/CommunicationComparison';
-import LandscapingAiWorkforce from '../components/Home/LandscapingAiWorkforce';
-import WelcomeCTASection from './../components/Home/Welcomectasection ';
+import WelcomeCTASection from '../components/Home/Welcomectasection ';
+import DentalCommunicationComparison from '../components/Home/DentalCommunicationComparison';
 
 export default function Hero() {
   return (
@@ -30,7 +30,7 @@ export default function Hero() {
       src={bg1}
       alt="Landscaping environment"
       /* CHANGED object-contain TO object-cover */
-      className="w-full h-full object-cover block" 
+      className="w-full h-full absolute object-cover block" 
     />
 
     <div className="hidden lg:block absolute inset-0 pointer-events-none z-20">
@@ -47,13 +47,14 @@ export default function Hero() {
 </div>
       </section>
             <CustomerCareSection/>
-              <WaveformDemoSection/>
-              <RevenueLeakageDashboard/>
-              <RevenueCalculator/>
-              <LandscapingCommunication/>
-              <LandscapingAiWorkforce/>
-              <WelcomeCTASection/>
-           
+            <WaveformDemoSection/>
+              <Reavenuheading/>
+            <RevenueLeakageSection/>
+            <RevenueCalculator/>
+            <DentalCommunicationComparison/>
+            <WelcomeCTASection/>
+          
+
     </main>
   );
 }
