@@ -69,11 +69,11 @@ export default function WelcomeCTASection() {
                 So You Can Focus on&nbsp;
                 <span className="relative inline-flex items-center text-left min-w-[20px]">
                   {/* CHANGED: Text color set to theme green (#3C995B) */}
-                  <span className="text-[#3C995B] font-bold">
+                  <span className="text-[#0d473a] font-bold">
                     {currentText}
                   </span>
                   {/* Blinking Cursor */}
-                  <span className="inline-block ml-1 w-[3px] h-[18px] sm:h-[24px] bg-[#3C995B] align-middle animate-pulse" />
+                  <span className="inline-block ml-1 w-[3px] h-[18px] sm:h-[24px] bg-[#0d473a] align-middle animate-pulse" />
                 </span>
               </span>
             </h2>
