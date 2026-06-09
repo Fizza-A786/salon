@@ -1,20 +1,19 @@
 import { useState, useEffect, useRef } from 'react';
 import { FaChevronDown, FaBars, FaTimes, FaRobot } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import logo from '../assets/logo.png';
 
 // ── Language Switcher Data ───────────────────────────────────────────────────
 const LANGUAGES = [
-  { code: 'en', label: 'English', flag: 'src/assets/flags/US.svg', link: '/' },
-  { code: 'es', label: 'Español (Spanish)', flag: 'src/assets/flags/ES.svg', link: '/' },
-  { code: 'fr', label: 'Français (French)', flag: 'src/assets/flags/FR.svg', link: '/' },
-  { code: 'de', label: 'Deutsch (German)', flag: 'src/assets/flags/DE.svg', link: '/' },
-  { code: 'it', label: 'Italiano (Italian)', flag: 'src/assets/flags/IT.svg', link: '/' },
-  { code: 'pt', label: 'Português (Portuguese)', flag: 'src/assets/flags/PT.svg', link: '/' },
-  { code: 'ja', label: '日本語 (Japanese)', flag: 'src/assets/flags/JP.svg', link: '/' },
-  { code: 'zh', label: '中文 (Chinese, Simplified)', flag: 'src/assets/flags/CN.svg', link: '/' },
-  { code: 'ko', label: '한국어 (Korean)', flag: 'src/assets/flags/KR.svg', link: '/' },
-  { code: 'bn', label: 'বাংলা (Bengali)', flag: 'src/assets/flags/BD.svg', link: '/' },
+  { code: 'en', label: 'English', flag: '/flags/US.svg', link: '/' },
+  { code: 'es', label: 'Español (Spanish)', flag: '/flags/ES.svg', link: '/' },
+  { code: 'fr', label: 'Français (French)', flag: '/flags/FR.svg', link: '/' },
+  { code: 'de', label: 'Deutsch (German)', flag: '/flags/DE.svg', link: '/' },
+  { code: 'it', label: 'Italiano (Italian)', flag: '/flags/IT.svg', link: '/' },
+  { code: 'pt', label: 'Português (Portuguese)', flag: '/flags/PT.svg', link: '/' },
+  { code: 'ja', label: '日本語 (Japanese)', flag: '/flags/JP.svg', link: '/' },
+  { code: 'zh', label: '中文 (Chinese, Simplified)', flag: '/flags/CN.svg', link: '/' },
+  { code: 'ko', label: '한국어 (Korean)', flag: '/flags/KR.svg', link: '/' },
+  { code: 'bn', label: 'বাংলা (Bengali)', flag: '/flags/BD.svg', link: '/' },
   { code: 'ar', label: 'See more languages', flag: ' →', link: '/languages' }
 ];
 
@@ -46,7 +45,7 @@ const LanguageSwitcher = ({ openDropdown, toggleDropdown, dropdownId = 'language
       </button>
       {openDropdown === dropdownId && (
         <div className={`
-          absolute right-0 overflow-x-hidden mt-1 py-1 rounded-lg shadow-lg min-w-[200px] max-h-[60vh] overflow-y-auto z-50 bg-white border border-gray-200
+          absolute right-[-30px] overflow-x-hidden mt-1 py-1 rounded-lg shadow-lg min-w-[200px] max-h-[60vh] overflow-y-auto z-50 bg-white border border-gray-200
           [&::-webkit-scrollbar]:w-1
           [&::-webkit-scrollbar-track]:bg-transparent
           [&::-webkit-scrollbar-thumb]:bg-[#316945]
@@ -135,11 +134,10 @@ const MobileLangDropdown = ({ toggleDropdown, selectedLang, setSelectedLang, ope
             <button
               key={lang.code}
               onClick={() => { setSelectedLang(lang); toggleDropdown('lang-mobile'); }}
-              className={`flex items-center justify-center gap-3 py-2.5 text-[15px] transition-colors ${
-                selectedLang.code === lang.code
+              className={`flex items-center justify-center gap-3 py-2.5 text-[15px] transition-colors ${selectedLang.code === lang.code
                   ? 'text-emerald-600 bg-emerald-50/50 font-semibold'
                   : 'text-slate-600 hover:bg-slate-100'
-              }`}
+                }`}
             >
               <img className='h-[14px] w-[20px] object-cover rounded-sm' src={lang.flag} alt={lang.label} />
               <span>{lang.label}</span>
@@ -157,7 +155,7 @@ const Navbar = () => {
   const [openDropdown, setOpenDropdown] = useState(null);
   const [hoveredAgentIndex, setHoveredAgentIndex] = useState(0);
   const [selectedLang, setSelectedLang] = useState(LANGUAGES[0]);
-  
+
   // States for scroll hide/show
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -167,7 +165,7 @@ const Navbar = () => {
     const controlNavbar = () => {
       if (typeof window !== 'undefined') {
         const currentScrollY = window.scrollY;
-        
+
         // Don't hide if the mobile menu or a dropdown is currently open
         if (mobileMenuOpen) return;
 
@@ -290,11 +288,10 @@ const Navbar = () => {
     <>
       {/* ── DESKTOP/MOBILE HEADER BAR ───────────────────────────────────────── */}
       <nav
-        className={`fixed left-1/2 -translate-x-1/2 w-[92%] sm:w-[95%] z-50 rounded-2xl px-4 xl:px-6 py-4 transition-all duration-500 ease-in-out ${
-          isVisible ? 'translate-y-0 opacity-100' : '-translate-y-[200%] opacity-0'
-        }`}
+        className={`fixed left-1/2 -translate-x-1/2 w-[92%] sm:w-[95%] z-40 rounded-2xl px-4 xl:px-6 py-4 transition-all duration-500 ease-in-out ${isVisible ? 'translate-y-0 opacity-100' : '-translate-y-[200%] opacity-0'
+          }`}
         style={{
-          top: '53px', /* Adjusted top margin for a fixed nav */
+          top: '54px', /* Adjusted top margin for a fixed nav */
           background: 'rgba(255,255,255,0.55)',
           backdropFilter: 'blur(20px)',
           WebkitBackdropFilter: 'blur(20px)',
@@ -306,7 +303,7 @@ const Navbar = () => {
           {/* LEFT: Logo */}
           <div className="flex items-center h-[24px] xl:h-[30px] gap-2 cursor-pointer shrink-0">
             <img
-              src={logo}
+              src="/logo.png"
               className="h-full w-auto object-contain brightness-0"
               alt="DaitchPro"
             />
@@ -407,19 +404,17 @@ const Navbar = () => {
 
       {/* ── MOBILE FULL SIDEBAR MENU ────────────────────────────────────────── */}
       <div
-        className={`mobile-sidebar-container fixed top-0 right-0 h-full w-[300px] bg-[#f8fafc] border-l border-slate-200 shadow-2xl z-[60] lg:hidden transition-transform duration-300 ease-in-out flex flex-col justify-start pt-4 overflow-y-auto ${
-          mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
+        className={`mobile-sidebar-container fixed top-0 right-0 h-full w-[300px] bg-[#f8fafc] border-l border-slate-200 shadow-2xl z-[60] lg:hidden transition-transform duration-300 ease-in-out flex flex-col justify-start pt-4 overflow-y-auto ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+          }`}
       >
         <div className="flex flex-col w-full px-2">
-          
+
           {/* 1. AI Agents */}
           <div className="flex flex-col w-full mb-1">
             <button
               onClick={() => toggleDropdown('ai-agents-mobile')}
-              className={`flex items-center justify-between text-slate-800 text-[16px] font-semibold py-3.5 px-6 rounded-xl w-full text-left transition-colors ${
-                openDropdown === 'ai-agents-mobile' ? 'bg-slate-200/60 text-emerald-700' : 'hover:bg-slate-200/40'
-              }`}
+              className={`flex items-center justify-between text-slate-800 text-[16px] font-semibold py-3.5 px-6 rounded-xl w-full text-left transition-colors ${openDropdown === 'ai-agents-mobile' ? 'bg-slate-200/60 text-emerald-700' : 'hover:bg-slate-200/40'
+                }`}
             >
               <div className="flex items-center gap-3">
                 <FaRobot className="text-[18px] text-emerald-500" />
@@ -442,9 +437,8 @@ const Navbar = () => {
           <div className="flex flex-col w-full mb-1">
             <button
               onClick={() => toggleDropdown('solutions-mobile')}
-              className={`flex items-center justify-between text-slate-800 text-[16px] font-semibold py-3.5 px-6 rounded-xl w-full text-left transition-colors ${
-                openDropdown === 'solutions-mobile' ? 'bg-slate-200/60 text-emerald-700' : 'hover:bg-slate-200/40'
-              }`}
+              className={`flex items-center justify-between text-slate-800 text-[16px] font-semibold py-3.5 px-6 rounded-xl w-full text-left transition-colors ${openDropdown === 'solutions-mobile' ? 'bg-slate-200/60 text-emerald-700' : 'hover:bg-slate-200/40'
+                }`}
             >
               <span className="pl-[26px]">Solution</span>
               <FaChevronDown size={12} className={`text-slate-400 transition-transform ${openDropdown === 'solutions-mobile' ? 'rotate-180' : ''}`} />
@@ -464,9 +458,8 @@ const Navbar = () => {
           <div className="flex flex-col w-full mb-1">
             <button
               onClick={() => toggleDropdown('platform-mobile')}
-              className={`flex items-center justify-between text-slate-800 text-[16px] font-semibold py-3.5 px-6 rounded-xl w-full text-left transition-colors ${
-                openDropdown === 'platform-mobile' ? 'bg-slate-200/60 text-emerald-700' : 'hover:bg-slate-200/40'
-              }`}
+              className={`flex items-center justify-between text-slate-800 text-[16px] font-semibold py-3.5 px-6 rounded-xl w-full text-left transition-colors ${openDropdown === 'platform-mobile' ? 'bg-slate-200/60 text-emerald-700' : 'hover:bg-slate-200/40'
+                }`}
             >
               <span className="pl-[26px]">Platform</span>
               <FaChevronDown size={12} className={`text-slate-400 transition-transform ${openDropdown === 'platform-mobile' ? 'rotate-180' : ''}`} />
@@ -486,9 +479,8 @@ const Navbar = () => {
           <div className="flex flex-col w-full mb-1">
             <button
               onClick={() => toggleDropdown('areas-mobile')}
-              className={`flex items-center justify-between text-slate-800 text-[16px] font-semibold py-3.5 px-6 rounded-xl w-full text-left transition-colors ${
-                openDropdown === 'areas-mobile' ? 'bg-slate-200/60 text-emerald-700' : 'hover:bg-slate-200/40'
-              }`}
+              className={`flex items-center justify-between text-slate-800 text-[16px] font-semibold py-3.5 px-6 rounded-xl w-full text-left transition-colors ${openDropdown === 'areas-mobile' ? 'bg-slate-200/60 text-emerald-700' : 'hover:bg-slate-200/40'
+                }`}
             >
               <span className="pl-[26px]">Areas We Handle</span>
               <FaChevronDown size={12} className={`text-slate-400 transition-transform ${openDropdown === 'areas-mobile' ? 'rotate-180' : ''}`} />

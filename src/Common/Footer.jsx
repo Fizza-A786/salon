@@ -1,5 +1,5 @@
 
-import logo from "../assets/logo.png";
+
 import { FiFacebook } from "react-icons/fi";
 import { FiTwitter } from "react-icons/fi";
 import { SlSocialLinkedin } from "react-icons/sl";
@@ -37,7 +37,7 @@ export const Footer = ({
               <img
                 className="w-48 h-auto object-contain"
                 alt="DaitchPro Logo"
-                src={logo}
+               src="/logo.png"
               />
               <div className="text-[20px] font-bold tracking-wide font-inter">
                 Subscribe To Our <br /> Newsletter
