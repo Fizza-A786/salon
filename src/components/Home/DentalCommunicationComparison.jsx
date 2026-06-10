@@ -22,6 +22,7 @@ export default function DentalCommunicationComparison() {
         {/* LEFT COLUMN: Human-Only Model Card */}
         <div className="relative w-full max-w-[656px] h-[543px] bg-neutral-200 rounded-[20px] lg:rounded-r-none overflow-hidden">
           {/* Main Content Background Image */}
+          {/* update images  */}
           <div 
             className="absolute inset-0 bg-cover bg-center z-0" 
             style={{ backgroundImage: `url(${p2})` }}
