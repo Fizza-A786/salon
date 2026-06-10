@@ -4,7 +4,7 @@ import { MdKeyboardVoice } from "react-icons/md";
 export default function VoiceAgentPanel({ isMobile }) {
   return (
     <div
-      className={`relative overflow-hidden w-full max-w-[235px] rounded-[20px] border border-white/20 bg-white/20 backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,0.12)] ${
+      className={`relative overflow-hidden w-full max-w-[235px] rounded-[20px] border border-white/20 bg-white/20 backdrop-blur-[3px] shadow-[0_8px_30px_rgba(0,0,0,0.12)] ${
         isMobile
           ? "mx-auto"
           : "absolute top-[70%] left-[40%] -translate-x-1/2 -translate-y-1/2 z-20"
@@ -26,9 +26,9 @@ export default function VoiceAgentPanel({ isMobile }) {
         {/* Microphone */}
         <div className="flex justify-center mb-4">
           <div className="relative flex items-center justify-center">
-            <span className="absolute w-[54px] h-[54px] rounded-full bg-[#5AC76F]/20 animate-pulse" />
+            {/* <span className="absolute w-[38px] h-[38px] rounded-full bg-[#5AC76F]/20 animate-pulse" /> */}
 
-            <div className="relative z-10 w-[42px] h-[42px] rounded-full bg-[#4CAF63] flex items-center justify-center shadow-md">
+            <div className="relative z-10 w-[32px] h-[32px] rounded-full bg-[#4CAF63] flex items-center justify-center shadow-md">
               <MdKeyboardVoice className="text-white text-[20px]" />
             </div>
           </div>
@@ -38,15 +38,15 @@ export default function VoiceAgentPanel({ isMobile }) {
         <div className="flex items-center gap-3 mb-4">
           {/* Play Button */}
           <div className="relative flex items-center justify-center shrink-0">
-            <span className="absolute w-[44px] h-[44px] rounded-full bg-[#5AC76F]/20" />
+            <span className="absolute w-[34px] h-[34px] rounded-full bg-[#5AC76F]/20" />
 
-            <div className="relative z-10 w-[34px] h-[34px] rounded-full bg-[#4CAF63] flex items-center justify-center">
+            <div className="relative z-10 w-[24px] h-[24px] rounded-full bg-[#4CAF63] flex items-center justify-center">
               <FaPlay className="text-white text-[11px] ml-[2px]" />
             </div>
           </div>
 
           {/* Wave Bars */}
-          <div className="flex items-center gap-[2.5px] flex-1 h-[42px]">
+          <div className="flex items-center gap-[2.5px] flex-1 h-[22px]">
             <img
               src="/Voice.svg"
               alt="wave"
@@ -56,7 +56,7 @@ export default function VoiceAgentPanel({ isMobile }) {
         </div>
 
         {/* Status */}
-        <div className="text-[11px] text-[#333] mb-3">
+        <div className="text-[11px] text-[#333] mb-1">
           Live status:{" "}
           <span className="text-[#43A85B] font-semibold">
             Ready to Take Orders

@@ -3,7 +3,7 @@ import { MdSend } from 'react-icons/md';
 export default function AIChatPanel({ isMobile }) {
   return (
     <div
-      className={`flex flex-col w-full h-[255px] max-w-[275px] bg-white/20 backdrop-blur-xl border border-white/60 rounded-[24px] overflow-hidden shadow-[0_12px_36px_rgba(0,0,0,0.08)] pointer-events-auto z-30 ${
+      className={`flex flex-col w-full h-[255px] max-w-[275px] bg-white/20 backdrop-blur-[3px] border border-white/60 rounded-[24px] overflow-hidden shadow-[0_12px_36px_rgba(0,0,0,0.08)] pointer-events-auto z-30 ${
         isMobile ? 'mx-auto' : ''
       }`}
     >

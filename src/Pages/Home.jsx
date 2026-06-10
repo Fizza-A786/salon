@@ -13,47 +13,47 @@ import DentalCommunicationComparison from '../components/Home/DentalCommunicatio
 
 export default function Hero() {
   return (
-    <main className="w-full flex flex-col bg-gradient-to-r from-[#9ADBB8]/40 to-white/40 backdrop-blur-lg">
+    <main className="w-full flex flex-col bg-gradient-to-r py-10 from-[#9ADBB8]/40 to-white/40 backdrop-blur-lg">
       <section className="relative w-full min-h-screen flex flex-col lg:flex-row items-stretch">
-        
-      <div className="w-full lg:w-[44%] relative z-10 flex items-center shrink-0">
-  <HeroContent />
-</div>
 
-<div className="relative w-full lg:w-[62%] z-0 flex self-stretch">
-  <div className="relative w-full h-full flex items-center justify-center overflow-visible">
+        <div className="w-full lg:w-[44%] relative z-10 flex items-center shrink-0">
+          <HeroContent />
+        </div>
 
-    <motion.img
-      initial={{ opacity: 0, scale: 1.02 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 1, ease: "easeOut" }}
-      src={bg1}
-      alt="Landscaping environment"
-      /* CHANGED object-contain TO object-cover */
-      className="w-full h-full absolute object-cover block" 
-    />
+        <div className="relative w-full lg:w-[62%] z-0 flex self-stretch">
+          <div className="relative w-full h-full flex items-center justify-center overflow-visible">
 
-    <div className="hidden lg:block absolute inset-0 pointer-events-none z-20">
-      <div className="absolute left-[4%] top-[18%] w-[239px] h-[238px] pointer-events-auto">
-        <VoiceAgentPanel isMobile={false} />
-      </div>
+            <motion.img
+              initial={{ opacity: 0, scale: 1.02 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, ease: "easeOut" }}
+              src={bg1}
+              alt="Landscaping environment"
+              /* CHANGED object-contain TO object-cover */
+              className="w-full h-full absolute object-cover bg-center block"
+            />
 
-      <div className="absolute right-[6%] bottom-[14%] w-[283px] h-[253px] pointer-events-auto">
-        <AIChatPanel isMobile={false} />
-      </div>
-    </div>
+            <div className="hidden lg:block absolute inset-0 pointer-events-none z-20">
+              <div className="absolute left-[5%] top-[7%] w-[239px] h-[238px] pointer-events-auto">
+                <VoiceAgentPanel isMobile={false} />
+              </div>
 
-  </div>
-</div>
+              <div className="absolute right-[6%] bottom-[14%] w-[283px] h-[253px] pointer-events-auto">
+                <AIChatPanel isMobile={false} />
+              </div>
+            </div>
+
+          </div>
+        </div>
       </section>
-            <CustomerCareSection/>
-            <WaveformDemoSection/>
-              <Reavenuheading/>
-            <RevenueLeakageSection/>
-            <RevenueCalculator/>
-            <DentalCommunicationComparison/>
-            <WelcomeCTASection/>
-          
+      <CustomerCareSection />
+      <WaveformDemoSection />
+      <Reavenuheading />
+      <RevenueLeakageSection />
+      <RevenueCalculator />
+      <DentalCommunicationComparison />
+      <WelcomeCTASection />
+
 
     </main>
   );

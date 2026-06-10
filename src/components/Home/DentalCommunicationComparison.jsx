@@ -24,7 +24,7 @@ export default function DentalCommunicationComparison() {
           {/* Main Content Background Image */}
           <div 
             className="absolute inset-0 bg-cover bg-center z-0" 
-            style={{ backgroundImage: `url(${p1})` }}
+            style={{ backgroundImage: `url(${p2})` }}
           />
           
           {/* Glassmorphic Layer Structure */}
@@ -83,7 +83,7 @@ export default function DentalCommunicationComparison() {
           {/* Main Content Background Image */}
           <div 
             className="absolute inset-0 bg-cover bg-center z-0" 
-            style={{ backgroundImage: `url(${p2})` }}
+            style={{ backgroundImage: `url(${p1})` }}
           />
           
           {/* Glassmorphic Layer Structure */}
