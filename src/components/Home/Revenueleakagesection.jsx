@@ -409,7 +409,7 @@ export default function ProblemSection() {
               </div>
             </div>
 
-            {/* ── Right: Woman Image (Figma Height Fixed) ── */}
+            {/* ── Right: Woman Image  ── */}
             <div className="problem-right-image-wrap">
               <img
                 src={sideGirl}
