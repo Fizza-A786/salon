@@ -1,417 +1,440 @@
 "use client";
 import React from "react";
-import coinDrain from "@/assets/bg3.png";
+import sideGirl from "@/assets/bg3.png";
 
-const stats = [
-  { value: "87", label: "Missed Calls ( Last 7 Days)", red: false },
-  { value: "$18,500", label: "Estimated Lost Production", red: false },
-  { value: "30%", label: "Unanswered Calls", red: true },
-  { value: "25%", label: "Never Call Back", red: true },
-];
+// ─── Data ────────────────────────────────────────────────────────────────────
 
-// Content ko static array mein break kar diya taake exact design match ho aur logic break na ho
-const issueCardsContent = [
+const issueCards = [
   {
-    topTitle: "Missed Calls = Lost Revenue",
-    topSub: "Avg $1,200",
-    bottomTitle: "Front Desk Overload Over",
-    bottomSub: "Avg $1,200 per new patient lost",
+    title: "Missed Calls During Busy Hours",
+    desc: "Missed calls uncain during busy hours",
   },
   {
-    topTitle: "Front Desk Overload",
-    topSub: "Over 4 hour daily on repetitive tasks",
-    bottomTitle: "Appointment No-Shows",
-    bottomSub: "15% loss of daily capacity",
+    title: "Clients Hung Up →Lost Revenue",
+    desc: "Clients hung up revenue in plants",
   },
   {
-    topTitle: "Poor Follow-Up on",
-    topSub: "High loss of daily capacity",
-    bottomTitle: "Poor Follow-Up on High-Value Treatments",
-    bottomSub: "$50,000+ annual loss from unaccepted plans",
+    title: "Double Bookings & Scheduling Errors",
+    desc: "Problem bookings & enrie scheduling errors",
   },
   {
-    topTitle: "Insurance Confusion",
-    topSub: "20% of front desk time wasted",
-    bottomTitle: "Marketing Leakage",
-    bottomSub: "Low ROI due to uncaptured leads",
+    title: "No Follow-Up with Clients",
+    desc: "No follow-up with liews and clients",
+  },
+  {
+    title: "Messages & DMs Ignored",
+    desc: "Mersage & DMs data professional messages",
+  },
+  {
+    title: "No Centralized Customer Data",
+    desc: "Centralized professional, minimal accessories",
   },
 ];
 
-function StatCard({ value, label, red }) {
+const analyticsStats = [
+  { value: "30%", label: "calls unanswered" },
+  { value: "30%", label: "never call back" },
+  { value: "$10,00s", label: "lost every month" },
+];
+
+// ─── Sub-components ───────────────────────────────────────────────────────────
+
+function AlertIcon() {
+  return (
+    <div
+      style={{
+        width: 43,
+        height: 43,
+        minWidth: 43,
+        borderRadius: "50%",
+        background: "#FDDAD7",
+        position: "relative",
+        flexShrink: 0,
+      }}
+    >
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        style={{
+          position: "absolute",
+          top: 10,
+          left: 10,
+          transform: "rotate(180deg)",
+        }}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <circle cx="12" cy="12" r="10" fill="#F05855" />
+        <rect x="11" y="7" width="2" height="2" rx="1" fill="white" />
+        <rect x="11" y="11" width="2" height="6" rx="1" fill="white" />
+      </svg>
+    </div>
+  );
+}
+
+function IssueCard({ title, desc }) {
   return (
     <div
       style={{
         position: "relative",
-        flex: "1 1 200px",
-        minWidth: "160px",
-        height: "113px",
-        filter: "drop-shadow(0px 4px 10px rgba(0,0,0,0.25))",
-        backdropFilter: "blur(19px)",
-        WebkitBackdropFilter: "blur(19px)",
+        width: "239.52px",
+        height: "177px",
+        flexShrink: 0,
+        filter: "drop-shadow(0px 4px 10px rgba(0,0,0,0.15))",
       }}
     >
       <div
         style={{
           position: "absolute",
           inset: 0,
-          background: "linear-gradient(180deg, rgba(255,255,255,0.3) 0%, rgba(241,238,238,0.3) 100%)",
-          border: "0.5px solid rgba(255,255,255,0.14)",
+          background: "#E4F8F1",
+          border: "0.5px solid #3C995B",
           borderRadius: "16px",
         }}
       />
       <div
         style={{
           position: "absolute",
-          inset: 0,
           display: "flex",
           flexDirection: "column",
-          alignItems: "center",
           justifyContent: "center",
-          gap: "12px",
-          padding: "0 12px",
+          alignItems: "flex-start",
+          gap: 12,
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          width: "178.41px",
         }}
       >
+        <AlertIcon />
         <span
           style={{
             fontFamily: "'Roboto', sans-serif",
             fontWeight: 700,
-            fontSize: "32px",
-            lineHeight: "100%",
-            textAlign: "center",
-            color: red ? "#E51619" : "#000000",
+            fontSize: 18,
+            lineHeight: "120%",
+            color: "#000000",
+            width: "100%",
           }}
         >
-          {value}
+          {title}
         </span>
         <span
           style={{
             fontFamily: "'Roboto', sans-serif",
             fontWeight: 400,
-            fontSize: "15px",
-            lineHeight: "18px",
-            textAlign: "center",
+            fontSize: 14,
+            lineHeight: "16px",
             color: "#484848",
+            width: 139,
           }}
         >
-          {label}
+          {desc}
         </span>
       </div>
     </div>
   );
 }
 
-function AlertIcon() {
-  return (
-    <div
-      style={{
-        width: "36px",
-        height: "36px",
-        minWidth: "36px",
-        background: "rgba(255, 218, 218, 0.6)",
-        borderRadius: "50%",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-        <path d="M12 3L2 21h20L12 3z" fill="#FF0000" />
-        <rect x="11" y="10" width="2" height="5" rx="1" fill="white" />
-        <rect x="11" y="16.5" width="2" height="2" rx="1" fill="white" />
-      </svg>
-    </div>
-  );
-}
-
-function IssueCard({ topTitle, topSub, bottomTitle, bottomSub }) {
+function AnalyticsBar() {
   return (
     <div
       style={{
         position: "relative",
-        flex: "1 1 245px", /* Optimized width to fit inside 100% desktop layouts beautifully */
-        minWidth: "235px",
-        maxWidth: "280px",
-        minHeight: "175px",
-        filter: "drop-shadow(0px 10px 20px rgba(0,0,0,0.04))",
-        backdropFilter: "blur(20px)",
-        WebkitBackdropFilter: "blur(20px)",
-        boxSizing: "border-box",
+        width: "100%",
+        height: "67px",
+        filter: "drop-shadow(0px 4px 10px rgba(0,0,0,0.15))",
+        flexShrink: 0,
       }}
     >
       <div
         style={{
           position: "absolute",
           inset: 0,
-          background: "rgba(255, 255, 255, 0.45)",
-          border: "1.5px solid rgba(255, 255, 255, 0.6)",
-          borderRadius: "24px",
+          background: "#F0FAF7",
+          border: "0.5px solid #3C995B",
+          borderRadius: "16px",
         }}
       />
       <div
         style={{
-          position: "relative",
-          zIndex: 1,
-          padding: "20px 16px",
+          position: "absolute",
+          left: 21,
+          top: 11,
           display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          height: "100%",
-          boxSizing: "border-box",
-          gap: "10px",
+          flexDirection: "row",
+          alignItems: "center",
+          gap: 16,
+          height: 46,
+          right: 21,
         }}
       >
-        {/* Top Block */}
-        <div style={{ display: "flex", flexDirection: "row", alignItems: "flex-start", gap: "10px" }}>
-          <AlertIcon />
-          <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
-            <span style={{ fontFamily: "'Roboto', sans-serif", fontWeight: 700, fontSize: "14px", lineHeight: "120%", color: "#000000" }}>
-              {topTitle}
-            </span>
-            <span style={{ fontFamily: "'Roboto', sans-serif", fontWeight: 400, fontSize: "12px", lineHeight: "130%", color: "#555555" }}>
-              {topSub}
-            </span>
-          </div>
-        </div>
+        <span
+          style={{
+            fontFamily: "'Roboto', sans-serif",
+            fontWeight: 400,
+            fontSize: 20,
+            lineHeight: "23px",
+            color: "#000000",
+            whiteSpace: "nowrap",
+          }}
+        >
+          Analytics
+        </span>
 
-        {/* Divider */}
-        <div style={{ width: "100%", height: "1px", background: "rgba(0,0,0,0.06)", margin: "2px 0" }} />
-
-        {/* Bottom Block */}
-        <div style={{ display: "flex", flexDirection: "row", alignItems: "flex-start", gap: "10px" }}>
-          <AlertIcon />
-          <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
-            <span style={{ fontFamily: "'Roboto', sans-serif", fontWeight: 700, fontSize: "14px", lineHeight: "120%", color: "#000000" }}>
-              {bottomTitle}
-            </span>
-            <span style={{ fontFamily: "'Roboto', sans-serif", fontWeight: 400, fontSize: "12px", lineHeight: "130%", color: "#555555" }}>
-              {bottomSub}
-            </span>
-          </div>
-        </div>
+        {analyticsStats.map((stat, i) => (
+          <React.Fragment key={i}>
+            <div
+              style={{
+                width: 1,
+                height: 39,
+                background: "rgba(0,0,0,0.1)",
+                flexShrink: 0,
+              }}
+            />
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                gap: 8,
+                height: 46,
+                flexShrink: 0,
+              }}
+            >
+              <span
+                style={{
+                  fontFamily: "'Roboto', sans-serif",
+                  fontWeight: 700,
+                  fontSize: 24,
+                  lineHeight: "100%",
+                  color: "#000000",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                {stat.value}
+              </span>
+              <span
+                style={{
+                  fontFamily: "'Roboto', sans-serif",
+                  fontWeight: 300,
+                  fontSize: 16,
+                  lineHeight: "18px",
+                  color: "#000000",
+                }}
+              >
+                {stat.label}
+              </span>
+            </div>
+          </React.Fragment>
+        ))}
       </div>
     </div>
   );
 }
 
-export default function RevenueLeakageSection() {
+// ─── Main Component ───────────────────────────────────────────────────────────
+
+export default function ProblemSection() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap');
-        
-        .no-scrollbar::-webkit-scrollbar {
-          display: none;
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+        .problem-section-root {
+          width: 100%;
+          background: #FFFFFF;
+          padding: 60px 24px;
+          box-sizing: border-box;
         }
-        .no-scrollbar {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
+
+        .problem-container {
+          max-width: 1320px;
+          margin: 0 auto;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 48px;
+        }
+
+        .problem-title {
+          font-family: 'Roboto', sans-serif;
+          font-weight: 700;
+          font-size: 36px;
+          line-height: 120%;
+          color: #000000;
+          text-align: center;
+          margin: 0;
+        }
+
+        .problem-inner-layout {
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          align-items: stretch; /* Height card aur image wrapper dono ki same karne ke liye */
+          justify-content: center;
+          gap: 40px;
+          position: relative;
+        }
+
+        .problem-card-panel {
+          width: 798px;
+          position: relative;
+          z-index: 2;
+        }
+
+        .problem-right-image-wrap {
+          width: 440px;
+          display: flex;
+          align-items: flex-end; /* Image ko box ke baseline par touch karne ke liye */
+          justify-content: center;
+          position: relative;
+          z-index: 2;
+        }
+
+        .problem-right-image-wrap img {
+          width: 100%;
+          height: 100%; /* Parent ki puri height fill karegi */
+          object-fit: cover; /* Contain ki jagah Cover jo frame fill rakhegi */
+          object-position: center 15%; /* Height balance fix karne ke liye aur cutout frame maintain karne k liye */
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 1200px) {
+          .problem-inner-layout {
+            flex-direction: column !important;
+            align-items: center !important;
+            gap: 50px;
+          }
+          .problem-right-image-wrap {
+            width: 380px;
+            height: 450px;
+          }
+        }
+
+        @media (max-width: 840px) {
+          .problem-card-panel {
+            width: 100% !important;
+            max-width: 520px;
+          }
+          .problem-cards-row {
+            flex-direction: column !important;
+            align-items: center !important;
+            gap: 20px !important;
+          }
+          .analytics-bar-wrap {
+            display: none !important;
+          }
         }
       `}</style>
 
-      <section
-        style={{
-          fontFamily: "'Roboto', sans-serif",
-          width: "100%",
-          display: "flex",
-          justifyContent: "center",
-          boxSizing: "border-box",
-        }}
-      >
-        <div
-          className="responsive-section-container"
-          style={{
-            position: "relative",
-            width: "100%",
-            maxWidth: "1440px",
-            background: "#FFFFFF",
-            boxSizing: "border-box",
-          }}
-        >
-          {/* Background blobs */}
-          <div style={{ position: "absolute", inset: 0, pointerEvents: "none", overflow: "hidden" }}>
-            <div style={{ position: "absolute", width: 1104, height: 825, left: "calc(50% - 552px - 371px)", top: -181, background: "rgba(163,180,199,0.78)", filter: "blur(80px)", borderRadius: "50%" }} />
-            <div style={{ position: "absolute", width: 975, height: 729, left: "calc(50% - 487.5px + 340.5px)", top: 186, background: "rgba(163,180,199,0.64)", filter: "blur(80px)", borderRadius: "50%" }} />
-            <div style={{ position: "absolute", width: 855, height: 639, left: "calc(50% - 427.5px + 473.5px)", top: -153, background: "rgba(163,213,194,0.62)", filter: "blur(80px)", borderRadius: "50%" }} />
-            <div style={{ position: "absolute", width: 855, height: 639, left: "calc(50% - 427.5px - 461.5px)", top: 301, background: "rgba(163,213,194,0.57)", filter: "blur(80px)", borderRadius: "50%" }} />
-          </div>
-
-          <div
-            style={{
-              position: "relative",
-              zIndex: 1,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              gap: "40px",
-              width: "100%",
-            }}
-          >
-
-            {/* Stats Row */}
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                flexWrap: "wrap",
-                gap: "23px",
-                width: "100%",
-                maxWidth: "1041px",
-                justifyContent: "center",
-              }}
-            >
-              {stats.map((s, i) => <StatCard key={i} {...s} />)}
-            </div>
-
-            {/* Middle Row: Badge + Coin */}
-            <div
-              style={{
-                position: "relative",
-                width: "100%",
-                maxWidth: "1290px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                minHeight: "257px",
-              }}
-            >
+      <section className="problem-section-root">
+        <div className="problem-container">
+          
+          {/* Layout wrapper */}
+          <div className="problem-inner-layout">
+            
+            {/* ── Left: Card Panel ── */}
+            <div className="problem-card-panel">
               <div
                 style={{
                   position: "relative",
-                  width: "486px",
-                  maxWidth: "90%",
-                  height: "257px",
-                  flexShrink: 0,
-                  filter: "drop-shadow(0px 22px 22px rgba(241,12,6,0.3))",
+                  width: "100%",
+                  height: "100%", /* Pure container row height fill rakhega layout match k liye */
+                  background: "rgba(228,248,241,0.3)",
+                  border: "0.5px solid #3C995B",
+                  borderRadius: 24,
+                  backdropFilter: "blur(19px)",
+                  WebkitBackdropFilter: "blur(19px)",
+                  padding: "32px 24px 24px",
+                  boxSizing: "border-box",
                 }}
               >
-                <div
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    background: "linear-gradient(166.42deg, rgba(219,202,204,0.9) 14.36%, rgba(220,57,54,0.9) 87.89%)",
-                    border: "2px solid #FFFFFF",
-                    borderRadius: "20px 20px 84px 84px",
-                  }}
-                />
-                <span
-                  style={{
-                    position: "absolute",
-                    width: "181px",
-                    left: "50%",
-                    transform: "translateX(-50%)",
-                    top: "20px",
-                    fontFamily: "'Roboto', sans-serif",
-                    fontWeight: 500,
-                    fontSize: "18px",
-                    lineHeight: "21px",
-                    textAlign: "center",
-                    color: "#000000",
-                    whiteSpace: "nowrap",
-                  }}
-                >
-                  Analytics Dashboard
-                </span>
-                <div
-                  style={{
-                    position: "absolute",
-                    left: "13px",
-                    right: "13px",
-                    top: "87px",
-                    height: "148px",
-                    background: "linear-gradient(111.83deg, #C68385 18.41%, #DC3936 59.58%)",
-                    border: "1px solid rgba(255,255,255,0.29)",
-                    borderRadius: "100px",
-                    boxShadow: "0px 4px 10px rgba(0,0,0,0.25)",
-                    backdropFilter: "blur(19px)",
-                    WebkitBackdropFilter: "blur(19px)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <span
+                <div style={{ display: "flex", flexDirection: "column", gap: 24, width: "100%" }}>
+                  
+                  {/* Row 1 */}
+                  <div
+                    className="problem-cards-row"
                     style={{
-                      fontFamily: "'Roboto', sans-serif",
-                      fontWeight: 700,
-                      fontSize: "clamp(22px, 3vw, 32px)",
-                      lineHeight: "120%",
-                      textAlign: "center",
-                      color: "#FFFFFF",
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      gap: 16,
+                      width: "100%",
                     }}
                   >
-                    CRITCAL REVENUE<br />LEAKAGE
-                  </span>
-                </div>
-              </div>
+                    {issueCards.slice(0, 3).map((card, i) => (
+                      <IssueCard key={i} title={card.title} desc={card.desc} />
+                    ))}
+                  </div>
 
+                  {/* Row 2 */}
+                  <div
+                    className="problem-cards-row"
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      gap: 16,
+                      width: "100%",
+                    }}
+                  >
+                    {issueCards.slice(3, 6).map((card, i) => (
+                      <IssueCard key={i} title={card.title} desc={card.desc} />
+                    ))}
+                  </div>
+
+                  {/* Analytics Bar */}
+                  <div className="analytics-bar-wrap" style={{ width: "100%", marginTop: 8 }}>
+                    <AnalyticsBar />
+                  </div>
+                </div>
+
+                {/* Disclaimer */}
+                <p
+                  style={{
+                    fontFamily: "'Roboto', sans-serif",
+                    fontWeight: 400,
+                    fontSize: 13,
+                    lineHeight: "16px",
+                    textAlign: "center",
+                    color: "#666666",
+                    margin: "24px 0 0 0",
+                    width: "100%",
+                  }}
+                >
+                  *Disclaimer are susponsible to respect in the ensuring any environmenial a modern Al vibe.
+                </p>
+              </div>
+            </div>
+
+            {/* ── Right: Woman Image (Figma Height Fixed) ── */}
+            <div className="problem-right-image-wrap">
               <img
-                src={coinDrain}
-                alt="coin drain"
-                style={{
-                  position: "absolute",
-                  right: 0,
-                  top: "50%",
-                  transform: "translateY(-50%)",
-                  width: "274px",
-                  height: "274px",
-                  objectFit: "contain",
-                  display: "block",
-                }}
-                className="rl-coin"
+                src={sideGirl}
+                alt="Dental practice receptionist"
               />
             </div>
 
-            {/* ─── FIXED ROW TRACK: SAFE FILL NO-CLIP ─── */}
+            {/* ── Decorative Background Dots ── */}
             <div
               style={{
-                width: "100%",
-                maxWidth: "1290px",
-                overflowX: "auto", 
-                boxSizing: "border-box",
-                padding: "0 10px 15px",
+                position: "absolute",
+                inset: 0,
+                pointerEvents: "none",
+                zIndex: 1, 
               }}
-              className="no-scrollbar"
             >
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  flexWrap: "nowrap",
-                  gap: "16px",
-                  width: "100%",
-                  boxSizing: "border-box",
-                }}
-                className="cards-inner-row"
-              >
-                {issueCardsContent.map((card, i) => <IssueCard key={i} {...card} />)}
-              </div>
+              <div style={{ position: "absolute", width: 11, height: 11, left: "2%", top: "80%", borderRadius: "50%", background: "#95D8C7" }} />
+              <div style={{ position: "absolute", width: 13, height: 13, left: "1%", top: "15%", borderRadius: "50%", background: "#96DBC8" }} />
+              <div style={{ position: "absolute", width: 12, height: 12, left: "55%", top: "5%", borderRadius: "50%", background: "#94D9C6" }} />
+              <div style={{ position: "absolute", width: 7, height: 7, left: "62%", top: "2%", borderRadius: "50%", background: "#CEF7EC" }} />
             </div>
 
           </div>
         </div>
       </section>
-
-      <style>{`
-        .responsive-section-container {
-          padding: 34px 40px 60px;
-        }
-        @media (max-width: 1024px) {
-          .cards-inner-row {
-            width: max-content !important; /* Touch/Scroll safe context for smaller monitors */
-          }
-        }
-        @media (max-width: 900px) {
-          .rl-coin { display: none !important; }
-          .responsive-section-container {
-            padding: 24px 16px 40px !important;
-          }
-        }
-        @media (min-width: 1100px) {
-          .cards-inner-row {
-            justify-content: center !important; /* Perfect align center on 100% desktop viewport */
-          }
-        }
-      `}</style>
     </>
   );
 }

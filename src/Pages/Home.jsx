@@ -2,14 +2,11 @@ import { motion } from 'framer-motion';
 import HeroContent from '../components/Home/HeroContent';
 import AIChatPanel from '../components/Home/AIChatPanel';
 import VoiceAgentPanel from '../components/Home/VoiceAgentPanel';
-import bg1 from '../assets/Bg1.png';
+import bg1 from '../assets/bg1.png';
 import CustomerCareSection from '../components/Home/CustomerCareSection';
 import WaveformDemoSection from '../components/Home/WaveformDemoSection';
 import RevenueLeakageSection from '../components/Home/Revenueleakagesection';
 import Reavenuheading from '../components/Home/Reavenuheading';
-import RevenueCalculator from '../components/Home/RevenueCalculator';
-import WelcomeCTASection from '../components/Home/Welcomectasection ';
-import DentalCommunicationComparison from '../components/Home/DentalCommunicationComparison';
 
 export default function Hero() {
   return (
@@ -50,9 +47,9 @@ export default function Hero() {
       <WaveformDemoSection />
       <Reavenuheading />
       <RevenueLeakageSection />
-      <RevenueCalculator />
+      {/* <RevenueCalculator />
       <DentalCommunicationComparison />
-      <WelcomeCTASection />
+      <WelcomeCTASection /> */}
 
 
     </main>
