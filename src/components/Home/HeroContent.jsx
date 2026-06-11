@@ -1,57 +1,61 @@
-import AIChatPanel from "./AIChatPanel";
-import VoiceAgentPanel from "./VoiceAgentPanel";
-
 export default function HeroContent() {
+  const bulletPoints = [
+    "Instantly answers every call",
+    "Books appointments automatically",
+    "Updates CRM in real-time",
+    "Handles chat, SMS, and inquiries"
+  ];
+
   return (
-    <div className="w-full px-6 sm:px-12 lg:px-10 flex flex-col justify-center max-w-2xl mx-auto lg:mx-0 z-10 relative py-12 lg:py-16">
+    <div className="w-full max-w-xl flex flex-col justify-center text-left font-sans select-none antialiased">
       
-      {/* Mobile Glass Glow Background Circle */}
-      <div className="absolute top-[20%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-white/80 rounded-full blur-[70px] -z-10 lg:hidden pointer-events-none" />
-
-      {/* Figma Typography Header */}
-      <h1 className="text-[32px] sm:text-[40px] mb-6 md:text-[40px] lg:text-[48px] font-bold text-[#000000] text-left leading-[1.12] tracking-tight font-sans mt-19">
-        DaitchPro – Al<br/>
-Dental Revenue<br/>
-Intelligence Agent<br />
-
+      {/* Principal Header */}
+      <h1 className="text-[44px] sm:text-[54px] font-bold mt-12 text-white leading-[1.1] tracking-tight mb-5 drop-shadow-[0_2px_4px_rgba(0,0,0,0.2)]">
+        Never Miss a <br /> Client Again.
       </h1>
 
-      {/* Mobile View Responsive Grid Layer */}
-      <div className="flex lg:hidden flex-row items-stretch justify-center gap-3 mb-8 w-full mt-2">
-        <div className="w-1/2 flex flex-col items-center">
-          <VoiceAgentPanel isMobile={true} />
-        </div>
-        <div className="w-1/2 flex flex-col items-center">
-          <AIChatPanel isMobile={true} />
-        </div>
-      </div>
+      {/* Description Body Text */}
+      <p className="text-[17px] sm:text-[19px] text-white/95 font-normal leading-[1.4] mb-8 drop-shadow-[0_1px_3px_rgba(0,0,0,0.15)]">
+        AI Receptionist for Salons - Answer Calls, <br />
+        Book Appointments, and Manage Clients 24/7.
+      </p>
 
-      {/* Figma Bullet Lists */}
-      <ul className="space-y-3.5 mb-10 pl-5 text-[#000000] text-[15px] sm:text-[16px] lg:text-[17px] font-medium leading-relaxed">
-        <li className="list-disc pl-1">Hygiene recall calling automation
-</li>
-        <li className="list-disc pl-1">Treatment follow-up tracking systems
-</li>
-        <li className="list-disc pl-1">Revenue leakage → recovery analytics
-</li>
-        <li className="list-disc pl-1">Dental naturally dental enhancement</li>
+      {/* Structured Bullet Lists */}
+      <ul className="space-y-4 mb-10 pl-1">
+        {bulletPoints.map((text, index) => (
+          <li key={index} className="flex items-center gap-3 text-[16px] sm:text-[18px] text-white/95 font-normal drop-shadow-[0_1px_2px_rgba(0,0,0,0.15)]">
+            <span className="w-1.5 h-1.5 rounded-full bg-white shrink-0 opacity-90" />
+            <span className="leading-none">{text}</span>
+          </li>
+        ))}
       </ul>
 
-      {/* Action Buttons Frame Interface */}
-      <div className="flex flex-row items-center justify-start gap-4 mb-6 w-full">
+ {/* Action Buttons Frame Interface */}
+
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-4 w-full">
+
         {/* Primary Radial Highlight Button */}
-        <button className="inline-flex font-semibold items-center justify-center py-3.5 px-8 sm:px-10 rounded-xl text-black border border-white/60 bg-[radial-gradient(59.41%_515.38%_at_40.59%_15.83%,rgba(175,217,177,0.95)_0%,rgba(60,153,91,0.95)_100%)] shadow-[0px_8px_24px_rgba(60,153,91,0.25)] hover:shadow-[0px_12px_28px_rgba(60,153,91,0.35)] transition-all hover:-translate-y-0.5 active:translate-y-0 whitespace-nowrap text-[15px] sm:text-[16px]">
+
+        <button className="inline-flex font-semibold items-center justify-center py-4 px-10 rounded-xl text-black border border-white/60 bg-[radial-gradient(59.41%_515.38%_at_40.59%_15.83%,rgba(175,217,177,0.95)_0%,rgba(60,153,91,0.95)_100%)] shadow-[0px_8px_24px_rgba(60,153,91,0.25)] hover:shadow-[0px_12px_28px_rgba(60,153,91,0.35)] transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 whitespace-nowrap text-[16px]">
+
           Start Free Trial
+
         </button>
-        
-        {/* Secondary Ghost Button */}
-        <button className="inline-flex font-semibold items-center justify-center py-3.5 px-8 sm:px-10 rounded-xl text-[#3C995B] border-2 border-[#3C995B] bg-transparent hover:bg-[#3C995B]/5 transition-all hover:-translate-y-0.5 active:translate-y-0 whitespace-nowrap text-[15px] sm:text-[16px]">
+
+
+
+        {/* Secondary White/Green Ghost Button */}
+
+        <button className="inline-flex font-semibold items-center justify-center py-4 px-10 rounded-xl text-[#3C995B] border-[1px] border-[#3C995B] bg-[#FFFFFF] shadow-[0px_4px_14px_rgba(0,0,0,0.15)] hover:bg-[#3C995B]/5 transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 whitespace-nowrap text-[16px]">
+
           Book a Demo
+
         </button>
+
       </div>
 
-      {/* Sub-caption Text Frame */}
-      
+
+
     </div>
   );
 }

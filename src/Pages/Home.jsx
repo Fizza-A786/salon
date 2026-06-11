@@ -1,57 +1,65 @@
-import { motion } from 'framer-motion';
-import HeroContent from '../components/Home/HeroContent';
-import AIChatPanel from '../components/Home/AIChatPanel';
-import VoiceAgentPanel from '../components/Home/VoiceAgentPanel';
+import React from 'react';
 import bg1 from '../assets/bg1.png';
+import HeroContent from '../components/Home/HeroContent';
 import CustomerCareSection from '../components/Home/CustomerCareSection';
 import WaveformDemoSection from '../components/Home/WaveformDemoSection';
-import RevenueLeakageSection from '../components/Home/Revenueleakagesection';
 import Reavenuheading from '../components/Home/Reavenuheading';
 
 export default function Hero() {
   return (
-    <main className="w-full flex flex-col bg-gradient-to-r py-10 from-[#9ADBB8]/40 to-white/40 backdrop-blur-lg">
-      <section className="relative w-full min-h-screen flex flex-col lg:flex-row items-stretch">
+    <>
+    <section className="relative w-full min-h-screen flex items-center justify-start overflow-hidden font-sans antialiased selection:bg-[#4DA667]/30">
+      
+      {/* Background Container - Space Gaps Removed Completely */}
+      <div className="absolute inset-0 w-full h-full z-0">
+        <img
+          src={bg1}
+          alt="Modern luxury salon environment"
+          /* h-full w-full ke sath object-fill lgane se upar aur neeche ki sari spaces remove ho jayengi bina image crop kiye */
+          className="w-full h-full object-fill object-center block"
+        />
+        {/* Left-sided premium dark gradient mask overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent pointer-events-none" />
+      </div>
 
-        <div className="w-full lg:w-[44%] relative z-10 flex items-center shrink-0">
-          <HeroContent />
+      {/* Figma Blur Ellipses Layers */}
+      <div className="absolute inset-0 w-full h-full z-1 pointer-events-none hidden lg:block">
+        {/* Ellipse 46953 */}
+        <div 
+          className="absolute w-[492px] h-[330px] rounded-full opacity-80"
+          style={{
+            left: 'calc(50% - 492px/2 - 629px)',
+            top: '5%',
+            background: 'linear-gradient(79.8deg, #918394 33.07%, #FFFFFF 127.46%)',
+            filter: 'blur(100px)'
+          }}
+        />
+
+        {/* Ellipse 46951 */}
+        <div 
+          className="absolute w-[808px] h-[639px] rounded-full opacity-70"
+          style={{
+            left: 'calc(50% - 808px/2 - 552px)',
+            top: '25%',
+            background: 'linear-gradient(79.8deg, rgba(150, 132, 126, 0.8) 33.07%, rgba(255, 255, 255, 0.8) 127.46%)',
+            filter: 'blur(100px)'
+          }}
+        />
+      </div>
+
+      {/* Hero Content Overlay Frame */}
+      <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-14 py-20 lg:py-25">
+        <div className="w-full lg:w-[50%] xl:w-[44%]">
+          <HeroContent/>
         </div>
+      </div>
+  
 
-        <div className="relative w-full lg:w-[62%] z-0 flex self-stretch">
-          <div className="relative w-full h-full flex items-center justify-center overflow-visible">
-
-            <motion.img
-              initial={{ opacity: 0, scale: 1.02 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1, ease: "easeOut" }}
-              src={bg1}
-              alt="Landscaping environment"
-              /* CHANGED object-contain TO object-cover */
-              className="w-full h-full absolute object-cover bg-center block"
-            />
-
-            <div className="hidden lg:block absolute inset-0 pointer-events-none z-20">
-              <div className="absolute left-[5%] top-[7%] w-[239px] h-[238px] pointer-events-auto">
-                <VoiceAgentPanel isMobile={false} />
-              </div>
-
-              <div className="absolute right-[6%] bottom-[14%] w-[283px] h-[253px] pointer-events-auto">
-                <AIChatPanel isMobile={false} />
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
-      <CustomerCareSection />
-      <WaveformDemoSection />
-      <Reavenuheading />
-      <RevenueLeakageSection />
-      {/* <RevenueCalculator />
-      <DentalCommunicationComparison />
-      <WelcomeCTASection /> */}
-
-
-    </main>
+    </section>
+    <CustomerCareSection/>
+    <WaveformDemoSection/>
+    <Reavenuheading/>
+    </>
   );
 }
+
