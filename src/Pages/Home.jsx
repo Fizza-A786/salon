@@ -1,5 +1,5 @@
 import React from 'react';
-import bg1 from '../assets/bg1.png';
+import bg1 from '../assets/Bg1.png';
 import HeroContent from '../components/Home/HeroContent';
 import CustomerCareSection from '../components/Home/CustomerCareSection';
 import WaveformDemoSection from '../components/Home/WaveformDemoSection';
