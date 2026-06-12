@@ -1,6 +1,6 @@
 
 
-const Reavenuheading = () => {
+export default function Reavenuheading() {
   return (
     <section className="w-full bg-white py-8  px-4 sm:px-8">
       <div className="max-w-6xl mx-auto text-center  md:pt-[60px] md:pb-[12px]  flex flex-col items-center justify-center">
@@ -14,4 +14,3 @@ const Reavenuheading = () => {
   )
 }
 
-export default Reavenuheading

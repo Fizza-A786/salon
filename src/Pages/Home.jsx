@@ -5,7 +5,8 @@ import CustomerCareSection from '../components/Home/CustomerCareSection';
 import WaveformDemoSection from '../components/Home/WaveformDemoSection';
 import Reavenuheading from '../components/Home/Reavenuheading';
 import ProblemSection from '../components/Home/Revenueleakagesection';
-import SalonReceptionistShowcase from '../components/Home/SalonReception';
+import DaitchProShowcase from '../components/Home/SalonReception';
+
 export default function Hero() {
   return (
     <>
@@ -61,7 +62,8 @@ export default function Hero() {
         {/* Hero Content Overlay Frame */}
         <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-14 py-20 lg:py-25">
           <div className="w-full lg:w-[50%] xl:w-[44%]">
-            <HeroContent />
+            {/* <HeroContent /> */}
+            <HeroContent/>
           </div>
         </div>
 
@@ -70,8 +72,10 @@ export default function Hero() {
     <CustomerCareSection/>
     <WaveformDemoSection/>
     <Reavenuheading/>
+  
     <ProblemSection/>
-    <SalonReceptionistShowcase/>
+    <DaitchProShowcase/>
+
     </>
   );
 }
