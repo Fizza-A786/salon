@@ -8,57 +8,67 @@ import Reavenuheading from '../components/Home/Reavenuheading';
 export default function Hero() {
   return (
     <>
-    <section className="relative w-full min-h-screen flex items-center justify-start overflow-hidden font-sans antialiased selection:bg-[#4DA667]/30">
-      
-      {/* Background Container - Space Gaps Removed Completely */}
-      <div className="absolute inset-0 w-full h-full z-0">
-        <img
-          src={bg1}
-          alt="Modern luxury salon environment"
-          /* h-full w-full ke sath object-fill lgane se upar aur neeche ki sari spaces remove ho jayengi bina image crop kiye */
-          className="w-full h-full object-fill object-center block"
-        />
-        {/* Left-sided premium dark gradient mask overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent pointer-events-none" />
-      </div>
+      <section className="relative w-full m-h-screen flex items-center justify-start overflow-hidden font-sans antialiased selection:bg-[#4DA667]/30">
 
-      {/* Figma Blur Ellipses Layers */}
-      <div className="absolute inset-0 w-full h-full z-1 pointer-events-none hidden lg:block">
-        {/* Ellipse 46953 */}
-        <div 
-          className="absolute w-[492px] h-[330px] rounded-full opacity-80"
-          style={{
-            left: 'calc(50% - 492px/2 - 629px)',
-            top: '5%',
-            background: 'linear-gradient(79.8deg, #918394 33.07%, #FFFFFF 127.46%)',
-            filter: 'blur(100px)'
-          }}
-        />
-
-        {/* Ellipse 46951 */}
-        <div 
-          className="absolute w-[808px] h-[639px] rounded-full opacity-70"
-          style={{
-            left: 'calc(50% - 808px/2 - 552px)',
-            top: '25%',
-            background: 'linear-gradient(79.8deg, rgba(150, 132, 126, 0.8) 33.07%, rgba(255, 255, 255, 0.8) 127.46%)',
-            filter: 'blur(100px)'
-          }}
-        />
-      </div>
-
-      {/* Hero Content Overlay Frame */}
-      <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-14 py-20 lg:py-25">
-        <div className="w-full lg:w-[50%] xl:w-[44%]">
-          <HeroContent/>
+        {/* Background Container - Space Gaps Removed Completely */}
+        <div className="absolute inset-0 w-full h-[100%] z-0">
+          <img
+            src={bg1}
+            alt="Modern luxury salon environment"
+            /* h-full w-full ke sath object-fill lgane se upar aur neeche ki sari spaces remove ho jayengi bina image crop kiye */
+            className="w-full h-full"
+          />
+          {/* Left-sided premium dark gradient mask overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent pointer-events-none" />
         </div>
-      </div>
-  
 
-    </section>
-    <CustomerCareSection/>
-    <WaveformDemoSection/>
-    <Reavenuheading/>
+        {/* Figma Blur Ellipses Layers */}
+        <div className="absolute inset-0 w-full h-full z-1 pointer-events-none hidden lg:block">
+          {/* Ellipse 46953 */}
+          <div
+            className="absolute w-[663px] h-[397px] rounded-full"
+            style={{
+              left: 'calc(70% - 663px/2 - 629px)',
+              top: '5%',
+              background: 'linear-gradient(283deg, rgba(149, 131, 124, 0.70) 20.32%, rgba(163, 213, 194, 0.70) 51.46%)',
+              filter: 'blur(80px)'
+            }}
+          />
+          {/* Ellipse 46952 */}
+          <div
+            className="absolute  w-[492px] h-[330px] rounded-full"
+            style={{
+              left: 'calc(50% - 663px/2 - 629px)',
+              top: '60%',
+              background: 'linear-gradient(80deg, #918394 33.07%, #FFF 127.46%)',
+              filter: 'blur(80px)'
+            }}
+          />
+
+          {/* Ellipse 46951 */}
+          <div
+            className="absolute w-[808px] h-[639px] rounded-full"
+            style={{
+              left: 'calc(50% - 808px/2 - 552px)',
+              top: '25%',
+              background: 'linear-gradient(80deg, rgba(150, 132, 126, 0.8) 33.07%, rgba(255, 255, 255, 0.8) 127.46%)',
+              filter: 'blur(80px)'
+            }}
+          />
+        </div>
+
+        {/* Hero Content Overlay Frame */}
+        <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-14 py-20 lg:py-25">
+          <div className="w-full lg:w-[50%] xl:w-[44%]">
+            <HeroContent />
+          </div>
+        </div>
+
+
+      </section>
+      <CustomerCareSection />
+      <WaveformDemoSection />
+      <Reavenuheading />
     </>
   );
 }

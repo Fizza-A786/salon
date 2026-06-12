@@ -10,7 +10,7 @@ export default function HeroContent() {
     <div className="w-full max-w-xl flex flex-col justify-center text-left font-sans select-none antialiased">
       
       {/* Principal Header */}
-      <h1 className="text-[44px] sm:text-[54px] font-bold mt-12 text-white leading-[1.1] tracking-tight mb-5 drop-shadow-[0_2px_4px_rgba(0,0,0,0.2)]">
+      <h1 className="text-[44px] sm:text-[53px] font-bold mt-12 text-white leading-[1.1] tracking-tight mb-5 drop-shadow-[0_2px_4px_rgba(0,0,0,0.2)]">
         Never Miss a <br /> Client Again.
       </h1>
 
