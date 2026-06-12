@@ -4,7 +4,8 @@ import HeroContent from '../components/Home/HeroContent';
 import CustomerCareSection from '../components/Home/CustomerCareSection';
 import WaveformDemoSection from '../components/Home/WaveformDemoSection';
 import Reavenuheading from '../components/Home/Reavenuheading';
-
+import ProblemSection from '../components/Home/Revenueleakagesection';
+import SalonReceptionistShowcase from '../components/Home/SalonReception';
 export default function Hero() {
   return (
     <>
@@ -65,10 +66,12 @@ export default function Hero() {
         </div>
 
 
-      </section>
-      <CustomerCareSection />
-      <WaveformDemoSection />
-      <Reavenuheading />
+    </section>
+    <CustomerCareSection/>
+    <WaveformDemoSection/>
+    <Reavenuheading/>
+    <ProblemSection/>
+    <SalonReceptionistShowcase/>
     </>
   );
 }
