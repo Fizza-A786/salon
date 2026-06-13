@@ -1,82 +1,117 @@
 import React from 'react';
-import bg1 from '../assets/Bg1.png';
+import bg1 from '../assets/Bg1.png'; 
+import navBg from '../assets/image 1942.png'; 
 import HeroContent from '../components/Home/HeroContent';
 import CustomerCareSection from '../components/Home/CustomerCareSection';
 import WaveformDemoSection from '../components/Home/WaveformDemoSection';
 import Reavenuheading from '../components/Home/Reavenuheading';
 import ProblemSection from '../components/Home/Revenueleakagesection';
 import DaitchProShowcase from '../components/Home/SalonReception';
+import Dashoardheading from '../components/Home/Dashoardheading';
 
 export default function Hero() {
   return (
     <>
-      <section className="relative w-full m-h-screen flex items-center justify-start overflow-hidden font-sans antialiased selection:bg-[#4DA667]/30">
+ <section className="relative w-full h-[611px] overflow-hidden bg-white">
+  {/* Background Image */}
+<div className="absolute inset-0 z-0">
+  <img
+    src={bg1}
+    alt="Salon background"
+    className="w-full h-full object-cover"
+    style={{
+      objectPosition: "center 15%", /* Top boundary se 15% ka safe space hamesha locked rahega */
+    }}
+  />
+</div>
 
-        {/* Background Container - Space Gaps Removed Completely */}
-        <div className="absolute inset-0 w-full h-[100%] z-0">
-          <img
-            src={bg1}
-            alt="Modern luxury salon environment"
-            /* h-full w-full ke sath object-fill lgane se upar aur neeche ki sari spaces remove ho jayengi bina image crop kiye */
-            className="w-full h-full"
-          />
-          {/* Left-sided premium dark gradient mask overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent pointer-events-none" />
-        </div>
+  {/* Ellipse 46951 */}
+  <div
+    className="absolute rounded-full pointer-events-none"
+    style={{
+      width: "808px",
+      height: "639px",
+      left: "calc(50% - 404px - 552px)",
+      top: "306px",
+      background:
+        "linear-gradient(79.8deg, rgba(150,132,126,0.8) 33.07%, rgba(255,255,255,0.8) 127.46%)",
+      filter: "blur(80px)",
+    }}
+  />
 
-        {/* Figma Blur Ellipses Layers */}
-        <div className="absolute inset-0 w-full h-full z-1 pointer-events-none hidden lg:block">
-          {/* Ellipse 46953 */}
-          <div
-            className="absolute w-[663px] h-[397px] rounded-full"
-            style={{
-              left: 'calc(70% - 663px/2 - 629px)',
-              top: '5%',
-              background: 'linear-gradient(283deg, rgba(149, 131, 124, 0.70) 20.32%, rgba(163, 213, 194, 0.70) 51.46%)',
-              filter: 'blur(80px)'
-            }}
-          />
-          {/* Ellipse 46952 */}
-          <div
-            className="absolute  w-[492px] h-[330px] rounded-full"
-            style={{
-              left: 'calc(50% - 663px/2 - 629px)',
-              top: '60%',
-              background: 'linear-gradient(80deg, #918394 33.07%, #FFF 127.46%)',
-              filter: 'blur(80px)'
-            }}
-          />
+  {/* Ellipse 46953 */}
+  <div
+    className="absolute rounded-full pointer-events-none"
+    style={{
+      width: "492px",
+      height: "330px",
+      left: "calc(50% - 246px - 629px)",
+      top: "101px",
+      background:
+        "linear-gradient(79.8deg, #918394 33.07%, #FFFFFF 127.46%)",
+      filter: "blur(80px)",
+    }}
+  />
 
-          {/* Ellipse 46951 */}
-          <div
-            className="absolute w-[808px] h-[639px] rounded-full"
-            style={{
-              left: 'calc(50% - 808px/2 - 552px)',
-              top: '25%',
-              background: 'linear-gradient(80deg, rgba(150, 132, 126, 0.8) 33.07%, rgba(255, 255, 255, 0.8) 127.46%)',
-              filter: 'blur(80px)'
-            }}
-          />
-        </div>
+  {/* Ellipse 46954 */}
+  <div
+    className="absolute rounded-full pointer-events-none"
+    style={{
+      width: "311px",
+      height: "205px",
+      left: "calc(50% - 155.5px - 735.5px)",
+      top: "397px",
+      background:
+        "linear-gradient(97.51deg, #759489 91.22%, #FFFFFF 127.87%)",
+      filter: "blur(80px)",
+    }}
+  />
 
-        {/* Hero Content Overlay Frame */}
-        <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-14 py-20 lg:py-25">
-          <div className="w-full lg:w-[50%] xl:w-[44%]">
-            {/* <HeroContent /> */}
-            <HeroContent/>
-          </div>
-        </div>
+  {/* Ellipse 46952 */}
+  <div
+    className="absolute rounded-full pointer-events-none"
+    style={{
+      width: "402px",
+      height: "280px",
+      left: "117px",
+      top: "203px",
+      background: "#7F6253",
+      filter: "blur(80px)",
+    }}
+  />
 
+  {/* Dark Overlay */}
+  <div
+    className="absolute inset-0 z-10"
+    style={{
+      background:
+        "linear-gradient(90deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.15) 40%, rgba(0,0,0,0) 70%)",
+    }}
+  />
 
-    </section>
-    <CustomerCareSection/>
-    <WaveformDemoSection/>
-    <Reavenuheading/>
-  
-    <ProblemSection/>
-    <DaitchProShowcase/>
+  {/* Navbar Background */}
+  <div className="absolute top-0 left-0 w-full h-[110px] z-30">
+    <img
+      src={navBg}
+      alt=""
+      className="w-full h-full object-cover"
+    />
+  </div>
 
+  {/* Content */}
+  <div className="relative z-20 h-full max-w-[1440px] mx-auto">
+    <div className="absolute left-[42px] top-[96px] w-[520px]">
+      <HeroContent />
+    </div>
+  </div>
+</section>
+
+      <CustomerCareSection />
+      <WaveformDemoSection />
+      <Reavenuheading />
+      <ProblemSection />
+      <Dashoardheading />
+      <DaitchProShowcase />
     </>
   );
 }
-

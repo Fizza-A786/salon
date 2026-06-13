@@ -9,30 +9,32 @@ export default function HeroContent() {
   return (
     <div className="w-full max-w-xl flex flex-col justify-center text-left font-sans select-none antialiased">
       
-      {/* Principal Header */}
-      <h1 className="text-[44px] sm:text-[53px] font-bold mt-12 text-white leading-[1.1] tracking-tight mb-5 drop-shadow-[0_2px_4px_rgba(0,0,0,0.2)]">
-        Never Miss a <br /> Client Again.
+ <h1 
+        className="w-full max-w-[414px] mt-14 text-[40px] sm:text-[48px] lg:text-[53px] font-bold leading-[50px] sm:leading-[58px] lg:leading-[62px] text-white tracking-normal"
+        style={{ textShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)' }}
+      >
+        Never Miss a Client Again.
       </h1>
 
-      {/* Description Body Text */}
-      <p className="text-[17px] sm:text-[19px] text-white/95 font-normal leading-[1.4] mb-8 drop-shadow-[0_1px_3px_rgba(0,0,0,0.15)]">
-        AI Receptionist for Salons - Answer Calls, <br />
-        Book Appointments, and Manage Clients 24/7.
-      </p>
+      {/* Header Subtitle Area (Includes description & lists) */}
+      <div 
+        className="w-full max-w-[516px] flex flex-col justify-center text-[18px] sm:text-[21px] lg:text-[18px] font-medium leading-[167%] text-white gap-4 mt-1"
+        style={{ textShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)' }}
+      >
+        <p className="opacity-95">
+          AI Receptionist for Salons - Answer Calls, Book Appointments, and Manage Clients 24/7.
+        </p>
 
-      {/* Structured Bullet Lists */}
-      <ul className="space-y-4 mb-10 pl-1">
-        {bulletPoints.map((text, index) => (
-          <li key={index} className="flex items-center gap-3 text-[16px] sm:text-[18px] text-white/95 font-normal drop-shadow-[0_1px_2px_rgba(0,0,0,0.15)]">
-            <span className="w-1.5 h-1.5 rounded-full bg-white shrink-0 opacity-90" />
-            <span className="leading-none">{text}</span>
-          </li>
-        ))}
-      </ul>
+        <ul className="flex flex-col gap-2 pl-5 list-disc opacity-90 text-[16px] sm:text-[19px] lg:text-[18px]">
+          <li>Instantly answers every call</li>
+          <li>Books appointments automatically</li>
+          <li>Updates CRM in real-time</li>
+          <li>Handles chat, SMS, and inquiries</li>
+        </ul>
+      </div>
+      {/* Action Buttons Frame Interface */}
 
- {/* Action Buttons Frame Interface */}
-
-      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-4 w-full">
+      <div className="flex mt-4 flex-col sm:flex-row items-stretch sm:items-center justify-start gap-4 w-full">
 
         {/* Primary Radial Highlight Button */}
 
