@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
-import sideGirl from "@/assets/bg3.png";
+// Imported the new section background image path
+import sectionBg from "@/assets/image 3 bg.png";
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -244,7 +245,11 @@ export default function ProblemSection() {
 
         .problem-section-root {
           width: 100%;
-          background: #FFFFFF;
+          min-height: 697px;
+          background-image: url(${sectionBg.src || sectionBg});
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
           padding: 60px 24px;
           box-sizing: border-box;
         }
@@ -258,23 +263,12 @@ export default function ProblemSection() {
           gap: 48px;
         }
 
-        .problem-title {
-          font-family: 'Roboto', sans-serif;
-          font-weight: 700;
-          font-size: 36px;
-          line-height: 120%;
-          color: #000000;
-          text-align: center;
-          margin: 0;
-        }
-
         .problem-inner-layout {
           width: 100%;
           display: flex;
           flex-direction: row;
-          align-items: stretch; /* Height card aur image wrapper dono ki same karne ke liye */
-          justify-content: center;
-          gap: 40px;
+          align-items: center;
+          justify-content: flex-start; /* Aligns the dashboard container to the left side */
           position: relative;
         }
 
@@ -284,36 +278,11 @@ export default function ProblemSection() {
           z-index: 2;
         }
 
-        .problem-right-image-wrap {
-          width: 440px;
-          display: flex;
-          align-items: flex-end; /* Image ko box ke baseline par touch karne ke liye */
-          justify-content: center;
-          position: relative;
-          z-index: 2;
-        }
-
-        .problem-right-image-wrap img {
-          width: 100%;
-          height: 100%; /* Parent ki puri height fill karegi */
-          object-fit: cover; /* Contain ki jagah Cover jo frame fill rakhegi */
-          object-position: center 15%; /* Height balance fix karne ke liye aur cutout frame maintain karne k liye */
-        }
-
         /* Responsive Breakpoints */
-        @media (max-width: 1200px) {
-          .problem-inner-layout {
-            flex-direction: column !important;
-            align-items: center !important;
-            gap: 50px;
-          }
-          .problem-right-image-wrap {
-            width: 380px;
-            height: 450px;
-          }
-        }
-
         @media (max-width: 840px) {
+          .problem-inner-layout {
+            justify-content: center; /* Center layout items on smaller viewports */
+          }
           .problem-card-panel {
             width: 100% !important;
             max-width: 520px;
@@ -335,13 +304,13 @@ export default function ProblemSection() {
           {/* Layout wrapper */}
           <div className="problem-inner-layout">
             
-            {/* ── Left: Card Panel ── */}
+            {/* ── Center/Left: Card Panel Aligned Left ── */}
             <div className="problem-card-panel">
               <div
                 style={{
                   position: "relative",
                   width: "100%",
-                  height: "100%", /* Pure container row height fill rakhega layout match k liye */
+                  height: "100%",
                   background: "rgba(228,248,241,0.3)",
                   border: "0.5px solid #3C995B",
                   borderRadius: 24,
@@ -409,14 +378,6 @@ export default function ProblemSection() {
               </div>
             </div>
 
-            {/* ── Right: Woman Image  ── */}
-            <div className="problem-right-image-wrap">
-              <img
-                src={sideGirl}
-                alt="Dental practice receptionist"
-              />
-            </div>
-
             {/* ── Decorative Background Dots ── */}
             <div
               style={{
@@ -426,8 +387,8 @@ export default function ProblemSection() {
                 zIndex: 1, 
               }}
             >
-              <div style={{ position: "absolute", width: 11, height: 11, left: "2%", top: "80%", borderRadius: "50%", background: "#95D8C7" }} />
-              <div style={{ position: "absolute", width: 13, height: 13, left: "1%", top: "15%", borderRadius: "50%", background: "#96DBC8" }} />
+              <div style={{ position: "absolute", width: 11, height: 11, left: "85%", top: "80%", borderRadius: "50%", background: "#95D8C7" }} />
+              <div style={{ position: "absolute", width: 13, height: 13, left: "90%", top: "15%", borderRadius: "50%", background: "#96DBC8" }} />
               <div style={{ position: "absolute", width: 12, height: 12, left: "55%", top: "5%", borderRadius: "50%", background: "#94D9C6" }} />
               <div style={{ position: "absolute", width: 7, height: 7, left: "62%", top: "2%", borderRadius: "50%", background: "#CEF7EC" }} />
             </div>

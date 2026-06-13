@@ -20,7 +20,7 @@ export default function HeroContent() {
 
       {/* Header Subtitle Area (Includes description & lists) */ }
   <div
-    className="w-full max-w-[516px] flex flex-col justify-center text-[18px] sm:text-[21px] lg:text-[18px] font-medium leading-[167%] text-white gap-4 mt-1"
+    className="w-full max-w-[516px] flex flex-col justify-center text-[18px] sm:text-[21px] lg:text-[18px] font-medium leading-[167%] text-white gap-4 mt-3"
     style={{ textShadow: "0 2px 6px rgba(0,0,0,0.4)" }}
   >
     <p className="opacity-95">

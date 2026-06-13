@@ -1,159 +1,299 @@
 "use client";
-
-import React, { useState, useMemo, useEffect, useRef } from "react";
-// Import your background asset here
-import bg4 from "@/assets/bg4.png"
-
-// --- Utility: Animated Price Counter with Typewriter Effect ---
-function AnimatedPriceCounter({ finalValue }) {
-  const [displayText, setDisplayText] = useState("");
-  const typingIntervalRef = useRef(null);
-
-  useEffect(() => {
-    const formatted = `$${finalValue.toLocaleString()}`;
-    let currentIndex = 0;
-
-    if (typingIntervalRef.current) clearInterval(typingIntervalRef.current);
-
-    typingIntervalRef.current = setInterval(() => {
-      if (currentIndex < formatted.length) {
-        setDisplayText(formatted.substring(0, currentIndex + 1));
-        currentIndex++;
-      } else {
-        clearInterval(typingIntervalRef.current);
-      }
-    }, 50);
-
-    return () => clearInterval(typingIntervalRef.current);
-  }, [finalValue]);
-
-  return <span>{displayText}</span>;
-}
+import { useState, useMemo, useEffect } from "react";
+// Import the background asset from your local project assets folder
+import bgImage from "../../assets/bg4.png";
 
 export default function RevenueCalculator() {
-  const [inputs] = useState({
-    monthlyCalls: 1200,
-    missedPercent: 25,
-    avgValue: 800,
-  });
+  // Calculator Form State
+  const [monthlyCalls, setMonthlyCalls] = useState(1200);
+  const [missedPct, setMissedPct] = useState(28);
+  const [conversionRate, setConversionRate] = useState(35);
+  const [avgOrderValue, setAvgOrderValue] = useState(95);
 
-  const results = useMemo(() => {
+  const { lostMonthly, lostAnnually, recoveredAnnually } = useMemo(() => {
+    // 1. Calculate missed client inquiries
+    const totalMissedInquiries = monthlyCalls * (missedPct / 100);
+    
+    // 2. Out of missed, how many bookings were actually lost
+    const lostBookingsCount = totalMissedInquiries * (conversionRate / 100);
+    
+    // 3. Compute lost monthly and annual revenues
+    const lostMonthly = lostBookingsCount * avgOrderValue;
+    const lostAnnually = lostMonthly * 12;
+
+    // 4. Calculate recovered revenue based on an active target performance increase (e.g., recovering 70%)
+    const recoveryRate = 0.70; 
+    const recoveredAnnually = lostAnnually * recoveryRate;
+
     return {
-      monthlyRevenue: 48000,
-      lostAnnually: 576000,
-      estimatedRecovered: 115200
+      lostMonthly,
+      lostAnnually,
+      recoveredAnnually
     };
-  }, []);
+  }, [monthlyCalls, missedPct, conversionRate, avgOrderValue]);
+
+  const fmt = (n) => "$" + Math.round(n).toLocaleString();
+
+  // Typewriter Animation Logic
+  const fullText = useMemo(() => fmt(recoveredAnnually), [recoveredAnnually]);
+  const [displayedText, setDisplayedText] = useState(fullText);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    let timer;
+    
+    // If the underlying calculated value changes mid-type, instantly re-sync or let the animation re-run
+    if (!isDeleting && fullText !== displayedText && !fullText.startsWith(displayedText)) {
+      setDisplayedText(fullText);
+      return;
+    }
+
+    if (!isDeleting) {
+      // Typing phase
+      if (displayedText !== fullText) {
+        timer = setTimeout(() => {
+          setDisplayedText(fullText.slice(0, displayedText.length + 1));
+        }, 120); // Speed of typing character
+      } else {
+        // Hold full text visibility before starting deletion cycle
+        timer = setTimeout(() => {
+          setIsDeleting(true);
+        }, 3500); 
+      }
+    } else {
+      // Backspacing phase
+      if (displayedText.length > 1) { // Keep the "$" prefix constant for cleaner presentation
+        timer = setTimeout(() => {
+          setDisplayedText(displayedText.slice(0, -1));
+        }, 60); // Speed of backspacing
+      } else {
+        setIsDeleting(false);
+      }
+    }
+
+    return () => clearTimeout(timer);
+  }, [displayedText, isDeleting, fullText]);
 
   return (
-    <section className="w-full bg-white flex flex-col items-center justify-center pt-[76px] font-roboto overflow-hidden">
+    <section className="w-full bg-[#FFFFFF] flex flex-col items-center pt-[40px] gap-[42px] select-none" style={{ fontFamily: "'Roboto', sans-serif" }}>
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet" />
 
-      {/* Header Section */}
-      <div className="flex flex-col items-center gap-[16px] mb-[54px] max-w-[791px] text-center px-4">
-        <h2 className="font-medium text-[32px] md:text-[42px] leading-[100%] text-black">
-          How Much Revenue Are You Losing?
+      {/* Header Block */}
+      <div className="flex flex-col justify-center items-center pb-3 gap-4 w-full max-w-[1032px] min-h-[76px] mt-10 px-4">
+        <h2 className="w-full font-medium text-[32px] md:text-[42px] leading-tight flex items-center justify-center text-center text-[#000000] tracking-tight">
+          How Much Revenue Is Your Salon Losing?
         </h2>
-        <p className="font-normal text-[16px] md:text-[18px] leading-[167%] text-[#484848]">
-          Estimate your potential revenue impact based on your practice's communication metrics.
+        <p className="w-full font-normal text-[16px] md:text-[18px] leading-normal flex items-center justify-center text-center text-[#484848]">
+          Calculate how missed calls, no-shows, and poor follow-ups are silently costing your salon thousands every month.
         </p>
       </div>
 
-      {/* BACKGROUND GRAPHIC SECTION WRAPPER */}
-      <div
-        className="w-full bg-[length:100%_100%] bg-center bg-no-repeat flex items-center justify-center py-[60px] md:py-[100px] px-4"
-        style={{ backgroundImage: `url(${bg4.src || bg4})` }}
+      {/* Hero Canvas Area - Background set directly here to ensure NO edge cropping */}
+      <div 
+        className="relative w-full max-w-[1440px] min-h-[633px] bg-white overflow-hidden pb-12 lg:pb-0 bg-no-repeat bg-center"
+        style={{ 
+          backgroundImage: `url(${bgImage.src || bgImage})`,
+          backgroundSize: "100% 100%" // Ensures full image rendering safely locked within limits
+        }}
       >
-        {/* FIXED ROW CONTAINER FOR GLASSMORPHIC CARDS */}
-        <div className="w-full  flex flex-col lg:flex-row justify-center items-center lg:items-start gap-[40px] lg:gap-[152px]">
+        
+        {/* Flex container wrapper for layout on left side - Kept exact positions */}
+        <div className="relative z-10 flex flex-col lg:flex-row items-stretch justify-start gap-[40px] px-4 md:px-[60px] pt-[46px]">
+          
+          {/* =========================================================
+              LEFT ANALYTICS CARD - Decreased Width to 395px
+             ========================================================= */}
+          <div className="relative w-full max-w-[395px] flex flex-col justify-between rounded-[20px] border border-white/20 shadow-[0px_4px_14px_4px_rgba(0,0,0,0.1)] backdrop-blur-[13.5px] overflow-hidden p-6"
+               style={{ background: "linear-gradient(132.73deg, rgba(161, 164, 163, 0.2) 12.88%, rgba(255, 255, 255, 0) 163.96%)" }}>
+            
+            <div className="w-full flex flex-col gap-6">
+              {/* Main Stats Node Stack */}
+              <div className="w-full flex flex-col items-start gap-5">
+                <h3 className="w-full font-medium text-[18px] leading-[140%] tracking-tight text-[#000000]">
+                  MAIN ANALYTICS
+                </h3>
+                
+                <div className="w-full flex flex-col items-start gap-5">
+                  {/* Metric 1 */}
+                  <div className="flex flex-row items-center gap-3 w-full">
+                    <span className="w-[75px] shrink-0 font-black text-[26px] leading-none text-black drop-shadow-[0_4px_4px_rgba(255,255,255,0.8)]">
+                      {monthlyCalls.toLocaleString()}
+                    </span>
+                    <span className="font-normal text-[17px] md:text-[18px] leading-tight text-black drop-shadow-[0_4px_4px_rgba(255,255,255,0.8)]">
+                      Monthly Client Calls
+                    </span>
+                  </div>
 
-          {/* LEFT CARD: Results Display */}
-          <div className="relative w-full max-w-[443px] h-[474px] bg-white/10 border-l-[6px] border-[#C2FFE5] rounded-[16px] shadow-[0px_4px_10px_rgba(0,0,0,0.25)] backdrop-blur-[2px] p-[52px_49px]">
+                  {/* Metric 2 */}
+                  <div className="flex flex-row items-start gap-3 w-full">
+                    <span className="w-[75px] shrink-0 font-black text-[26px] leading-none text-black drop-shadow-[0_4px_4px_rgba(255,255,255,0.8)]">
+                      {missedPct}%
+                    </span>
+                    <span className="font-normal text-[17px] md:text-[18px] leading-tight text-black drop-shadow-[0_4px_4px_rgba(255,255,255,0.8)]">
+                      Missed Calls & No-Shows <span className="text-black/60 text-[13px] block font-light">(industry avg 15-30%)</span>
+                    </span>
+                  </div>
 
-            <div className="grid grid-cols-2 gap-x-[30px] gap-y-[52px] justify-items-center">
-              {/* Monthly Calls */}
-              <div className="flex flex-col items-center text-center gap-[12px] w-[121px]">
-                <span className="font-bold text-[32px] leading-[100%] text-black">1200</span>
-                <span className="text-[16px] md:text-[20px] leading-[100%] text-black whitespace-nowrap">Monthly Calls</span>
-              </div>
-              {/* Missed */}
-              <div className="flex flex-col items-center text-center gap-[12px] w-[121px]">
-                <span className="font-bold text-[32px] leading-[100%] text-black text-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]">25%</span>
-                <span className="text-[16px] md:text-[20px] leading-[100%] text-black">Missed</span>
-              </div>
-              {/* Conversion Rate */}
-              <div className="flex flex-col items-center text-center gap-[12px] w-[121px]">
-                <span className="font-bold text-[32px] leading-[100%] text-black text-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]">20%</span>
-                <span className="text-[16px] md:text-[20px] leading-[100%] text-black whitespace-nowrap">Conversion Rate</span>
-              </div>
-              {/* Avg Patient Value */}
-              <div className="flex flex-col items-center text-center gap-[12px] w-[152px]">
-                <span className="font-bold text-[32px] leading-[100%] text-black text-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]">$800</span>
-                <span className="text-[16px] md:text-[20px] leading-[100%] text-black whitespace-nowrap">Avg Patient Value</span>
-              </div>
-            </div>
+                  {/* Metric 3 */}
+                  <div className="flex flex-row items-start gap-3 w-full">
+                    <span className="w-[75px] shrink-0 font-black text-[26px] leading-none text-black drop-shadow-[0_4px_4px_rgba(255,255,255,0.8)]">
+                      {conversionRate}%
+                    </span>
+                    <span className="font-normal text-[17px] md:text-[18px] leading-tight text-black drop-shadow-[0_4px_4px_rgba(255,255,255,0.8)]">
+                      Booking Conversion Rate <span className="text-black/60 text-[13px] block font-light">(many salons underperform here)</span>
+                    </span>
+                  </div>
 
-            {/* Divider Line */}
-            <div className="w-[367px] border-t border-white absolute bottom-[156px] left-[38px]" />
+                  {/* Metric 4 */}
+                  <div className="flex flex-row items-center gap-3 w-full">
+                    <span className="w-[75px] shrink-0 font-black text-[26px] leading-none text-black drop-shadow-[0_4px_4px_rgba(255,255,255,0.8)]">
+                      ${avgOrderValue}
+                    </span>
+                    <span className="font-normal text-[17px] md:text-[18px] leading-tight text-black drop-shadow-[0_4px_4px_rgba(255,255,255,0.8)]">
+                      Average Service Value
+                    </span>
+                  </div>
+                </div>
+              </div>
 
-            {/* Bottom Green Status Block */}
-            <div className="absolute bottom-[36px] left-[37px] w-[369px] h-[105px] bg-[#3C995B] rounded-[10px] flex flex-col justify-center items-center gap-[20px] p-[12px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
-              <div className="text-white text-[20px] font-normal leading-[100%] text-shadow">
-                Last Monthly Revenue : <span className="font-bold">${results.monthlyRevenue.toLocaleString()}</span>
+              {/* Splitter Line Vector */}
+              <div className="w-full border-t border-[#000000]/20" />
+
+              {/* Downstream Calculations Array */}
+              <div className="w-full flex flex-col gap-3">
+                <h3 className="w-full font-medium text-[18px] leading-[140%] tracking-tight text-black">
+                  REVENUE LOSS (REALISTIC)
+                </h3>
+                
+                <div className="w-full flex flex-col gap-3">
+                  <div className="w-full flex flex-row justify-between items-center gap-2">
+                    <span className="font-normal text-[17px] text-black drop-shadow-[0_4px_4px_rgba(255,255,255,0.8)]">
+                      Lost Monthly Revenue:
+                    </span>
+                    <span className="font-black text-[24px] md:text-[26px] leading-none text-black drop-shadow-[0_4px_4px_rgba(255,255,255,0.8)] text-right whitespace-nowrap">
+                      {fmt(lostMonthly)}
+                    </span>
+                  </div>
+
+                  <div className="w-full flex flex-row justify-between items-center gap-2">
+                    <span className="font-normal text-[17px] text-black drop-shadow-[0_4px_4px_rgba(255,255,255,0.8)]">
+                      Lost Annually:
+                    </span>
+                    <span className="font-black text-[24px] md:text-[26px] leading-none text-black drop-shadow-[0_4px_4px_rgba(255,255,255,0.8)] text-right whitespace-nowrap">
+                      {fmt(lostAnnually)}
+                    </span>
+                  </div>
+                </div>
               </div>
-              <div className="text-white text-[20px] font-normal leading-[100%] text-shadow">
-                Lost Annually: <span className="font-bold">${results.lostAnnually.toLocaleString()}</span>
-              </div>
+
             </div>
           </div>
 
-          {/* RIGHT CARD: Interactive Input Rows */}
-          <div className="relative w-full max-w-[422px] h-[474px] bg-white/10 border border-white rounded-[16px] shadow-[0px_4px_10px_rgba(0,0,0,0.25)] backdrop-blur-[2px] p-[19px_15px]">
 
-            <div className="flex flex-col gap-[16px] items-center">
-              {/* Row 1: Monthly Calls */}
-              <div className="w-[383px] h-[54px] bg-[rgba(170,163,163,0.39)] border-[2px] border-[#C2FFE5] rounded-[12px] flex items-center justify-between px-[22px] shadow-[0px_4px_10px_rgba(0,0,0,0.25)]">
-                <div className="flex items-center gap-[12px]">
-                  <span className="text-[18px] text-black">Monthly Calls</span>
-                  <span className="text-[18px] text-black">➔</span>
+          {/* =========================================================
+              RIGHT INTERACTIVE CONTROLS CARD - Decreased Width to 355px
+             ========================================================= */}
+          <div className="relative w-full max-w-[355px] flex flex-col justify-between rounded-[20px] border border-white/20 shadow-[0px_4px_14px_4px_rgba(0,0,0,0.1)] backdrop-blur-[13.5px] overflow-hidden p-5"
+               style={{ background: "linear-gradient(132.73deg, rgba(161, 164, 163, 0.2) 12.88%, rgba(255, 255, 255, 0) 163.96%)" }}>
+
+            {/* Working Layout Layer */}
+            <div className="w-full flex flex-col gap-5">
+              
+              {/* Input Components Assembly Frame */}
+              <div className="w-full flex flex-col gap-3.5">
+                
+                {/* Row 1: Monthly Calls Input */}
+                <div className="w-full min-h-[42px] bg-white/66 rounded-[10px] flex flex-row justify-between items-center pl-3 pr-0 gap-2 border border-black/5">
+                  <span className="font-normal text-[14px] md:text-[15px] text-black py-1.5">
+                    Monthly Client Inquired <span className="text-black/40 font-light mx-0.5">→</span>
+                  </span>
+                  <div className="w-[76px] h-10 bg-[#E2FBF0] border border-[#93FFD1] shadow-[0px_4px_13px_rgba(194,255,229,0.1)] rounded-[10px] flex items-center justify-center shrink-0">
+                    <input 
+                      type="number" 
+                      value={monthlyCalls} 
+                      onChange={(e) => setMonthlyCalls(Math.max(0, Number(e.target.value)))}
+                      className="w-full bg-transparent border-none outline-none font-medium text-[15px] text-center text-black drop-shadow-[0_10px_10px_#C2FFE5]"
+                    />
+                  </div>
                 </div>
-                <span className="font-bold text-[24px] text-black">1,200</span>
-              </div>
 
-              {/* Row 2: Missed Call % */}
-              <div className="w-[383px] h-[54px] bg-[rgba(170,163,163,0.39)] border-[2px] border-[#C2FFE5] rounded-[12px] flex items-center justify-between px-[22px] shadow-[0px_4px_10px_rgba(0,0,0,0.25)]">
-                <div className="flex items-center gap-[12px]">
-                  <span className="text-[18px] text-black">Missed Call %</span>
-                  <span className="text-[18px] text-black">➔</span>
+                {/* Row 2: Missed Rate Input */}
+                <div className="w-full min-h-[42px] bg-white/66 rounded-[10px] flex flex-row justify-between items-center pl-3 pr-0 gap-2 border border-black/5">
+                  <span className="font-normal text-[14px] md:text-[15px] text-black py-1.5">
+                    Missed Opportunity Rate (%) <span className="text-black/40 font-light mx-0.5">→</span>
+                  </span>
+                  <div className="w-[76px] h-10 bg-[#E2FBF0] border border-[#93FFD1] shadow-[0px_4px_13px_rgba(194,255,229,0.1)] rounded-[10px] flex items-center justify-center shrink-0">
+                    <input 
+                      type="number" 
+                      value={missedPct} 
+                      onChange={(e) => setMissedPct(Math.max(0, Math.min(100, Number(e.target.value))))}
+                      className="w-full bg-transparent border-none outline-none font-medium text-[15px] text-center text-black drop-shadow-[0_10px_10px_#C2FFE5]"
+                    />
+                  </div>
                 </div>
-                <span className="font-bold text-[24px] text-black">25%</span>
-              </div>
 
-              {/* Row 3: Average Case Value */}
-              <div className="w-[383px] h-[54px] bg-[rgba(170,163,163,0.39)] border-[2px] border-[#C2FFE5] rounded-[12px] flex items-center justify-between px-[22px] shadow-[0px_4px_10px_rgba(0,0,0,0.25)]">
-                <div className="flex items-center gap-[12px]">
-                  <span className="text-[18px] text-black">Average Case value</span>
-                  <span className="text-[18px] text-black">➔</span>
+                {/* Row 3: Conversion Rate Input */}
+                <div className="w-full min-h-[42px] bg-white/66 rounded-[10px] flex flex-row justify-between items-center pl-3 pr-0 gap-2 border border-black/5">
+                  <span className="font-normal text-[14px] md:text-[15px] text-black py-1.5">
+                    Booking Conversion Rate (%) <span className="text-black/40 font-light mx-0.5">→</span>
+                  </span>
+                  <div className="w-[76px] h-10 bg-[#E2FBF0] border border-[#93FFD1] shadow-[0px_4px_13px_rgba(194,255,229,0.1)] rounded-[10px] flex items-center justify-center shrink-0">
+                    <input 
+                      type="number" 
+                      value={conversionRate} 
+                      onChange={(e) => setConversionRate(Math.max(0, Math.min(100, Number(e.target.value))))}
+                      className="w-full bg-transparent border-none outline-none font-medium text-[15px] text-center text-black drop-shadow-[0_10px_10px_#C2FFE5]"
+                    />
+                  </div>
                 </div>
-                <span className="font-bold text-[24px] text-black">$800</span>
+
+                {/* Row 4: Average Order Value Input */}
+                <div className="w-full min-h-[42px] bg-white/66 rounded-[10px] flex flex-row justify-between items-center pl-3 pr-0 gap-2 border border-black/5">
+                  <span className="font-normal text-[14px] md:text-[15px] text-black py-1.5">
+                    Average Service Value <span className="text-black/40 font-light mx-0.5">→</span>
+                  </span>
+                  <div className="w-[76px] h-10 bg-[#E2FBF0] border border-[#93FFD1] shadow-[0px_4px_13px_rgba(194,255,229,0.1)] rounded-[10px] flex items-center justify-center shrink-0 relative">
+                    <input 
+                      type="number" 
+                      value={avgOrderValue} 
+                      onChange={(e) => setAvgOrderValue(Math.max(0, Number(e.target.value)))}
+                      className="w-full bg-transparent border-none outline-none font-medium text-[15px] text-center text-black drop-shadow-[0_10px_10px_#C2FFE5]"
+                    />
+                  </div>
+                </div>
+
               </div>
-            </div>
 
-            {/* Lower Dynamic Value Block */}
-            <div className="absolute bottom-[16px] left-[19px] w-[383px] h-[202px] bg-[rgba(194,255,229,0.36)] rounded-[16px] shadow-[0px_4px_10px_#C2FFE5] backdrop-blur-[30.5px] flex flex-col items-center justify-between p-[16px_39px]">
-              <h3 className="font-bold text-[20px] leading-[120%] text-center text-black tracking-normal">
-                ESTIMATED ANNUAL REVENUE RECOVERED
-              </h3>
+              {/* Splitter Line Vector */}
+              <div className="w-full border-t border-[#000000]/20" />
 
-              <div className="flex items-center justify-center gap-1">
-                <span className="text-[42px] font-bold text-black tracking-tight">
-                  <AnimatedPriceCounter finalValue={results.estimatedRecovered} />
-                </span>
-                <div className="w-[8px] h-[50px] bg-[##3C995B] animate-pulse" />
+              {/* AI Recovery Widget Section Block */}
+              <div className="w-full flex flex-col items-start gap-3">
+                <h3 className="w-full font-medium text-[18px] leading-[140%] tracking-tight text-black text-left">
+                  AI RECOVERY BLOCK
+                </h3>
+                
+                <div className="relative w-full min-h-[135px] p-4 flex flex-col items-center justify-center rounded-2xl bg-[#C2FFE5]/36 shadow-[0px_4px_10px_#C2FFE5] backdrop-blur-[30.5px]">
+                  <h4 className="w-full font-bold text-[14px] md:text-[15px] leading-[130%] text-center text-black mb-2">
+                    ESTIMATED ANNUAL REVENUE<br />RECOVERED WITH DAITCHPRO AI:
+                  </h4>
+                  
+                  {/* Real-time Dynamic Counter Line with Typewriter effect */}
+                  <div className="flex flex-row items-center justify-center gap-1 relative h-[45px]">
+                    <span className="font-bold text-[32px] md:text-[36px] leading-none text-[#1E5631] tracking-tight min-w-[120px] text-center">
+                      {displayedText}
+                    </span>
+                    {/* Native CSS Terminal Caret Cursor */}
+                    <div className="w-1 h-[28px] md:h-[32px] bg-[#3C995B] animate-pulse rounded shrink-0" />
+                  </div>
+                </div>
               </div>
 
-              <p className="text-[16px] leading-[120%] text-center text-black">
-                Projection based on provided inputs. Results vary by practice.
+              {/* Disclaimers Typography Layer */}
+              <p className="w-full font-normal text-[12px] leading-[130%] text-black/70 text-center lg:text-left">
+                Based on AI reducing missed calls, improving conversion, and lowering no-shows. Results vary by salon.
               </p>
+
             </div>
           </div>
 

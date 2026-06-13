@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from 'react';
 import { FaChevronDown, FaBars, FaTimes, FaRobot } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
-// ── Language Switcher Data ───────────────────────────────────────────────────
 const LANGUAGES = [
   { code: 'en', label: 'English', flag: '/flags/US.svg', link: '/' },
   { code: 'es', label: 'Español (Spanish)', flag: '/flags/ES.svg', link: '/' },
@@ -48,7 +47,7 @@ const LanguageSwitcher = ({ openDropdown, toggleDropdown, dropdownId = 'language
           absolute right-[-30px] overflow-x-hidden mt-1 py-1 rounded-lg shadow-lg min-w-[200px] max-h-[60vh] overflow-y-auto z-50 bg-white border border-gray-200
           [&::-webkit-scrollbar]:w-1
           [&::-webkit-scrollbar-track]:bg-transparent
-          [&::-webkit-scrollbar-thumb]:bg-[#316945]
+          [&::-webkit-webkit-scrollbar-thumb]:bg-[#316945]
           [&::-webkit-scrollbar-thumb]:rounded-full
           [scrollbar-width:thin]
           [scrollbar-color:#316945_transparent]
@@ -82,7 +81,6 @@ const LanguageSwitcher = ({ openDropdown, toggleDropdown, dropdownId = 'language
   );
 };
 
-// Move these helper components outside of the Navbar render to avoid recreating
 const SimpleDropdown = ({ items, viewMoreHref }) => (
   <div className="absolute top-full left-0 mt-3 w-56 bg-white border border-gray-100 rounded-xl shadow-xl z-50 py-2 max-h-[70vh] overflow-y-auto">
     {items.map((item) => (
@@ -149,41 +147,12 @@ const MobileLangDropdown = ({ toggleDropdown, selectedLang, setSelectedLang, ope
   </div>
 );
 
-// ── Main Navbar ──────────────────────────────────────────────────────────────
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
   const [hoveredAgentIndex, setHoveredAgentIndex] = useState(0);
   const [selectedLang, setSelectedLang] = useState(LANGUAGES[0]);
 
-  // States for scroll hide/show
-  const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
-
-  // Handle auto-hide on scroll
-  useEffect(() => {
-    const controlNavbar = () => {
-      if (typeof window !== 'undefined') {
-        const currentScrollY = window.scrollY;
-
-        // Don't hide if the mobile menu or a dropdown is currently open
-        if (mobileMenuOpen) return;
-
-        // Hide if scrolling down past 80px, show if scrolling up
-        if (currentScrollY > lastScrollY && currentScrollY > 80) {
-          setIsVisible(false);
-        } else {
-          setIsVisible(true);
-        }
-        setLastScrollY(currentScrollY);
-      }
-    };
-
-    window.addEventListener('scroll', controlNavbar);
-    return () => window.removeEventListener('scroll', controlNavbar);
-  }, [lastScrollY, mobileMenuOpen]);
-
-  // Handle clicking outside mobile sidebar menu to auto-close it
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (!event.target.closest('.mobile-sidebar-container') && !event.target.closest('.mobile-toggle-btn')) {
@@ -198,7 +167,6 @@ const Navbar = () => {
 
   const toggleDropdown = (name) => setOpenDropdown(openDropdown === name ? null : name);
 
-  // ── Nav Data ────────────────────────────────────────────────────────────────
   const solutionsItems = [
     { label: 'Web Agency', href: '/solutions/web-agency' },
     { label: 'Digital Agency', href: '/solutions/digital-agency' },
@@ -286,12 +254,10 @@ const Navbar = () => {
 
   return (
     <>
-      {/* ── DESKTOP/MOBILE HEADER BAR ───────────────────────────────────────── */}
       <nav
-        className={`fixed left-1/2 -translate-x-1/2 w-[92%] sm:w-[95%] z-40 rounded-2xl px-4 xl:px-6 py-4 transition-all duration-500 ease-in-out ${isVisible ? 'translate-y-0 opacity-100' : '-translate-y-[200%] opacity-0'
-          }`}
+        className="fixed left-1/2 -translate-x-1/2 w-[92%] sm:w-[95%] max-w-[1440px] z-40 rounded-2xl px-4 xl:px-6 py-4"
         style={{
-          top: '54px', /* Adjusted top margin for a fixed nav */
+          top: '54px',
           background: 'rgba(255,255,255,0.55)',
           backdropFilter: 'blur(20px)',
           WebkitBackdropFilter: 'blur(20px)',
@@ -300,7 +266,6 @@ const Navbar = () => {
         }}
       >
         <div className="flex items-center justify-between">
-          {/* LEFT: Logo */}
           <div className="flex items-center h-[24px] xl:h-[30px] gap-2 cursor-pointer shrink-0">
             <img
               src="/logo.png"
@@ -309,7 +274,6 @@ const Navbar = () => {
             />
           </div>
 
-          {/* CENTER: Desktop Links */}
           <div className="hidden lg:flex items-center gap-4 xl:gap-8 justify-center flex-1 mx-4">
             <div className="relative navbar-dropdown-wrapper">
               <button
@@ -360,7 +324,6 @@ const Navbar = () => {
             </a>
           </div>
 
-          {/* RIGHT: Desktop Auth Actions */}
           <div className="hidden lg:flex items-center gap-3 xl:gap-4 shrink-0">
             <div className="navbar-dropdown-wrapper">
               <LanguageSwitcher openDropdown={openDropdown} toggleDropdown={toggleDropdown} dropdownId="language" />
@@ -390,7 +353,6 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* Mobile Menu Icon Selector Trigger */}
           <div className="lg:hidden flex items-center shrink-0">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -402,14 +364,11 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* ── MOBILE FULL SIDEBAR MENU ────────────────────────────────────────── */}
       <div
         className={`mobile-sidebar-container fixed top-0 right-0 h-full w-[300px] bg-[#f8fafc] border-l border-slate-200 shadow-2xl z-[60] lg:hidden transition-transform duration-300 ease-in-out flex flex-col justify-start pt-4 overflow-y-auto ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
           }`}
       >
         <div className="flex flex-col w-full px-2">
-
-          {/* 1. AI Agents */}
           <div className="flex flex-col w-full mb-1">
             <button
               onClick={() => toggleDropdown('ai-agents-mobile')}
@@ -433,7 +392,6 @@ const Navbar = () => {
             )}
           </div>
 
-          {/* 2. Solution */}
           <div className="flex flex-col w-full mb-1">
             <button
               onClick={() => toggleDropdown('solutions-mobile')}
@@ -454,7 +412,6 @@ const Navbar = () => {
             )}
           </div>
 
-          {/* 3. Platform */}
           <div className="flex flex-col w-full mb-1">
             <button
               onClick={() => toggleDropdown('platform-mobile')}
@@ -475,7 +432,6 @@ const Navbar = () => {
             )}
           </div>
 
-          {/* 4. Areas We Handle */}
           <div className="flex flex-col w-full mb-1">
             <button
               onClick={() => toggleDropdown('areas-mobile')}
@@ -499,7 +455,6 @@ const Navbar = () => {
             )}
           </div>
 
-          {/* 5. Pricing */}
           <a
             href="#pricing"
             className="block text-slate-800 text-[16px] font-semibold py-3.5 px-6 pl-[50px] w-full text-left rounded-xl hover:bg-slate-200/40 transition-colors"
@@ -507,10 +462,8 @@ const Navbar = () => {
             Pricing
           </a>
 
-          {/* Horizontal Separation Rule Line */}
           <div className="border-t border-slate-200 my-4 mx-4"></div>
 
-          {/* 6. Language Segment Label */}
           <div className="w-full mb-4">
             <p className="text-slate-400 text-[13px] font-semibold uppercase tracking-wider pl-6 mb-2">Region & Language</p>
             <MobileLangDropdown
@@ -522,7 +475,6 @@ const Navbar = () => {
             />
           </div>
 
-          {/* 7. Sign In */}
           <div className="px-4 mt-2">
             <a
               href="/login"
@@ -532,7 +484,6 @@ const Navbar = () => {
             </a>
           </div>
 
-          {/* 8. Get Started Mobile Section */}
           <div className="flex flex-col w-full px-4 mt-3 pb-8">
             <button
               onClick={() => toggleDropdown('get-started-mobile')}
@@ -554,12 +505,11 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* ── AI AGENTS MEGA DROPDOWN (Desktop Only) ──────────────────────────── */}
       {openDropdown === 'ai-agents' && (
         <div
           className="fixed left-1/2 -translate-x-1/2 w-[95%] max-w-7xl z-30 rounded-b-xl overflow-hidden shadow-2xl hidden lg:block"
           style={{
-            top: 'calc(4.5rem + 30px)',
+            top: '96px', // Adjusted to match the new top alignment gracefully
             height: '480px',
             background: 'linear-gradient(180deg, #063A2F 0%, #052d24 100%)',
             border: '1px solid rgba(255,255,255,0.12)',
